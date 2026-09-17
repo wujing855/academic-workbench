@@ -12,7 +12,14 @@
 ![Dependencies](https://img.shields.io/badge/%E4%BE%9D%E8%B5%96-%E4%BB%85%E6%A0%87%E5%87%86%E5%BA%93-059669)
 ![Cost](https://img.shields.io/badge/%E6%88%90%E6%9C%AC-%C2%A50-B45309)
 
+[![Release](https://img.shields.io/github/v/release/wujing855/academic-workbench?color=0F766E)](https://github.com/wujing855/academic-workbench/releases)
+[![Stars](https://img.shields.io/github/stars/wujing855/academic-workbench?style=social)](https://github.com/wujing855/academic-workbench/stargazers)
+[![Last commit](https://img.shields.io/github/last-commit/wujing855/academic-workbench?color=3776AB)](https://github.com/wujing855/academic-workbench/commits/main)
+![Platform](https://img.shields.io/badge/%E5%B9%B3%E5%8F%B0-macOS%20%7C%20Windows%20%7C%20Linux-333)
+
 [快速开始](#快速开始) · [面板一览](#面板一览) · [让-AI-Agent-帮你搭一个](#让-ai-agent-帮你搭一个) · [常见问题](#常见问题)
+
+⭐ **如果这套工作台帮到了你，欢迎点个 Star 支持一下** —— 也让更多埋头做研究的人看见它。
 
 <img src="docs/screenshots/01-overview.jpg" width="900" alt="概览面板">
 
