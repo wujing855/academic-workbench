@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学术工作台</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%230F766E' stroke='%230F766E' stroke-width='2'/><circle cx='16' cy='16' r='5' fill='%230F766E'/></svg>">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+</head>
+<body>
+
+<!-- ===== 背景层：AI 光场 + 色晕 ===== -->
+<div class="bg-layer" aria-hidden="true">
+  <div class="bg-photo"></div>
+  <div class="bg-orb o1"></div>
+  <div class="bg-orb o2"></div>
+  <div class="bg-orb o3"></div>
+  <div class="bg-key"></div>
+  <div class="bg-fade"></div>
+  <div class="bg-grain"></div>
+</div>
+
+<div class="app">
+
+  <!-- ===== 侧边栏 ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="14" stroke="var(--accent)" stroke-width="1.5"/>
+          <circle cx="16" cy="16" r="5" fill="var(--accent)" opacity="0.8"/>
+          <circle cx="16" cy="16" r="9" stroke="var(--accent)" stroke-width="0.8" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <div class="brand-title">学术工作台</div>
+        <div class="brand-sub" id="brandSub">你的研究领域</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-group">
+        <div class="nav-group-label">核心工作</div>
+        <button class="nav-item active" data-panel="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          <span>概览</span>
+        </button>
+        <button class="nav-item" data-panel="todos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <span>待办</span>
+          <span class="nav-badge" id="navTodoBadge">0</span>
+        </button>
+        <button class="nav-item" data-panel="focus">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5V13.5l2.4 1.7"/><path d="M9 2.5h6"/><path d="M12 2.5V6"/></svg>
+          <span>专注</span>
+          <span class="nav-badge" id="navFocusBadge" hidden></span>
+        </button>
+        <button class="nav-item" data-panel="news">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span>资讯</span>
+        </button>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-label">文献 · 转写</div>
+        <button class="nav-item" data-panel="literature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h6M9 11h4"/></svg>
+          <span>文献工具</span>
+        </button>
+        <button class="nav-item" data-panel="pdf">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 13h6M9 17h4"/><path d="M9 2l5 0 5 5" opacity="0"/></svg>
+          <span>PDF转写</span>
+        </button>
+        <button class="nav-item" data-panel="translations">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M8 7h8M8 11h5"/></svg>
+          <span>译文库</span>
+          <span class="nav-badge" id="navTransBadge" hidden></span>
+        </button>
+        <button class="nav-item" data-panel="readings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span>原文精读</span>
+          <span class="nav-badge" id="navReadingBadge" hidden></span>
+        </button>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-label">情报 · 日报</div>
+        <button class="nav-item" data-panel="frontier">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5" opacity="0.55"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg>
+          <span>前沿瞭望</span>
+          <span class="nav-badge" id="navFrontierBadge" style="display:none;">0</span>
+        </button>
+        <button class="nav-item" data-panel="hotspots">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v3H4z"/><path d="M4 9h10v11H4z"/><path d="M16 9h4v11h-4z"/><line x1="7" y1="12.5" x2="11" y2="12.5"/><line x1="7" y1="16" x2="11" y2="16"/></svg>
+          <span>热点日报</span>
+          <span class="nav-badge" id="navHotspotBadge" style="display:none;">0</span>
+        </button>
+        <button class="nav-item" data-panel="weekly">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span>科技周报</span>
+          <span class="nav-badge" id="navWeeklyBadge" style="display:none;">0</span>
+        </button>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-label">资源</div>
+        <button class="nav-item" data-panel="summaries">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span>摘要卡片</span>
+          <span class="nav-badge" id="navSummaryBadge" style="display:none;">0</span>
+        </button>
+        <button class="nav-item" data-panel="sections">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          <span>文件夹</span>
+        </button>
+        <button class="nav-item" data-panel="journal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+          <span>研究日志</span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="phd-mini">
+        <div class="phd-mini-head">
+          <span class="phd-mini-label">博士进度</span>
+          <span class="phd-mini-percent"><span id="phdPercentMini">0</span>%</span>
+        </div>
+        <div class="phd-mini-bar"><div class="phd-mini-fill" id="phdBarMini"></div></div>
+        <div class="phd-mini-range">2026.09 — 2030.06</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== 主内容区 ===== -->
+  <main class="main">
+
+    <!-- 顶部状态栏 -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 class="panel-title" id="panelTitle">概览</h1>
+        <span class="topbar-date" id="panelDate"></span>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-search" id="cmdkOpen" title="打开命令面板">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span>搜索 · 跳转</span>
+          <kbd>⌘K</kbd>
+        </button>
+        <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <div class="weather-chip" id="weatherChip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+          <span id="weatherText">加载中…</span>
+        </div>
+        <button class="btn-refresh" id="refreshBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          <span>更新资讯</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 面板容器 -->
+    <div class="panels">
+
+      <!-- ===== 面板：概览 ===== -->
+      <section class="panel active" id="panel-dashboard">
+        <div class="today-board" id="todayBoard"></div>
+        <div class="grid-2">
+          <div class="card card-phd">
+            <div class="card-dot"></div>
+            <div class="card-label">博士进度</div>
+            <div class="phd-big">
+              <span class="phd-num" id="phdPercent">0</span><span class="phd-unit">%</span>
+            </div>
+            <div class="phd-bar"><div class="phd-bar-fill" id="phdBarFill"></div></div>
+            <div class="phd-meta">
+              <span>入学 <span id="phdStartDate">2026-09-05</span></span>
+              <span>预计毕业 <span id="phdEndDate">2030-09-04</span></span>
+            </div>
+            <div class="phd-days" id="phdDays"></div>
+          </div>
+
+          <!-- 毕业条件（紧凑版，放grid-2右边） -->
+          <div class="card card-graduation card-graduation-compact">
+            <div class="card-dot"></div>
+            <div class="card-label">毕业条件</div>
+            <div class="grad-compact-top">
+              <div class="grad-compact-info">
+                <span class="grad-compact-name">C 刊论文</span>
+                <span class="grad-compact-count">
+                  <span class="grad-compact-num" id="gradCJrnlAchieved">0</span>
+                  <span class="grad-compact-sep">/</span>
+                  <span class="grad-compact-total" id="gradCJrnlRequired">2</span>
+                </span>
+              </div>
+              <div class="graduation-bar"><div class="graduation-bar-fill" id="gradCJrnlBar"></div></div>
+              <div class="grad-compact-hint">需发表 2 篇 C 刊</div>
+            </div>
+            <div class="grad-compact-bottom">
+              <button class="graduation-add-btn" id="pubAddBtn">+ 登记论文</button>
+              <div class="pub-list" id="pubList"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 今日待办（占满宽度） -->
+        <div class="card card-todos-dashboard">
+          <div class="card-dot"></div>
+          <div class="card-label">今日待办</div>
+          <div class="todo-mini todo-mini-wide" id="dashboardTodos"></div>
+          <button class="btn-goto" data-goto="todos">查看全部待办</button>
+        </div>
+
+        <div class="grid-3">
+          <div class="card stat-card">
+            <div class="stat-num" id="statFiles">0</div>
+            <div class="stat-label">文件总数</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num" id="statDirs">0</div>
+            <div class="stat-label">目录数</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num" id="statNews">0</div>
+            <div class="stat-label">资讯条目</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-dot"></div>
+          <div class="card-label">最新研究日志</div>
+          <div class="journal-mini" id="dashboardJournal"></div>
+        </div>
+      </section>
+
+      <!-- ===== 面板：待办 ===== -->
+      <section class="panel" id="panel-todos">
+        <div class="card">
+          <div class="card-dot"></div>
+          <div class="card-label">新建待办</div>
+          <div class="todo-input-row">
+            <input type="text" id="todoInput" class="todo-input" placeholder="输入新待办，回车添加…">
+            <select id="todoPriority" class="todo-input" style="flex:0 0 100px;cursor:pointer;">
+              <option value="普通">普通</option>
+              <option value="高">高优先级</option>
+              <option value="低">低优先级</option>
+            </select>
+            <button class="btn-primary" id="todoAddBtn">添加</button>
+          </div>
+        </div>
+        <div class="todo-board" id="todoBoard"></div>
+      </section>
+
+      <!-- ===== 面板：专注（番茄钟）===== -->
+      <section class="panel" id="panel-focus">
+        <div class="focus-grid">
+          <!-- 左：计时舞台 -->
+          <div class="card focus-stage" id="focusStage">
+            <div class="focus-ring-wrap" id="focusRingWrap">
+              <svg class="focus-ring" viewBox="0 0 248 248" aria-hidden="true">
+                <circle class="focus-ring-track" cx="124" cy="124" r="108"/>
+                <circle class="focus-ring-progress" id="focusRingProgress" cx="124" cy="124" r="108"/>
+              </svg>
+              <div class="focus-ripples" id="focusRipples" hidden>
+                <span></span><span></span><span></span>
+              </div>
+              <div class="focus-center">
+                <div class="focus-mode-chip" id="focusModeChip">专注</div>
+                <div class="focus-time" id="focusTime">25:00</div>
+                <div class="focus-task-label" id="focusTaskLabel">自由专注</div>
+              </div>
+            </div>
+            <div class="focus-actions">
+              <button class="focus-btn-main" id="focusStartBtn">开始专注</button>
+              <button class="focus-btn-ghost" id="focusPauseBtn" hidden>暂停</button>
+              <button class="focus-btn-ghost focus-btn-danger" id="focusGiveUpBtn" hidden>放弃</button>
+            </div>
+            <!-- 完成后出现的下一步建议（休息 / 再来一轮） -->
+            <div class="focus-next" id="focusNext" hidden></div>
+          </div>
+
+          <!-- 右：本轮设置 + 今日 -->
+          <div class="focus-side">
+            <div class="card" id="focusSetupCard">
+              <div class="card-dot"></div>
+              <div class="card-label">本轮设置</div>
+              <div class="focus-field">
+                <span class="focus-field-label">时长（分钟）</span>
+                <div class="focus-presets" id="focusPresets"></div>
+              </div>
+              <div class="focus-field">
+                <span class="focus-field-label">关联任务</span>
+                <select class="focus-select" id="focusTaskSelect"></select>
+              </div>
+              <div class="focus-hint" id="focusSetupHint"></div>
+            </div>
+            <div class="card">
+              <div class="card-dot"></div>
+              <div class="card-label">今日</div>
+              <div class="focus-today" id="focusToday"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-dot"></div>
+          <div class="card-label">近 7 天专注</div>
+          <div class="focus-bars-hint" id="focusBarsHint" hidden>最近 7 天还没有专注记录</div>
+          <div class="focus-bars" id="focusBars"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-dot"></div>
+          <div class="card-label">专注记录</div>
+          <div class="focus-log" id="focusLog"></div>
+        </div>
+      </section>
+
+      <!-- ===== 面板：资讯 ===== -->
+      <section class="panel" id="panel-news">
+        <div class="news-filter-row">
+          <div class="news-tabs" id="newsTabs"></div>
+          <button class="news-rel-toggle" id="newsRelToggle" title="只显示与你的研究领域相关的条目">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>只看相关</span>
+          </button>
+        </div>
+        <div class="news-list" id="newsList"></div>
+      </section>
+
+      <!-- ===== 面板：文献工具 ===== -->
+      <section class="panel" id="panel-literature">
+        <div class="lit-tabs" id="litTabs">
+          <button class="lit-tab active" data-lit="journals">期刊地图</button>
+          <button class="lit-tab" data-lit="glossary">术语表</button>
+          <button class="lit-tab" data-lit="queries">检索式库</button>
+          <button class="lit-tab" data-lit="arxiv">arXiv 追踪</button>
+        </div>
+
+        <!-- 子面板：期刊地图 -->
+        <div class="lit-subpanel active" id="lit-journals">
+          <div class="journal-filters" id="journalFilters"></div>
+          <div class="journal-grid" id="journalGrid"></div>
+        </div>
+
+        <!-- 子面板：术语表 -->
+        <div class="lit-subpanel" id="lit-glossary">
+          <div class="lit-search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="glossarySearch" class="lit-search" placeholder="搜索术语、全称、中文译名…">
+          </div>
+          <div class="glossary-list" id="glossaryList"></div>
+        </div>
+
+        <!-- 子面板：检索式库 -->
+        <div class="lit-subpanel" id="lit-queries">
+          <div class="query-list" id="queryList"></div>
+        </div>
+
+        <!-- 子面板：arXiv 追踪 -->
+        <div class="lit-subpanel" id="lit-arxiv">
+          <div class="arxiv-head">
+            <span class="arxiv-hint">领域论文追踪 · 按提交时间倒序 · 30 分钟缓存，<a href="https://arxiv.org/" target="_blank" rel="noopener">前往 arXiv ↗</a></span>
+            <button class="hs-btn" id="arxivRefreshBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              <span>刷新</span>
+            </button>
+          </div>
+          <div class="arxiv-list" id="arxivList"></div>
+        </div>
+      </section>
+
+      <!-- ===== 面板：PDF转写 ===== -->
+      <section class="panel" id="panel-pdf">
+        <!-- Token 到期提醒（最后10天显示） -->
+        <div class="pdf-token-banner" id="pdfTokenBanner" hidden>
+          <span class="pdf-token-icon"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+          <span class="pdf-token-text" id="pdfTokenText"></span>
+          <a class="pdf-token-link" href="https://mineru.net/apiManage/token" target="_blank" rel="noopener">去更新 →</a>
+        </div>
+        <!-- 工作区：左侧设置与进度 / 右侧转写结果 -->
+        <div class="pdf-workspace">
+        <div class="pdf-col pdf-col-left">
+
+        <!-- 上传与设置 -->
+        <div class="card pdf-upload-card">
+          <div class="card-dot"></div>
+          <div class="card-label">上传 PDF</div>
+
+          <!-- 拖拽上传区 -->
+          <div class="pdf-dropzone" id="pdfDropzone">
+            <input type="file" id="pdfFileInput" accept="application/pdf,.pdf" hidden>
+            <svg class="pdf-drop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <div class="pdf-drop-text">把 PDF 拖到这里，或 <span class="pdf-drop-link">点击选择文件</span></div>
+            <div class="pdf-drop-hint">只收 PDF，大小上限跟着你选的引擎走</div>
+            <div class="pdf-file-error" id="pdfFileError" hidden></div>
+            <div class="pdf-file-info" id="pdfFileInfo" hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span id="pdfFileName"></span>
+              <span id="pdfFileMeta" class="pdf-file-meta"></span>
+              <button class="pdf-file-clear" id="pdfFileClear" title="移除文件">×</button>
+            </div>
+          </div>
+
+          <!-- 引擎选择 -->
+          <div class="pdf-engine-row">
+            <label class="pdf-engine-opt">
+              <input type="radio" name="pdfEngine" value="local" checked>
+              <div class="pdf-engine-body">
+                <div class="pdf-engine-name">本地解析 <span class="pdf-engine-limit">≤ 500MB</span></div>
+                <div class="pdf-engine-desc">纯本地运行、不上传、可离线；扫描件约 1–2 分钟，无页数限制</div>
+              </div>
+            </label>
+            <label class="pdf-engine-opt">
+              <input type="radio" name="pdfEngine" value="cloud">
+              <div class="pdf-engine-body">
+                <div class="pdf-engine-name">云端加速 <span class="pdf-engine-limit">≤ 200MB / 200页</span></div>
+                <div class="pdf-engine-desc">速度更快、GPU 解析；PDF 将上传至 MinerU 第三方服务器</div>
+              </div>
+            </label>
+          </div>
+
+          <!-- 参数 + 操作行 -->
+          <div class="pdf-action-row">
+            <div class="pdf-opts">
+              <label class="pdf-opt"><input type="checkbox" id="pdfOptFormula" checked> 公式识别</label>
+              <label class="pdf-opt"><input type="checkbox" id="pdfOptTable" checked> 表格识别</label>
+              <label class="pdf-opt pdf-opt-ocr">扫描件自动 OCR（无需手动）</label>
+            </div>
+            <div class="pdf-action-right">
+              <span class="pdf-worker-status" id="pdfWorkerStatus">检测引擎中…</span>
+              <button class="btn-primary" id="pdfStartBtn" disabled>开始转写</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 进度 -->
+        <div class="card pdf-progress-card" id="pdfProgressCard" hidden>
+          <!-- 原来这里有个 .card-dot：其他卡片都是「点 + 标题」成对（上传 PDF / 转写结果），
+               进度卡没有标题，这个点就孤零零贴在状态文字左上角，像粘上去的脏点 —— 已删除。 -->
+          <div class="pdf-progress-head">
+            <span class="pdf-progress-stage" id="pdfProgressStage">排队中…</span>
+            <span class="pdf-progress-pct" id="pdfProgressPct"></span>
+            <span class="pdf-progress-engine" id="pdfProgressEngine"></span>
+          </div>
+          <div class="pdf-progress-bar"><div class="pdf-progress-fill" id="pdfProgressFill"></div></div>
+          <div class="pdf-error" id="pdfErrorBox" hidden></div>
+        </div>
+
+        </div><!-- /pdf-col-left -->
+
+        <div class="pdf-col pdf-col-right">
+        <!-- 空状态：还没有转写结果 -->
+        <div class="card pdf-empty-state" id="pdfEmptyState">
+          <div class="card-dot"></div>
+          <div class="card-label">转写结果</div>
+          <div class="pdf-empty-body">
+            <div class="pdf-empty-title">还没有转写结果</div>
+            <div class="pdf-empty-desc">选一份 PDF，挑好解析引擎，点「开始转写」。转完这里会出全文预览、图片公式、译文和摘要。</div>
+            <div class="pdf-empty-steps">
+              <span>1 选择文件</span>
+              <span>2 选引擎</span>
+              <span>3 开始转写</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 结果 -->
+        <div class="card pdf-result-card" id="pdfResultCard" hidden>
+          <div class="card-dot"></div>
+          <div class="card-label">转写结果</div>
+          <div class="pdf-result-head">
+            <div class="pdf-result-id">
+              <div class="pdf-result-title" id="pdfResultTitle" title="">转写结果</div>
+              <div class="pdf-result-meta" id="pdfResultMeta"></div>
+            </div>
+            <div class="pdf-result-actions">
+              <button class="pdf-mini-btn pdf-mini-btn-primary" id="pdfIngestBtn">存入文献库</button>
+              <button class="pdf-mini-btn" id="pdfCopyBtn">复制 Markdown</button>
+              <button class="pdf-mini-btn" id="pdfDownloadBtn">下载 .md</button>
+              <button class="pdf-mini-btn pdf-open-folder-btn" id="pdfOpenFolderBtn" title="在 Finder 中打开转写结果所在文件夹"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> 打开文件夹</button>
+              <button class="pdf-mini-btn" id="pdfRetryBtn">重新转写</button>
+            </div>
+          </div>
+          <div class="pdf-tabs">
+            <button class="pdf-tab active" data-pdfview="preview" title="完整渲染：文字、标题、图片、公式、表格按原文排版显示">预览</button>
+            <button class="pdf-tab" data-pdfview="assets" title="汇总全文中的图片、公式、表格（除纯文字外的元素）">图片公式</button>
+            <button class="pdf-tab" data-pdfview="translation" title="整篇译成中文，分段并行翻译，结果会缓存">译文<span class="pdf-tab-badge" id="pdfTransTabBadge" hidden>翻译中…</span></button>
+            <button class="pdf-tab" data-pdfview="summary" title="生成结构化文献摘要（模型见下方说明）">摘要<span class="pdf-tab-badge" id="pdfSumTabBadge" hidden>生成中…</span></button>
+            <button class="pdf-tab" data-pdfview="reading" title="逐段对照的精读长文：原文一段、译文一段，重点处附解读">精读<span class="pdf-tab-badge" id="pdfReadTabBadge" hidden>生成中…</span></button>
+            <span class="pdf-images-info" id="pdfImagesInfo"></span>
+          </div>
+          <div class="pdf-preview markdown-body" id="pdfPreview"></div>
+          <div class="pdf-assets" id="pdfAssets" hidden></div>
+          <div class="pdf-translation" id="pdfTranslation" hidden>
+            <div class="pdf-translation-empty" id="pdfTransEmpty">
+              <div class="pdf-translation-icon"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+              <div class="pdf-translation-title">全文中译</div>
+              <div class="pdf-translation-desc" id="pdfTransDesc">用 <span id="pdfTransModelName">翻译模型</span> 把整篇论文译成中文，保留标题、公式和表格。<span id="pdfTransEst"></span></div>
+              <button class="pdf-mini-btn pdf-mini-btn-primary" id="pdfTransStartBtn">开始翻译全文</button>
+              <div class="pdf-translation-note" id="pdfTransNote"></div>
+            </div>
+            <div class="pdf-translation-progress" id="pdfTransProgress" hidden>
+              <div class="pdf-translation-progress-text" id="pdfTransProgressText">正在翻译…</div>
+              <div class="pdf-progress-bar"><div class="pdf-progress-fill" id="pdfTransProgressFill"></div></div>
+              <button class="pdf-mini-btn" id="pdfTransCancelBtn" style="margin-top:10px;">取消</button>
+            </div>
+            <div id="pdfTransResultWrap" hidden>
+              <div class="pdf-trans-result-bar">
+                <span class="pdf-trans-result-label">译文（含原文图片）</span>
+                <button class="pdf-mini-btn pdf-mini-btn-primary" id="pdfTransSaveBtn" title="归档到译文库，之后可随时回看和检索">存入译文库</button>
+                <button class="pdf-mini-btn" id="pdfTransRetryBtn">重新翻译</button>
+              </div>
+              <div class="markdown-body" id="pdfTransContent"></div>
+            </div>
+          </div>
+          <div class="pdf-translation" id="pdfReading" hidden>
+            <div class="pdf-translation-empty" id="pdfReadEmpty">
+              <div class="pdf-translation-icon"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+              <div class="pdf-translation-title">原文精读</div>
+              <div class="pdf-translation-desc">
+                用 <span id="pdfReadModelName">精读模型</span> 把全文做成逐段对照的精读长文：
+                <strong>原文一段、译文一段，重点处附解读</strong>（关键概念、方法思路、隐含前提）。
+              </div>
+              <button class="pdf-mini-btn pdf-mini-btn-primary" id="pdfReadStartBtn">生成原文精读</button>
+              <div class="pdf-translation-note" id="pdfReadNote"></div>
+            </div>
+            <div class="pdf-translation-progress" id="pdfReadProgress" hidden>
+              <div class="pdf-translation-progress-text" id="pdfReadProgressText">正在生成精读…</div>
+              <div class="pdf-progress-bar"><div class="pdf-progress-fill" id="pdfReadProgressFill"></div></div>
+              <button class="pdf-mini-btn" id="pdfReadCancelBtn" style="margin-top:10px;">取消</button>
+            </div>
+            <div id="pdfReadResultWrap" hidden>
+              <div class="pdf-trans-result-bar">
+                <span class="pdf-trans-result-label">原文精读（原文 + 译文 + 解读）</span>
+                <span class="pdf-read-archived" id="pdfReadArchivedTip" hidden>已存入精读库</span>
+                <button class="pdf-mini-btn" id="pdfReadCopyBtn">复制 Markdown</button>
+                <button class="pdf-mini-btn" id="pdfReadRetryBtn">重新生成</button>
+              </div>
+              <div class="markdown-body reading-body" id="pdfReadContent"></div>
+            </div>
+          </div>
+          <div class="pdf-translation" id="pdfSummary" hidden>
+            <div class="pdf-translation-empty" id="pdfSumEmpty">
+              <div class="pdf-translation-icon"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+              <div class="pdf-translation-title">总结摘要</div>
+              <div class="pdf-translation-desc">用 <span id="pdfSumModelName">Qwen3.8 Flash</span> 从转写结果中提取文献摘要。选择深度后点击生成：</div>
+              <div class="sum-depth-buttons">
+                <button class="pdf-mini-btn sum-depth-btn" data-depth="quick">
+                  <span class="sum-depth-icon"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+                  <span class="sum-depth-name">快速</span>
+                  <span class="sum-depth-desc">30秒速览</span>
+                </button>
+                <button class="pdf-mini-btn pdf-mini-btn-primary sum-depth-btn active" data-depth="standard">
+                  <span class="sum-depth-icon"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+                  <span class="sum-depth-name">标准</span>
+                  <span class="sum-depth-desc">3分钟精读</span>
+                </button>
+                <button class="pdf-mini-btn sum-depth-btn" data-depth="deep">
+                  <span class="sum-depth-icon"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></span>
+                  <span class="sum-depth-name">深度</span>
+                  <span class="sum-depth-desc">10分钟+批判</span>
+                </button>
+              </div>
+              <div class="pdf-translation-note" id="pdfSumNote"></div>
+            </div>
+            <div class="pdf-translation-progress" id="pdfSumProgress" hidden>
+              <div class="pdf-translation-progress-text" id="pdfSumProgressText">正在阅读全文并生成摘要…</div>
+              <div class="pdf-progress-bar"><div class="pdf-progress-fill pdf-progress-indeterminate"></div></div>
+            </div>
+            <div id="pdfSumResultWrap" hidden>
+              <div class="sum-result-bar">
+                <div class="sum-depth-switch">
+                  <button class="sum-switch-btn active" data-depth="quick"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 快速</button>
+                  <button class="sum-switch-btn" data-depth="standard"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> 标准</button>
+                  <button class="sum-switch-btn" data-depth="deep"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg> 深度</button>
+                </div>
+                <div class="sum-result-actions">
+                  <span class="pdf-trans-result-label" id="pdfSumMeta"></span>
+                  <button class="pdf-mini-btn" id="pdfSumSaveBtn"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> 保存</button>
+                  <button class="pdf-mini-btn" id="pdfSumRetryBtn">重新生成</button>
+                </div>
+              </div>
+              <div class="pdf-summary-body markdown-body" id="pdfSumContent"></div>
+            </div>
+          </div>
+        </div>
+        </div><!-- /pdf-col-right -->
+        </div><!-- /pdf-workspace -->
+      </section>
+
+      <!-- ===== 面板：前沿瞭望（双通道学术雷达，报纸风归档） ===== -->
+      <section class="panel" id="panel-frontier">
+        <div id="frontierListView">
+          <div class="hs-masthead">
+            <div class="hs-masthead-left">
+              <div class="hs-masthead-title">前沿瞭望 · 双通道学术雷达</div>
+              <div class="hs-masthead-sub">壹 应用前沿 ｜ 贰 深度评述 · 每天出一期，每条都带原文链接</div>
+            </div>
+            <div class="hs-masthead-actions">
+              <button class="hs-btn" id="frontierFolderBtn" title="在 Finder 中打开归档目录">归档目录</button>
+              <button class="hs-btn hs-btn-primary" id="frontierRefreshBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                <span>刷新列表</span>
+              </button>
+            </div>
+          </div>
+          <div class="hs-hint">
+            <strong>双通道与可信度标注：</strong>通道壹追踪本领域的应用突破（新方法 · 新工具 · 关键论文），通道贰追踪方法论与概念层面的反思与争论。凡文献类条目一律附原文链接，并标注三类可信度：<code>同行评议</code>／<code>预印本</code>／<code>新闻解读</code>。每期以 <code>YYYY-MM-DD.html</code> 永久保存在 <code>data/frontier/</code>，点击任一期即在下方原版式展开。
+          </div>
+          <div class="hs-list" id="frontierList"></div>
+        </div>
+        <div id="frontierDetailView" style="display:none;">
+          <div class="hs-detail-head">
+            <button class="hs-btn" id="frontierBackBtn">← 返回归档列表</button>
+            <div class="hs-detail-title" id="frontierDetailTitle"></div>
+            <a class="hs-btn" id="frontierOpenTab" target="_blank" rel="noopener">新标签页打开</a>
+          </div>
+          <div class="paper-wrap" id="frontierFrame"></div>
+        </div>
+      </section>
+
+      <!-- ===== 面板：热点日报（报纸风归档） ===== -->
+      <section class="panel" id="panel-hotspots">
+        <div id="hotspotsListView">
+          <div class="hs-masthead">
+            <div class="hs-masthead-left">
+              <div class="hs-masthead-title">热点日报 · 全网热点检测</div>
+              <div class="hs-masthead-sub">每天 10:00 / 16:00 自动生成 · 每期归档保留 · 报纸版面版</div>
+            </div>
+            <div class="hs-masthead-actions">
+              <button class="hs-btn" id="hotspotFolderBtn" title="在 Finder 中打开归档目录">归档目录</button>
+              <button class="hs-btn hs-btn-primary" id="hotspotRefreshBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                <span>刷新列表</span>
+              </button>
+            </div>
+          </div>
+          <div class="hs-hint">
+            <strong>生成与归档：</strong>每天 10:00（上午版）和 16:00（下午版）各出一期。流程是先读 Skill 文档，再去全网采热点，筛完分类挑 TOP3 深挖，最后排成报纸版式。文件按 <code>YYYY-MM-DD_上午版.html / YYYY-MM-DD_下午版.html</code> 存在 <code>09_工作台程序/data/hotspots/</code>，下午版会和上午版对照去重。点任一期，就在下面按原版式展开。
+          </div>
+          <div class="hs-list" id="hotspotList"></div>
+        </div>
+        <div id="hotspotsDetailView" style="display:none;">
+          <div class="hs-detail-head">
+            <button class="hs-btn" id="hotspotBackBtn">← 返回归档列表</button>
+            <div class="hs-detail-title" id="hotspotDetailTitle"></div>
+            <a class="hs-btn" id="hotspotOpenTab" target="_blank" rel="noopener">新标签页打开 ↗</a>
+          </div>
+          <div class="paper-wrap" id="hotspotFrame"></div>
+        </div>
+      </section>
+
+      <!-- ===== 面板：科技爱好者周刊 ===== -->
+      <section class="panel" id="panel-weekly">
+        <div class="hs-masthead">
+          <div class="hs-masthead-left">
+            <div class="hs-masthead-title">科技爱好者周刊</div>
+            <div class="hs-masthead-sub">阮一峰 · 每周五更新 · 每期标着发布日期 · 缓存 6 小时</div>
+          </div>
+          <div class="hs-masthead-actions">
+            <button class="hs-btn" id="weeklyArchiveBtn" title="在 GitHub 打开完整归档">完整归档 ↗</button>
+            <button class="hs-btn hs-btn-primary" id="weeklyRefreshBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              <span>刷新</span>
+            </button>
+          </div>
+        </div>
+        <div class="hs-hint">
+          数据来自阮一峰的 <code>ruanyf/weekly</code> 开源仓库，一次抓最近几期，缓存 6 小时。想提前看新刊，点上面「刷新」。
+        </div>
+        <div class="hs-list" id="weeklyList"></div>
+      </section>
+
+      <!-- ===== 面板：摘要卡片 ===== -->
+      <section class="panel" id="panel-summaries">
+        <div id="summariesListView">
+          <div class="hs-masthead">
+            <div class="hs-masthead-left">
+              <div class="hs-masthead-title">文献摘要卡片库</div>
+              <div class="hs-masthead-sub">存过的论文摘要都在这儿，按深度分了级 · 点开一张卡片看完整内容</div>
+            </div>
+            <div class="hs-masthead-actions">
+              <button class="hs-btn" id="summarySelectToggle" title="开启后点卡片即可勾选，用于批量生成综述或导出">勾选模式</button>
+              <button class="hs-btn" id="summaryBibBtn" title="导出全部（或勾选）卡片为 BibTeX 文献格式">导出 BibTeX</button>
+              <button class="hs-btn" id="summaryFolderBtn" title="在 Finder 中打开保存目录">保存目录</button>
+              <button class="hs-btn hs-btn-primary" id="summaryRefreshBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                <span>刷新列表</span>
+              </button>
+            </div>
+          </div>
+          <div class="sum-filter-bar">
+            <button class="sum-filter-btn active" data-filter="all">全部</button>
+            <button class="sum-filter-btn" data-filter="quick"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 快速</button>
+            <button class="sum-filter-btn" data-filter="standard"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> 标准</button>
+            <button class="sum-filter-btn" data-filter="deep"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg> 深度</button>
+          </div>
+          <div class="sum-toolbar">
+            <label class="sum-search" for="summarySearch">
+              <svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="search" id="summarySearch" placeholder="搜索标题 / 关键词 / 一句话结论…" autocomplete="off" />
+            </label>
+          </div>
+          <div class="sum-tag-filter" id="summaryTagFilter"></div>
+          <div class="sum-card-list" id="summaryCardList"></div>
+          <div class="sum-empty" id="summaryEmpty" hidden>
+            <div class="sum-empty-icon"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+            <div class="sum-empty-title">还没有保存的摘要</div>
+            <div class="sum-empty-desc">转写完一份 PDF，切到「摘要」标签生成，点「保存」就进卡片库了</div>
+          </div>
+          <!-- 勾选模式浮动操作条 -->
+          <div class="sum-action-bar" id="sumActionBar" hidden>
+            <span class="sum-action-count" id="sumActionCount">已选 0 篇</span>
+            <button class="hs-btn hs-btn-primary" id="sumActionReview">生成综述草稿</button>
+            <button class="hs-btn" id="sumActionBib">导出 BibTeX</button>
+            <button class="hs-btn" id="sumActionClear">取消选择</button>
+          </div>
+        </div>
+        <div id="summariesDetailView" style="display:none;">
+          <div class="hs-detail-head">
+            <button class="hs-btn" id="summaryBackBtn">← 返回卡片列表</button>
+            <div class="hs-detail-title" id="summaryDetailTitle"></div>
+          </div>
+          <div class="xref-bar" id="summaryXref"></div>
+          <div class="sum-tags-editor" id="summaryTagsEditor">
+            <span class="sum-tags-label">标签</span>
+            <span class="sum-tag-chips" id="summaryTagChips"></span>
+            <input type="text" id="summaryTagInput" placeholder="输入标签后回车" maxlength="16" autocomplete="off" />
+            <button class="sum-tag-ai-btn" id="summaryTagAiBtn" title="用 AI 读摘要内容，建议 3-5 个主题标签">AI 建议</button>
+            <div class="sum-tag-suggest" id="summaryTagSuggest" hidden></div>
+          </div>
+          <div class="sum-detail-body" id="summaryDetailContent"></div>
+        </div>
+      </section>
+
+      <!-- ===== 面板：译文库 ===== -->
+      <section class="panel" id="panel-translations">
+        <div id="translationsListView">
+          <div class="hs-masthead">
+            <div class="hs-masthead-left">
+              <div class="hs-masthead-title">译文库</div>
+              <div class="hs-masthead-sub">存过的全文翻译都在这儿，按保存时间排列 · 点开一篇读译文</div>
+            </div>
+            <div class="hs-masthead-actions">
+              <button class="hs-btn" id="transFolderBtn" title="在 Finder 中打开译文库目录">保存目录</button>
+              <button class="hs-btn hs-btn-primary" id="transRefreshBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                <span>刷新列表</span>
+              </button>
+            </div>
+          </div>
+          <div class="sum-toolbar">
+            <label class="sum-search" for="transSearch">
+              <svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="search" id="transSearch" placeholder="搜索标题 / 来源 / 正文片段…" autocomplete="off" />
+            </label>
+          </div>
+          <div class="trans-list" id="transList"></div>
+          <div class="sum-empty" id="transEmpty" hidden>
+            <div class="sum-empty-icon"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <div class="sum-empty-title">译文库还是空的</div>
+            <div class="sum-empty-desc">在 PDF 转写的「译文」标签翻译完全文后，点「存入译文库」，译文就会归档到这里</div>
+          </div>
+        </div>
+        <div id="translationsDetailView" style="display:none;">
+          <div class="hs-detail-head">
+            <button class="hs-btn" id="transBackBtn">← 返回译文列表</button>
+            <div class="hs-detail-title" id="transDetailTitle"></div>
+            <button class="hs-btn" id="transDeleteBtn" title="从译文库移除（不影响转写任务里的原文）">删除</button>
+          </div>
+          <div class="trans-detail-meta" id="transDetailMeta"></div>
+          <div class="xref-bar" id="transXref"></div>
+          <div class="sum-detail-body" id="transDetailContent"></div>
+        </div>
+      </section>
+
+      <!-- ===== 面板：原文精读库 ===== -->
+      <section class="panel" id="panel-readings">
+        <div id="readingsListView">
+          <div class="hs-masthead">
+            <div class="hs-masthead-left">
+              <div class="hs-masthead-title">原文精读</div>
+              <div class="hs-masthead-sub">逐段对照的精读长文 · 原文一段、译文一段、重点处附解读 · 按生成时间排列</div>
+            </div>
+            <div class="hs-masthead-actions">
+              <button class="hs-btn" id="readFolderBtn" title="在 Finder 中打开精读库目录">保存目录</button>
+              <button class="hs-btn hs-btn-primary" id="readRefreshBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                <span>刷新列表</span>
+              </button>
+            </div>
+          </div>
+          <div class="sum-toolbar">
+            <label class="sum-search" for="readSearch">
+              <svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="search" id="readSearch" placeholder="搜索标题 / 来源 / 正文片段…" autocomplete="off" />
+            </label>
+          </div>
+          <div class="trans-list" id="readList"></div>
+          <div class="sum-empty" id="readEmpty" hidden>
+            <div class="sum-empty-icon"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+            <div class="sum-empty-title">精读库还是空的</div>
+            <div class="sum-empty-desc">在 PDF 转写的「精读」标签生成精读长文，生成完会自动归档到这里</div>
+          </div>
+        </div>
+        <div id="readingsDetailView" style="display:none;">
+          <div class="hs-detail-head">
+            <button class="hs-btn" id="readBackBtn">← 返回精读列表</button>
+            <div class="hs-detail-title" id="readDetailTitle"></div>
+            <button class="hs-btn" id="readDeleteBtn" title="从精读库移除（不影响转写任务里的原文件）">删除</button>
+          </div>
+          <div class="trans-detail-meta" id="readDetailMeta"></div>
+          <div class="xref-bar" id="readXref"></div>
+          <div class="sum-detail-body reading-body" id="readDetailContent"></div>
+        </div>
+      </section>
+
+      <!-- ===== 面板：文件夹 ===== -->
+      <section class="panel" id="panel-sections">
+        <div class="sections-grid" id="sectionsGrid"></div>
+      </section>
+
+      <!-- ===== 面板：研究日志 ===== -->
+      <section class="panel" id="panel-journal">
+        <div class="week-review" id="weekReview" hidden></div>
+        <div class="card">
+          <div class="card-dot"></div>
+          <div class="card-label">快速记录</div>
+          <div class="journal-input-row">
+            <div style="display:flex;gap:10px;align-items:center;">
+              <select id="journalType" class="todo-input" style="flex:0 0 100px;cursor:pointer;">
+                <option value="日常">日常</option>
+                <option value="想法">想法</option>
+                <option value="问题">问题</option>
+                <option value="进展">进展</option>
+              </select>
+              <span style="font-size:12px;color:var(--text-muted);">选择日志类型</span>
+            </div>
+            <textarea id="journalInput" class="journal-input" placeholder="今天的研究进展、想法、卡住的地方…&#10;写 [[card:论文标题]] 能链到摘要卡片，点一下就跳过去" rows="3"></textarea>
+            <button class="btn-primary" id="journalAddBtn">记录</button>
+          </div>
+        </div>
+        <div class="journal-filters" id="journalTypeFilters"></div>
+        <div class="journal-timeline" id="journalTimeline"></div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- Toast 提示 -->
+<div class="toast" id="toast"></div>
+
+<!-- 综述草稿模态（挂在 body 直下，避免 panel 动画 stacking context 困住 z-index） -->
+<div class="review-modal" id="reviewModal" hidden>
+  <div class="review-modal-overlay" id="reviewModalOverlay"></div>
+  <div class="review-modal-content">
+    <div class="review-modal-head">
+      <div class="review-modal-title" id="reviewModalTitle">综述草稿</div>
+      <button class="pdf-file-clear" id="reviewModalClose" title="关闭">×</button>
+    </div>
+    <div class="review-modal-toolbar" id="reviewModalToolbar">
+      <input type="text" id="reviewTopicInput" placeholder="综述主题（留空则用默认主题）" maxlength="60" autocomplete="off" />
+      <button class="hs-btn hs-btn-primary" id="reviewRunBtn">生成</button>
+      <button class="hs-btn" id="reviewCopyBtn" hidden>复制全文</button>
+      <button class="hs-btn" id="reviewDownloadBtn" hidden>下载 .md</button>
+    </div>
+    <div class="review-modal-status" id="reviewModalStatus" hidden></div>
+    <div class="review-modal-body markdown-body" id="reviewModalBody" hidden></div>
+  </div>
+</div>
+
+<!-- 番茄钟专注计时浮条 -->
+<div class="pomo-timer" id="pomoTimer" hidden>
+  <svg class="pomo-ring" viewBox="0 0 48 48">
+    <circle class="pomo-ring-bg" cx="24" cy="24" r="20"/>
+    <circle class="pomo-ring-fg" id="pomoRingFg" cx="24" cy="24" r="20"/>
+  </svg>
+  <div class="pomo-info">
+    <div class="pomo-clock" id="pomoClock">25:00</div>
+    <div class="pomo-task" id="pomoTask"></div>
+  </div>
+  <div class="pomo-btns">
+    <button class="pomo-btn" id="pomoPauseBtn" title="暂停 / 继续">暂停</button>
+    <button class="pomo-btn pomo-btn-stop" id="pomoStopBtn" title="放弃本次专注">放弃</button>
+  </div>
+</div>
+
+<!-- 原文精读生成进度：浮动进度卡，任何面板都能看到（生成在服务端跑，切走/关标签都不中断） -->
+<div class="read-task" id="readTaskBar" hidden>
+  <div class="read-task-head">
+    <span class="read-task-dot" aria-hidden="true"></span>
+    <span class="read-task-title" id="readTaskTitle">原文精读生成中</span>
+    <button class="read-task-cancel" id="readTaskCancel" type="button" title="停止生成（已完成的部分不会保留）">取消</button>
+  </div>
+  <div class="read-task-bar">
+    <div class="read-task-track"><div class="read-task-fill" id="readTaskFill"></div></div>
+    <span class="read-task-pct" id="readTaskPct">0%</span>
+  </div>
+  <div class="read-task-foot">
+    <span class="read-task-count" id="readTaskSub">0 / 0 段</span>
+    <span class="read-task-eta" id="readTaskEta"></span>
+  </div>
+</div>
+
+<!-- 天气详情模态框 -->
+<div class="weather-modal" id="weatherModal">
+  <div class="weather-modal-overlay" id="weatherModalOverlay"></div>
+  <div class="weather-modal-content">
+    <div class="weather-modal-header">
+      <div class="weather-modal-title">
+        <span class="weather-modal-icon" id="wModalIcon" data-wx-ico="thermo"></span>
+        <span>天气详情</span>
+      </div>
+      <button class="weather-modal-close" id="weatherModalClose" aria-label="关闭">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="weather-modal-body" id="weatherModalBody">
+      <!-- 当前天气 -->
+      <div class="weather-main">
+        <div class="weather-temp-block">
+          <div class="weather-now-icon" id="wModalNowIcon" data-wx-ico="cloud"></div>
+          <div class="weather-readout">
+            <div class="weather-temp" id="wModalTemp">--</div>
+            <div class="weather-desc" id="wModalDesc">--</div>
+            <div class="weather-feels" id="wModalFeels">--</div>
+          </div>
+        </div>
+        <div class="weather-details">
+          <div class="weather-detail-item">
+            <span class="weather-detail-icon" data-wx-ico="humidity"></span>
+            <span class="weather-detail-label">湿度</span>
+            <span class="weather-detail-value" id="wModalHumidity">--</span>
+          </div>
+          <div class="weather-detail-item">
+            <span class="weather-detail-icon" data-wx-ico="wind"></span>
+            <span class="weather-detail-label">风向</span>
+            <span class="weather-detail-value" id="wModalWind">--</span>
+          </div>
+          <div class="weather-detail-item">
+            <span class="weather-detail-icon" data-wx-ico="gauge"></span>
+            <span class="weather-detail-label">气压</span>
+            <span class="weather-detail-value" id="wModalPressure">--</span>
+          </div>
+          <div class="weather-detail-item">
+            <span class="weather-detail-icon" data-wx-ico="eye"></span>
+            <span class="weather-detail-label">能见度</span>
+            <span class="weather-detail-value" id="wModalVisibility">--</span>
+          </div>
+          <div class="weather-detail-item">
+            <span class="weather-detail-icon" data-wx-ico="uv"></span>
+            <span class="weather-detail-label">紫外线</span>
+            <span class="weather-detail-value" id="wModalUV">--</span>
+          </div>
+          <div class="weather-detail-item">
+            <span class="weather-detail-icon" data-wx-ico="sunrise"></span>
+            <span class="weather-detail-label">日出日落</span>
+            <span class="weather-detail-value" id="wModalSun">--</span>
+          </div>
+        </div>
+      </div>
+      <!-- 3天预报 -->
+      <div class="weather-forecast" id="wModalForecast"></div>
+      <!-- 空气质量 + 天气指数 -->
+      <div class="weather-bottom">
+        <div class="weather-aqi" id="wModalAqiBlock">
+          <div class="weather-aqi-ring">
+            <svg class="aqi-ring-svg" viewBox="0 0 44 44" aria-hidden="true">
+              <circle class="aqi-ring-track" cx="22" cy="22" r="18"/>
+              <circle class="aqi-ring-arc" id="wModalAqiArc" cx="22" cy="22" r="18"/>
+            </svg>
+            <div class="weather-aqi-value" id="wModalAqiValue">--</div>
+          </div>
+          <div class="weather-aqi-meta">
+            <div class="weather-aqi-label">空气质量指数</div>
+            <div class="weather-aqi-category" id="wModalAqiCategory">--</div>
+          </div>
+        </div>
+        <div class="weather-indices" id="wModalIndices"></div>
+      </div>
+      <!-- 天气预警 -->
+      <div class="weather-alerts" id="wModalAlerts" style="display:none;"></div>
+    </div>
+    <div class="weather-modal-footer">
+      <span>数据源：和风天气 QWeather · 每小时自动更新</span>
+    </div>
+  </div>
+</div>
+
+<!-- PDF 一键入库弹框（P0） -->
+<div class="pdf-modal" id="pdfIngestModal" hidden>
+  <div class="pdf-modal-overlay" id="pdfIngestOverlay"></div>
+  <div class="pdf-modal-content">
+    <div class="pdf-modal-header">
+      <span class="pdf-modal-title">存入文献库</span>
+      <button class="pdf-modal-close" id="pdfIngestClose" aria-label="关闭">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="pdf-modal-body">
+      <div class="pdf-ingest-hint" id="pdfIngestHint">正在提取元数据…</div>
+      <label class="pdf-field">
+        <span class="pdf-field-label">标题 <em>*</em></span>
+        <input type="text" id="piTitle" placeholder="论文标题（自动提取，可修改）">
+      </label>
+      <div class="pdf-field-row">
+        <label class="pdf-field">
+          <span class="pdf-field-label">作者</span>
+          <input type="text" id="piAuthors" placeholder="多个作者用、分隔">
+        </label>
+        <label class="pdf-field pdf-field-narrow">
+          <span class="pdf-field-label">年份</span>
+          <input type="text" id="piYear" placeholder="如 2021" inputmode="numeric">
+        </label>
+      </div>
+      <div class="pdf-field-row">
+        <label class="pdf-field">
+          <span class="pdf-field-label">期刊 / 会议 / 出版社</span>
+          <input type="text" id="piJournal">
+        </label>
+        <label class="pdf-field pdf-field-narrow">
+          <span class="pdf-field-label">DOI</span>
+          <input type="text" id="piDoi" placeholder="可空">
+        </label>
+      </div>
+      <label class="pdf-field">
+        <span class="pdf-field-label">
+          摘要
+          <button type="button" class="pdf-ai-btn" id="piAiBtn"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4L12 3z"/><path d="M18.5 15l.8 1.9 1.9.8-1.9.8-.8 1.9-.8-1.9-1.9-.8 1.9-.8.8-1.9z"/></svg> AI 智能补全</button>
+        </span>
+        <textarea id="piAbstract" rows="3" placeholder="论文摘要（可点上方 AI 智能补全自动生成，约15秒；也可手动填写）"></textarea>
+      </label>
+      <label class="pdf-field">
+        <span class="pdf-field-label">关键词</span>
+        <input type="text" id="piKeywords" placeholder="多个关键词用逗号分隔">
+      </label>
+      <input type="hidden" id="piSummaryZh">
+      <div class="pdf-field-row">
+        <label class="pdf-field pdf-field-narrow">
+          <span class="pdf-field-label">分类</span>
+          <select id="piCategory">
+            <option value="精读" selected>精读</option>
+            <option value="泛读">泛读</option>
+            <option value="待读">待读</option>
+          </select>
+        </label>
+        <label class="pdf-field">
+          <span class="pdf-field-label">研究主题（可选已有，也可直接输入新建）</span>
+          <input type="text" id="piTheme" list="piThemeList" placeholder="如：可解释性">
+          <datalist id="piThemeList"></datalist>
+        </label>
+        <label class="pdf-field pdf-field-narrow">
+          <span class="pdf-field-label">优先级</span>
+          <select id="piPriority">
+            <option value="核心">核心</option>
+            <option value="参考" selected>参考</option>
+            <option value="补充">补充</option>
+          </select>
+        </label>
+      </div>
+      <label class="pdf-check">
+        <input type="checkbox" id="piMakeNotes" checked>
+        <span>同时生成读书札记骨架（02_研究笔记 / 02_读书札记）</span>
+      </label>
+      <div class="pdf-ingest-error" id="pdfIngestError" hidden></div>
+      <div class="pdf-ingest-done" id="pdfIngestDone" hidden>
+        <div class="pdf-ingest-done-title">已存入文献库</div>
+        <div class="pdf-ingest-path" id="piDonePaper"></div>
+        <div class="pdf-ingest-path" id="piDoneNote"></div>
+      </div>
+    </div>
+    <div class="pdf-modal-footer" id="pdfIngestFooter">
+      <button class="pdf-mini-btn" id="pdfIngestCancel">取消</button>
+      <button class="pdf-mini-btn pdf-mini-btn-primary" id="pdfIngestConfirm">确认入库</button>
+    </div>
+  </div>
+</div>
+
+<!-- 选中文字浮动工具栏：PDF预览中选中文字时出现 -->
+<div class="pdf-sel-toolbar" id="pdfSelToolbar" hidden>
+  <button class="pdf-sel-btn" id="pdfSelQuoteBtn" title="将选中段落作为引用追加到读书札记的「可引用段落摘录」">
+    引用到札记
+  </button>
+  <span class="pdf-sel-count" id="pdfSelCount"></span>
+</div>
+
+<!-- 图片灯箱：点击放大查看 -->
+<div class="pdf-img-lightbox" id="pdfImgLightbox" hidden>
+  <div class="pdf-img-lightbox-overlay" id="pdfImgLightboxOverlay"></div>
+  <div class="pdf-img-lightbox-content">
+    <button class="pdf-img-lightbox-close" id="pdfImgLightboxClose" aria-label="关闭"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <img class="pdf-img-lightbox-img" id="pdfImgLightboxImg" src="" alt="">
+    <div class="pdf-img-lightbox-caption" id="pdfImgLightboxCaption"></div>
+  </div>
+</div>
+
+<!-- ===== ⌘K 命令面板 ===== -->
+<div class="cmdk-overlay" id="cmdkOverlay" role="dialog" aria-modal="true" aria-label="命令面板">
+  <div class="cmdk">
+    <div class="cmdk-input-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="cmdk-input" id="cmdkInput" type="text" placeholder="输入面板名或动作…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="cmdk-list" id="cmdkList"></div>
+    <div class="cmdk-foot">
+      <span><kbd>↑</kbd><kbd>↓</kbd>选择</span>
+      <span><kbd>↵</kbd>执行</span>
+      <span><kbd>esc</kbd>关闭</span>
+    </div>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

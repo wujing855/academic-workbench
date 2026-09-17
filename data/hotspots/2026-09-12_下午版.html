@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>热点日报·2026年9月12日 下午版</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { background:#efe7d3; }
+  body {
+    font-family:"Songti SC","STSong","SimSun","Noto Serif CJK SC",serif;
+    background:#efe7d3; color:#141414; line-height:1.7; font-size:16px;
+  }
+  .paper { max-width:900px; margin:0 auto; background:#fbf6e7; padding:34px 44px 40px; border-left:1px solid #d8d0c2; border-right:1px solid #d8d0c2; }
+  .topbar { display:flex; justify-content:space-between; font-size:13px; color:#5b5649; letter-spacing:.5px; border-bottom:2px solid #141414; padding-bottom:8px; margin-bottom:6px; }
+  .masthead { text-align:center; padding:14px 0 10px; border-bottom:1px solid #141414; margin-bottom:10px; }
+  .masthead h1 { font-size:46px; font-weight:900; letter-spacing:14px; text-indent:14px; }
+  .masthead .sub { font-size:13px; color:#5b5649; margin-top:4px; letter-spacing:1px; }
+  .metaline { display:flex; justify-content:space-between; font-size:13px; color:#3c3830; padding:7px 2px; border-bottom:1px solid #d8d0c2; margin-bottom:14px; }
+  .dedup { background:#f7efd9; border-left:4px solid #b3261e; padding:12px 16px; font-size:14px; line-height:1.8; margin-bottom:20px; }
+  .dedup b { color:#b3261e; }
+  .sec { margin-bottom:26px; }
+  .sec-head { display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid #141414; padding-bottom:5px; margin-bottom:12px; }
+  .sec-head h2 { font-size:21px; font-weight:900; letter-spacing:2px; }
+  .sec-head .kw { font-size:13px; color:#9b9484; font-weight:normal; letter-spacing:.5px; }
+  .head-grid { display:grid; grid-template-columns:1.55fr 1fr; gap:22px; }
+  .art { margin-bottom:16px; }
+  .atitle { font-size:18px; font-weight:900; line-height:1.45; margin-bottom:7px; }
+  .atitle .ptag { display:inline-block; font-size:12px; font-weight:700; color:#b3261e; border:1px solid #b3261e; padding:0 5px; margin-right:6px; vertical-align:2px; letter-spacing:1px; }
+  .body { font-size:15px; line-height:1.78; margin-bottom:7px; text-align:justify; }
+  .body.dropcap::first-letter { font-size:34px; font-weight:900; float:left; line-height:1; margin:4px 6px 0 0; }
+  .highlight { background:#f7efd9; border-left:4px solid #b3261e; padding:9px 13px; font-size:14px; line-height:1.75; margin:9px 0; }
+  .srcline { font-size:12px; color:#8a8374; border-top:1px dotted #d8d0c2; padding-top:5px; margin-top:8px; }
+  .rail { display:flex; flex-direction:column; gap:15px; }
+  .block { border-top:1px solid #141414; padding-top:9px; }
+  .block .btitle { font-size:15.5px; font-weight:900; margin-bottom:5px; line-height:1.45; }
+  .block .btitle .ptag { display:inline-block; font-size:11.5px; font-weight:700; color:#b3261e; border:1px solid #b3261e; padding:0 4px; margin-right:5px; vertical-align:1.5px; letter-spacing:1px; }
+  .block .bbody { font-size:13.8px; line-height:1.72; text-align:justify; }
+  .block .bsrc { font-size:11.5px; color:#8a8374; margin-top:5px; border-top:1px dotted #d8d0c2; padding-top:4px; }
+  .chartbox { background:#fdfaf0; border:1px solid #d8d0c2; padding:12px; margin:10px 0; }
+  .chartbox .cap { font-size:13px; font-weight:700; margin-bottom:8px; }
+  .chartbox .note { font-size:11.5px; color:#8a8374; margin-top:5px; }
+  .watch-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .watch .wtitle { font-size:16.5px; font-weight:900; margin-bottom:6px; line-height:1.5; }
+  .watch .wtitle .ptag { display:inline-block; font-size:12px; font-weight:700; color:#b3261e; border:1px solid #b3261e; padding:0 5px; margin-right:6px; vertical-align:2px; letter-spacing:1px; }
+  .watch .wbody { font-size:14px; line-height:1.76; text-align:justify; }
+  .track-row { border:1px solid #d8d0c2; background:#faf5e9; padding:12px 16px; margin-bottom:20px; }
+  .track-row h3 { font-size:16px; font-weight:900; margin-bottom:7px; border-bottom:1px solid #d8d0c2; padding-bottom:5px; }
+  .track-row ul { list-style:none; }
+  .track-row li { font-size:13.8px; line-height:1.75; padding-left:14px; position:relative; margin-bottom:4px; }
+  .track-row li::before { content:"—"; color:#b3261e; position:absolute; left:0; }
+  .fade-row { border:1px solid #d8d0c2; background:#faf5e9; padding:12px 16px; margin-bottom:20px; }
+  .fade-row h3 { font-size:16px; font-weight:900; margin-bottom:7px; border-bottom:1px solid #d8d0c2; padding-bottom:5px; }
+  .fade-row ul { list-style:none; }
+  .fade-row li { font-size:13.5px; line-height:1.75; padding-left:14px; position:relative; margin-bottom:3px; }
+  .fade-row li::before { content:"▼"; color:#b3261e; position:absolute; left:0; font-size:11px; top:3px; }
+  .footer { border-top:2px solid #141414; padding-top:10px; font-size:12px; color:#5b5649; line-height:1.8; margin-top:22px; }
+  .footer b { color:#141414; }
+  .quick { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+  .quick span { font-size:12.5px; background:#f2ead6; border:1px solid #d8d0c2; padding:2px 8px; }
+</style>
+</head>
+<body>
+<div class="paper">
+
+  <!-- 报头 -->
+  <div class="topbar"><span>热点日报·全网热点检测</span><span>2026年9月12日 星期六·农历八月初二</span></div>
+  <div class="masthead">
+    <h1>热点日报</h1>
+    <div class="sub">HOTSPOT DAILY · 全网热点检测日报</div>
+  </div>
+  <div class="metaline">
+    <span>第2026-0912期·下午版</span>
+    <span>采集时间 16:05—16:15 | 6次检索</span>
+    <span>版本 v2.7.0+实体保护 | 对照今日上午版去重</span>
+  </div>
+
+  <!-- 本期说明 -->
+  <div class="dedup">
+    <b>本期说明（下午版·对照2026-09-12上午版去重）：</b>上午版已完整展开的 14 种矿产储量世界第一与深海矿床、数据产权登记制度、中国男篮首战开门红、金砖会晤启程、业主遭公职人员辱骂等，本版一律不重复展开。本版只收录<b>午后新增与实质进展</b>：①打假网红“铁头”一审获刑 8 年（上午版仅速览“退庭时辱骂法庭”，本版为判决详情）；②中国男篮 15:00 对阵巴林，半场 46:29 领先（上午版预告，本版为战报）；③习近平当地时间中午抵达新德里（上午版“启程”，本版“抵达”）；④男子编造女生催资助事件官方通报反转；⑤iPhone Duo 预订价冲至 39999 元等消费动态；⑥刀郎公益线上音乐会开播、17 岁少年被困大兴安岭林区 8 天 7 夜自行走出等观察与速览。上午版已报且无新进展者（矿产、数据产权、亚运村争议、埃博拉等）仅列入文末“跨日与跨期追踪”。
+  </div>
+
+  <!-- 头版 -->
+  <div class="sec">
+    <div class="sec-head"><h2>头版·要闻与法治</h2><span class="kw">铁头获刑 · 催资助反转</span></div>
+    <div class="head-grid">
+      <div class="main">
+        <div class="art">
+          <div class="atitle"><span class="ptag">法治</span>打假网红“铁头”一审获刑 8 年：寻衅滋事罪、敲诈勒索罪数罪并罚</div>
+          <p class="body dropcap">9 月 11 日下午，杭州市滨江区人民法院对打假网红“铁头惩恶扬善”（本名董某某）敲诈勒索、寻衅滋事案一审宣判：董某某犯寻衅滋事罪、敲诈勒索罪，数罪并罚，决定执行有期徒刑 8 年，并处罚金 13 万元。法院认定，6 名被告人构成恶势力组织，其余 5 名被告人因敲诈勒索罪被判处有期徒刑 9 个月 15 天至 13 年不等。</p>
+          <p class="body">案件背景：董某某曾以曝光三亚海鲜市场“五两秤”、举报新东方违规补课走红，2024 年 5 月伙同他人以曝黑料相威胁，向某带货主播索要数百克黄金。受害企业创始人王来库称，宣判后“铁头”方未当庭上诉，退庭时还辱骂法庭。另有媒体披露，其背后操盘公司已注销，律师就“打假维权”与“敲诈勒索”的法律边界作出解读：以曝光相要挟、索要财物即可能突破维权范畴。</p>
+          <div class="chartbox">
+            <div class="cap">图一：从“打假网红”到被告席——事件时间线</div>
+            <svg viewBox="0 0 812 190" width="100%" xmlns="http://www.w3.org/2000/svg">
+              <line x1="60" y1="95" x2="790" y2="95" stroke="#141414" stroke-width="2"/>
+              <circle cx="150" cy="95" r="8" fill="#b3261e"/>
+              <text x="150" y="62" text-anchor="middle" font-size="15" font-weight="bold">2023 年</text>
+              <text x="150" y="128" text-anchor="middle" font-size="14">曝光三亚海鲜“五两秤”走红</text>
+              <circle cx="350" cy="95" r="8" fill="#b3261e"/>
+              <text x="350" y="62" text-anchor="middle" font-size="15" font-weight="bold">2024 年 5 月</text>
+              <text x="350" y="128" text-anchor="middle" font-size="14">伙同他人以曝黑料威胁，索要数百克黄金</text>
+              <circle cx="540" cy="95" r="8" fill="#b3261e"/>
+              <text x="540" y="62" text-anchor="middle" font-size="15" font-weight="bold">2024 年</text>
+              <text x="540" y="128" text-anchor="middle" font-size="14">自爆涉黄经历，遭举报与抵制</text>
+              <circle cx="720" cy="95" r="8" fill="#b3261e"/>
+              <text x="720" y="62" text-anchor="middle" font-size="15" font-weight="bold">2026 年 9 月 11 日</text>
+              <text x="720" y="128" text-anchor="middle" font-size="14">一审宣判：获刑 8 年，罚金 13 万元</text>
+            </svg>
+            <div class="note">注：时间线依据环球网、央广网、法治日报、扬子晚报报道整理；一审判决，尚未生效，是否上诉以后续为准。</div>
+          </div>
+          <p class="body">舆论观察：事件在微博、抖音、头条三平台同步发酵（9 月 12 日早间数据，头条热榜第 2 位）。公众讨论集中在“打假流量”模式的边界——既肯定曝光黑幕的监督价值，也警惕以打假为名的索财行为。一审判决未生效，上诉权行使情况与终审结果仍需关注。</p>
+          <div class="srcline">信息来源：环球网、央广网、法治日报、扬子晚报、华龙网（2026年9月11日—12日）</div>
+        </div>
+      </div>
+      <div class="rail">
+        <div class="block">
+          <div class="btitle"><span class="ptag">反转</span>男子编造女生催资助事件：官方通报系自导自演</div>
+          <div class="bbody">甘肃嘉峪关姚某某（男，37 岁）自编自导“停止资助某学生后遭对方威胁”，虚构“高中数学老师”身份博取流量；警方核查教育、民政系统均无其从业与资助记录，已对其采取刑事强制措施，案件侦办中。详见本版社会法治。</div>
+          <div class="bsrc">信息来源：澎湃新闻、环球时报、京报网（2026年9月11日—12日）</div>
+        </div>
+        <div class="block">
+          <div class="btitle"><span class="ptag">进展</span>习近平抵达新德里出席金砖会晤</div>
+          <div class="bbody">当地时间 9 月 12 日中午，国家主席习近平乘专机抵达新德里帕拉姆空军基地，印度政府高级官员到机场迎接；蔡奇、王毅同机抵达。金砖合作机制今年迎来成立 20 周年，明年中方将再次担任金砖轮值主席国。</div>
+          <div class="bsrc">信息来源：新华社国际（2026年9月12日 15:01）</div>
+        </div>
+        <div class="block">
+          <div class="btitle"><span class="ptag">消费</span>iPhone Duo 预订价冲至 39999 元</div>
+          <div class="bbody">苹果首款折叠屏 iPhone Duo 相关话题热度走高，网传预订价冲至 39999 元（据热搜引擎聚合数据，具体以官方渠道为准）；天猫官旗 9 月 12 日起抢先预约，24 期免息、以旧换新至高补贴 900 元。</div>
+          <div class="bsrc">信息来源：热搜引擎、新浪微博（2026年9月12日），价格以官方发布为准</div>
+        </div>
+        <div class="block">
+          <div class="btitle"><span class="ptag">奇闻</span>17 岁少年被困大兴安岭林区 8 天 7 夜自行走出</div>
+          <div class="bbody">17 岁少年在大兴安岭林区走失 8 天 7 夜后获救，自称靠喝山泉水存活；家属称其自行走出林区，身体消瘦明显。（据新浪新闻，细节待官方通报）</div>
+          <div class="bsrc">信息来源：新浪新闻（2026年9月12日 16:06）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第二版·体育 -->
+  <div class="sec">
+    <div class="sec-head"><h2>第二版·体育</h2><span class="kw">半场领先 · 冲击两连胜</span></div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">战报</span>中国男篮对阵巴林：半场 46:29 领先 17 分，廖三宁 15 分</div>
+      <p class="body">北京时间 9 月 12 日 15:00，名古屋爱知国际体育馆，亚运会男篮小组赛 C 组第二轮，中国男篮对阵巴林男篮（CCTV5 直播）。首节中国队内外开花，连续命中远投、单节命中 5 记三分，以 32:11 领先 21 分，此后一度将优势扩大到 24 分；次节巴林队冲击内线追分，廖三宁凭个人能力稳住局面，半场结束中国男篮以 46:29 领先。</p>
+      <p class="body">半场数据：廖三宁 15 分领跑全队，胡金秋 7 分 3 篮板，李悦洲 7 分。本场赵继伟、杨瀚森缺席。巴林队首轮以 89:85 爆冷掀翻卫冕冠军菲律宾，归化球员桑普森交出 24 分 13 篮板 8 助攻的准三双，本场首节即受中国队防守压制。按赛程，中国男篮将于 9 月 14 日 12:00 对阵菲律宾队。（全场最终比分以赛事官方为准。）</p>
+      <div class="chartbox">
+        <div class="cap">图二：中国男篮半场战报（首节 vs 半场累计比分）</div>
+        <svg viewBox="0 0 812 190" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <line x1="70" y1="150" x2="790" y2="150" stroke="#141414" stroke-width="1.5"/>
+          <text x="62" y="78" text-anchor="end" font-size="15">46</text>
+          <text x="62" y="122" text-anchor="end" font-size="15">32</text>
+          <text x="200" y="172" text-anchor="middle" font-size="16">首节结束</text>
+          <rect x="140" y="106" width="80" height="44" fill="#f2ead6" stroke="#b3261e"/>
+          <text x="180" y="128" text-anchor="middle" font-size="15" font-weight="bold">32</text>
+          <rect x="230" y="131" width="80" height="19" fill="#d8d0c2" stroke="#8a8374"/>
+          <text x="270" y="145" text-anchor="middle" font-size="15" font-weight="bold">11</text>
+          <text x="500" y="172" text-anchor="middle" font-size="16">半场结束（进行中）</text>
+          <rect x="440" y="60" width="80" height="90" fill="#f2ead6" stroke="#b3261e"/>
+          <text x="480" y="82" text-anchor="middle" font-size="15" font-weight="bold">46</text>
+          <rect x="530" y="104" width="80" height="46" fill="#d8d0c2" stroke="#8a8374"/>
+          <text x="570" y="126" text-anchor="middle" font-size="15" font-weight="bold">29</text>
+          <rect x="85" y="182" width="80" height="5" fill="#f2ead6" stroke="#b3261e"/>
+          <text x="180" y="188" font-size="14">中国男篮</text>
+          <rect x="300" y="182" width="80" height="5" fill="#d8d0c2" stroke="#8a8374"/>
+          <text x="395" y="188" font-size="14">巴林</text>
+        </svg>
+        <div class="note">注：数据截至 9 月 12 日半场（腾讯新闻、懂球帝、球迷屋）；全场比分以官方为准。</div>
+      </div>
+      <div class="srcline">信息来源：腾讯新闻、懂球帝、球迷屋、直播吧（2026年9月12日 15:20—15:56）</div>
+    </div>
+  </div>
+
+  <!-- 第三版·时政纪念 -->
+  <div class="sec">
+    <div class="sec-head"><h2>第三版·时政纪念</h2><span class="kw">金砖抵印 · 服贸成果</span></div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">时政</span>习近平抵达新德里：金砖合作机制迎来 20 周年</div>
+      <p class="body">新华社新德里 9 月 12 日电：当地时间 9 月 12 日中午，国家主席习近平乘专机抵达新德里，应印度总理莫迪邀请，出席金砖国家领导人第十八次会晤。习近平抵达新德里帕拉姆空军基地时，印度政府高级官员热情迎接，礼兵分列红毯两侧致敬。蔡奇、王毅等陪同人员同机抵达，中国驻印度大使徐飞洪也到机场迎接。</p>
+      <p class="body">此次峰会恰逢金砖合作机制成立 20 周年，会晤于 9 月 12 日至 13 日举行。据人民日报海外版，中方将同金砖成员国和伙伴国一道，回顾金砖合作历程，共绘“大金砖”高质量发展蓝图；明年，中方将再次担任金砖轮值主席国。</p>
+      <div class="srcline">信息来源：新华社国际、人民日报海外版、外交部网站（2026年9月12日）</div>
+    </div>
+    <div class="quick">
+      <span>速览：服贸会多项硬核成果落地（今日头条热榜第 3 位，成果清单待官方发布）</span>
+      <span>速览：中方调整对日签证规费（据头条热榜，细则以官方发布为准）</span>
+    </div>
+  </div>
+
+  <!-- 第四版·宏观数据 -->
+  <div class="sec">
+    <div class="sec-head"><h2>第四版·宏观数据</h2><span class="kw">签证规费 · 服务贸易</span></div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">数据</span>服贸会多项硬核成果落地，服务贸易开放持续提速</div>
+      <p class="body">9 月 12 日，今日头条热榜关注“服贸会多项硬核成果落地”。本届服贸会集中发布了一批服务贸易领域成果，涉及跨境服务、数字贸易等方向（具体成果清单以官方发布为准）。同期，中方宣布调整对日签证规费，涉及赴日签证相关费用标准（细则以官方公告为准）。</p>
+      <div class="srcline">信息来源：今日头条热榜、慧科洞察（2026年9月12日）</div>
+    </div>
+  </div>
+
+  <!-- 第五版·就业产业 -->
+  <div class="sec">
+    <div class="sec-head"><h2>第五版·就业产业</h2><span class="kw">刀郎音乐会 · 消费观察</span></div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">文化</span>刀郎公益线上音乐会开播：零套路获官媒盛赞</div>
+      <p class="body">9 月 12 日，刀郎公益线上音乐会开播，热度迅速登顶抖音、百度、微博等多平台娱乐热搜，相关话题讨论量短时间内突破百万。与部分流量演出的数据泡沫不同，这场音乐会的热度主要来自观众自发传播；新华网、中新网、央视文娱等媒体发文点赞其“零套路、回归音乐本质”。</p>
+      <div class="srcline">信息来源：今日头条（2026年9月12日 15:55）</div>
+    </div>
+    <div class="quick">
+      <span>速览：lululemon 为什么卖不动登微博热搜（品牌消费观察）</span>
+    </div>
+  </div>
+
+  <!-- 第六版·社会法治 -->
+  <div class="sec">
+    <div class="sec-head"><h2>第六版·社会法治</h2><span class="kw">催资助反转 · 流量骗局</span></div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">反转</span>“停止资助女生遭催捐”大反转：系自导自演，男子已被采取刑事强制措施</div>
+      <p class="body">近日，甘肃嘉峪关“男子因女学生生活奢靡停止助学资助、反被女生威胁”事件引爆网络关注，多家媒体跟进评论。9 月 11 日晚，事件出现反转：据环球时报记者从有关方面获悉，该事件系当事人自导自演编造；嘉峪关警方通报称，姚某某（男，37 岁）为博取网络关注、吸粉引流，自编自导、虚构伪造“停止资助某学生后遭对方威胁”不实内容，通过个人网络账号对外发布，严重误导公众认知，扰乱网络公共秩序。</p>
+      <p class="body">核查细节：当地教育系统查无该男子相关从业记录，其自称的“普通高中数学老师”身份存疑；民政部门表示没有其官方资助备案记录。目前公安机关已依法受理该案件，姚某某已被采取刑事强制措施，案件正在进一步侦办。</p>
+      <p class="body">法律视角：律师分析认为，若构成寻衅滋事罪，基本量刑为五年以下有期徒刑、拘役或者管制；情节特别严重的，可处五年以上十年以下有期徒刑。舆论普遍关注此类“消费社会善意”的流量骗局对公益公信力的透支。（事件处于侦办阶段，最终认定以司法机关为准；各方观点并列，不作预判。）</p>
+      <div class="srcline">信息来源：澎湃新闻、环球时报、京报网、中国新闻网、闪电新闻（2026年9月11日—12日）</div>
+    </div>
+    <div class="quick">
+      <span>速览：女婴误吞电池 26 小时食道被腐蚀（据微博热搜，就医提醒类）</span>
+    </div>
+  </div>
+
+  <!-- 第七版·平台治理民生 -->
+  <div class="sec">
+    <div class="sec-head"><h2>第七版·平台治理民生</h2><span class="kw">林区脱险 · 消费百态</span></div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">民生速览</span>17 岁少年被困大兴安岭林区 8 天 7 夜，自行走出获救</div>
+      <p class="body">9 月 12 日，一名 17 岁少年在大兴安岭林区走失 8 天 7 夜后自行走出获救的消息引发关注。据家属称，少年靠喝山泉水存活，走出林区时身体消瘦明显；目前获救细节与走失原因待官方进一步通报。</p>
+      <div class="srcline">信息来源：新浪新闻（2026年9月12日 16:06）</div>
+    </div>
+  </div>
+
+  <!-- 观察哨 -->
+  <div class="sec">
+    <div class="sec-head"><h2>观 察 哨</h2><span class="kw">音乐会现象 · 台风路径</span></div>
+    <div class="watch-grid">
+      <div class="watch">
+        <div class="wtitle"><span class="ptag">文化</span>刀郎公益音乐会现象：当“零套路”成为稀缺品</div>
+        <div class="wbody">
+          <p class="body">刀郎公益线上音乐会以“无广告、无打赏引导、无套路”的形态刷屏，讨论量破百万，并获央媒点赞。分析：在直播打赏与商业化话术泛滥的背景下，“纯净”本身成为传播变量；事件也再次带出线上演出商业模式的讨论——公益形态与可持续运营之间如何平衡，值得持续观察。</p>
+          <div class="srcline">信息来源：今日头条、新华网、中新网、央视文娱（2026年9月12日）</div>
+        </div>
+      </div>
+      <div class="watch">
+        <div class="wtitle"><span class="ptag">防灾</span>今年首个“秋台风”路径更新：华南南部持续性降雨</div>
+        <div class="wbody">
+          <p class="body">上午版已报首个“秋台风”或来袭，本版跟进：气象口径称 12 日至下周初，华南南部将有持续性降雨过程（台风具体路径与强度以中央气象台发布为准）。沿海居民需关注预报预警，做好防范。</p>
+          <div class="srcline">信息来源：网易早报（2026年9月12日），路径以气象部门发布为准</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 跨日与跨期追踪 -->
+  <div class="track-row">
+    <h3>跨日与跨期追踪</h3>
+    <ul>
+      <li>14 种矿产储量世界第一与西太平洋深海矿床：上午版已展开，午后无新增官方口径。</li>
+      <li>数据产权登记制度：上午版已展开，国家数据产权登记服务系统继续试运行，无新增进展。</li>
+      <li>日本亚运会“集装箱+邮轮”住宿争议：持续发酵，运动员吐槽内容仍在扩散，无官方回应更新。</li>
+      <li>刚果（金）埃博拉确诊破 7000 例：无新增通报。</li>
+      <li>成品油临时调控已执行（92 号汽油上调 0.20 元/升）：生效首日，暂无新增。</li>
+      <li>中国男篮首战开门红（上午版）：本版已升级为对巴林半场战报。</li>
+      <li>网红“铁头”退庭时辱骂法庭（上午版速览）：本版已升级为一审宣判详情。</li>
+    </ul>
+  </div>
+
+  <!-- 退榜观察 -->
+  <div class="fade-row">
+    <h3>退榜观察（对照今日上午版榜单位置）</h3>
+    <ul>
+      <li>“我国发现世界级规模深海矿床”：上午微博热搜第 3 位（42.0 万）→ 仍居榜上，热度平稳。</li>
+      <li>“网红铁头退庭时辱骂法庭”→ 升级为“打假网红铁头一审获刑 8 年”，头条热榜第 2 位，话题实质性推进。</li>
+      <li>“苹果高管称折叠屏比例泄密很遗憾”：微博热搜第 1 位（71.4 万）→ 叠加 iPhone Duo 预订价 39999 元话题，持续霸榜。</li>
+      <li>“陈幸同超级大逆转”“韦世豪禁赛”：上午版在榜，午后降温，未见新进展。</li>
+    </ul>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="footer">
+    <b>信息来源：</b>新华社国际、人民日报海外版、外交部网站、环球网、央广网、法治日报、扬子晚报、澎湃新闻、环球时报、京报网、中国新闻网、腾讯新闻、懂球帝、球迷屋、今日头条热榜、微博热搜、新浪新闻、慧科洞察 等（2026年9月11日—12日）。<br>
+    <b>生成时间：</b>2026 年 9 月 12 日 16:15（Asia/Shanghai）｜<b>版本：</b>热点检测 Skill v2.7.0 + 实体保护规则<br>
+    <b>免责声明：</b>本报告基于公开信息整理，热搜话题及部分细节标注“据传/待核实”，最终以官方发布为准；涉反转、争议事件均并列各方观点，不作预判。
+  </div>
+
+</div>
+</body>
+</html>

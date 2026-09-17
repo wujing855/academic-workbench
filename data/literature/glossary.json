@@ -1,0 +1,423 @@
+{
+  "module": "glossary",
+  "title": "外文期刊入门手册·术语速查表（全手册合并）",
+  "source": "《外文期刊入门手册》第三部分文末",
+  "extracted_at": "2026-09-05",
+  "convention": "四件套体例：全称 + 缩写 + 中文译名 + 一句话人话解释；「—」表示该项不适用（单词即名称 / 无通行中文译名）",
+  "count": 59,
+  "items": [
+    {
+      "term": "AFDB",
+      "full_name": "AlphaFold Protein Structure Database",
+      "zh": "AlphaFold 蛋白质结构数据库",
+      "plain_explanation": "DeepMind 与 EMBL-EBI 维护的 2 亿+ 预测结构库",
+      "url": "https://alphafold.ebi.ac.uk/"
+    },
+    {
+      "term": "alert",
+      "full_name": "—",
+      "zh": "提醒 / 订阅推送",
+      "plain_explanation": "检索式或期刊的新内容自动发到邮箱",
+      "url": "见 My NCBI / 各期刊页"
+    },
+    {
+      "term": "AlphaFold",
+      "full_name": "—",
+      "zh": "—",
+      "plain_explanation": "DeepMind 开发的蛋白质结构预测模型系列（2020 年 CASP14 夺冠）",
+      "url": "https://www.nature.com/articles/s41586-021-03819-2"
+    },
+    {
+      "term": "APC",
+      "full_name": "Article Processing Charge",
+      "zh": "文章处理费",
+      "plain_explanation": "作者被录用后支付的费用，读者免费",
+      "url": "https://www.plos.org/fees/ （实例）"
+    },
+    {
+      "term": "arXiv",
+      "full_name": "arXiv",
+      "zh": "—",
+      "plain_explanation": "物理起家的预印本库，q-bio 板块偏计算生物",
+      "url": "https://arxiv.org/archive/q-bio"
+    },
+    {
+      "term": "benchmark",
+      "full_name": "—",
+      "zh": "基准",
+      "plain_explanation": "标准化的公开测试集 + 统一指标，用于方法间比较",
+      "url": "https://predictioncenter.org/ （结构预测实例）"
+    },
+    {
+      "term": "bioRxiv",
+      "full_name": "bioRxiv",
+      "zh": "—",
+      "plain_explanation": "生物学专用预印本库（冷泉港实验室运营）",
+      "url": "https://www.biorxiv.org/"
+    },
+    {
+      "term": "BOAI",
+      "full_name": "Budapest Open Access Initiative",
+      "zh": "布达佩斯开放获取倡议",
+      "plain_explanation": "OA 运动的奠基性声明（2002）",
+      "url": "https://www.budapestopenaccessinitiative.org/read/"
+    },
+    {
+      "term": "CASP",
+      "full_name": "Critical Assessment of Structure Prediction",
+      "zh": "结构预测盲测竞赛",
+      "plain_explanation": "两年一届的蛋白质结构预测独立盲测（1994 年起）",
+      "url": "https://predictioncenter.org/"
+    },
+    {
+      "term": "CiteScore",
+      "full_name": "—（单词即名称）",
+      "zh": "引用分",
+      "plain_explanation": "Elsevier 按 4 年窗口算的期刊平均被引",
+      "url": "https://www.scopus.com/sources"
+    },
+    {
+      "term": "COPE",
+      "full_name": "Committee on Publication Ethics",
+      "zh": "出版伦理委员会",
+      "plain_explanation": "出版伦理规范制定与会员组织",
+      "url": "https://publicationethics.org/members"
+    },
+    {
+      "term": "Clarivate",
+      "full_name": "Clarivate",
+      "zh": "科睿唯安",
+      "plain_explanation": "运营 Web of Science 与 JCR 的商业分析公司",
+      "url": "https://mjl.clarivate.com/"
+    },
+    {
+      "term": "Crossref",
+      "full_name": "Crossref",
+      "zh": "—",
+      "plain_explanation": "DOI 注册机构，持有撤稿数据库",
+      "url": "https://www.crossref.org/"
+    },
+    {
+      "term": "de novo design",
+      "full_name": "de novo protein design",
+      "zh": "蛋白质从头设计",
+      "plain_explanation": "不依赖天然模板，直接设计全新蛋白质",
+      "url": "https://www.nature.com/articles/s41586-023-06415-8 （实例）"
+    },
+    {
+      "term": "DOI",
+      "full_name": "Digital Object Identifier",
+      "zh": "数字对象标识符",
+      "plain_explanation": "论文的永久编号，以 10. 开头",
+      "url": "https://doi.org/10.1073/pnas.0507655102 （格式实例）"
+    },
+    {
+      "term": "DOAJ",
+      "full_name": "Directory of Open Access Journals",
+      "zh": "开放获取期刊目录",
+      "plain_explanation": "收录通过审核的 OA 期刊的免费名录",
+      "url": "https://doaj.org/"
+    },
+    {
+      "term": "DORA",
+      "full_name": "San Francisco Declaration on Research Assessment",
+      "zh": "旧金山科研评估宣言",
+      "plain_explanation": "反对用期刊指标代替论文质量评价的全球倡议",
+      "url": "https://sfdora.org/"
+    },
+    {
+      "term": "E-utilities",
+      "full_name": "Entrez Programming Utilities",
+      "zh": "NCBI 官方检索接口",
+      "plain_explanation": "用 URL 直接查询 PubMed 计数的官方 API",
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
+    },
+    {
+      "term": "FAIR",
+      "full_name": "Findable, Accessible, Interoperable, Reusable",
+      "zh": "FAIR 数据原则",
+      "plain_explanation": "数据应可发现、可访问、可互操作、可复用",
+      "url": "https://www.go-fair.org/fair-principles/"
+    },
+    {
+      "term": "foundation model",
+      "full_name": "—",
+      "zh": "基础模型",
+      "plain_explanation": "在海量数据上预训练、可适配多种下游任务的大模型",
+      "url": "—（见第 16 章方向 2/3）"
+    },
+    {
+      "term": "h-index",
+      "full_name": "—",
+      "zh": "h 指数",
+      "plain_explanation": "有 h 篇论文各被引至少 h 次",
+      "url": "https://www.scimagojr.com/ （期刊层面）"
+    },
+    {
+      "term": "hybrid",
+      "full_name": "hybrid journal",
+      "zh": "混合期刊",
+      "plain_explanation": "订阅制刊 + 单篇可选付费开放",
+      "url": "https://www.elsevier.com/researcher/author/open-access/oa-basics"
+    },
+    {
+      "term": "ICML",
+      "full_name": "International Conference on Machine Learning",
+      "zh": "国际机器学习大会",
+      "plain_explanation": "AI 方法学两大会议之一",
+      "url": "https://icml.cc/"
+    },
+    {
+      "term": "ICLR",
+      "full_name": "International Conference on Learning Representations",
+      "zh": "国际学习表征会议",
+      "plain_explanation": "表征学习方向的主要会议（公开评审文化代表）",
+      "url": "https://iclr.cc/"
+    },
+    {
+      "term": "IF / JIF",
+      "full_name": "(Journal) Impact Factor",
+      "zh": "期刊影响因子",
+      "plain_explanation": "前两年论文的平均被引频次",
+      "url": "https://jcr.clarivate.com/ （需订阅）"
+    },
+    {
+      "term": "ISCB",
+      "full_name": "International Society for Computational Biology",
+      "zh": "国际计算生物学学会",
+      "plain_explanation": "计算生物学的主要学术团体（官方刊物三本，见 13.5）",
+      "url": "https://www.iscb.org/"
+    },
+    {
+      "term": "ISMB",
+      "full_name": "Intelligent Systems for Molecular Biology",
+      "zh": "分子生物学智能系统会议",
+      "plain_explanation": "ISCB 的年度综合会议（论文特刊发表于 Bioinformatics）",
+      "url": "https://www.iscb.org/"
+    },
+    {
+      "term": "ISSN",
+      "full_name": "International Standard Serial Number",
+      "zh": "国际标准连续出版物号",
+      "plain_explanation": "期刊的注册编号",
+      "url": "https://www.issn.org/"
+    },
+    {
+      "term": "iCite",
+      "full_name": "iCite",
+      "zh": "—",
+      "plain_explanation": "NIH 的免费论文级文献计量工具（RCR）",
+      "url": "https://icite.od.nih.gov/"
+    },
+    {
+      "term": "JCR",
+      "full_name": "Journal Citation Reports",
+      "zh": "期刊引用报告",
+      "plain_explanation": "Clarivate 每年发布的期刊指标报告",
+      "url": "https://jcr.clarivate.com/ （需订阅）"
+    },
+    {
+      "term": "MeSH",
+      "full_name": "Medical Subject Headings",
+      "zh": "医学主题词表",
+      "plain_explanation": "NLM 给每条记录标注的规范化主题词",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/help/"
+    },
+    {
+      "term": "MEDLINE",
+      "full_name": "—",
+      "zh": "医学文献在线数据库",
+      "plain_explanation": "PubMed 的最大子库（NLM 挑选的期刊）",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/about/"
+    },
+    {
+      "term": "MJL",
+      "full_name": "Master Journal List",
+      "zh": "主期刊列表",
+      "plain_explanation": "WoS 收录期刊的免费查询入口",
+      "url": "https://mjl.clarivate.com/"
+    },
+    {
+      "term": "My NCBI",
+      "full_name": "My NCBI",
+      "zh": "NCBI 个人账号",
+      "plain_explanation": "PubMed 免费账号：存检索、订提醒",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK53592/"
+    },
+    {
+      "term": "NeurIPS",
+      "full_name": "Conference on Neural Information Processing Systems",
+      "zh": "神经信息处理系统大会",
+      "plain_explanation": "AI 方法学两大会议之一",
+      "url": "https://neurips.cc/"
+    },
+    {
+      "term": "OA",
+      "full_name": "Open Access",
+      "zh": "开放获取",
+      "plain_explanation": "读者免费获取全文的出版模式",
+      "url": "https://www.budapestopenaccessinitiative.org/read/"
+    },
+    {
+      "term": "OpenReview",
+      "full_name": "OpenReview",
+      "zh": "—",
+      "plain_explanation": "AI 会议公开评审与论文托管平台",
+      "url": "https://openreview.net/"
+    },
+    {
+      "term": "paywall",
+      "full_name": "paywall",
+      "zh": "付费墙",
+      "plain_explanation": "订阅刊\"摘要可见、全文收费\"的访问限制",
+      "url": "—"
+    },
+    {
+      "term": "PMC",
+      "full_name": "PubMed Central",
+      "zh": "—",
+      "plain_explanation": "NLM 的论文全文存档库",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/about/intro/"
+    },
+    {
+      "term": "PMLR",
+      "full_name": "Proceedings of Machine Learning Research",
+      "zh": "机器学习研究论文集",
+      "plain_explanation": "ICML 等会议论文集的出版系列",
+      "url": "https://proceedings.mlr.press/"
+    },
+    {
+      "term": "preprint",
+      "full_name": "preprint",
+      "zh": "预印本",
+      "plain_explanation": "未经同行评审的先行发布版本",
+      "url": "https://arxiv.org/"
+    },
+    {
+      "term": "Q1–Q4",
+      "full_name": "Quartile 1–4",
+      "zh": "四分位分区",
+      "plain_explanation": "学科内按指标排序后的前四分段位",
+      "url": "见 JCR / https://www.scimagojr.com/"
+    },
+    {
+      "term": "q-bio",
+      "full_name": "Quantitative Biology",
+      "zh": "定量生物学",
+      "plain_explanation": "arXiv 的生物学板块（10 个子板块）",
+      "url": "https://arxiv.org/archive/q-bio"
+    },
+    {
+      "term": "RCR",
+      "full_name": "Relative Citation Ratio",
+      "zh": "相对引用比",
+      "plain_explanation": "按领域与时间校正的论文影响力指标",
+      "url": "https://icite.od.nih.gov/"
+    },
+    {
+      "term": "RECOMB",
+      "full_name": "Annual International Conference on Research in Computational Molecular Biology",
+      "zh": "计算分子生物学国际年会",
+      "plain_explanation": "算法导向的计算生物学会议（2026 年第 30 届）",
+      "url": "https://www.recomb.org/"
+    },
+    {
+      "term": "retraction",
+      "full_name": "retraction",
+      "zh": "撤稿",
+      "plain_explanation": "论文的正式作废声明",
+      "url": "https://gitlab.com/crossref/retraction-watch-data"
+    },
+    {
+      "term": "RSS",
+      "full_name": "Really Simple Syndication",
+      "zh": "信息聚合订阅",
+      "plain_explanation": "网站更新的标准化推送格式",
+      "url": "https://rss.arxiv.org/rss/q-bio （实例）"
+    },
+    {
+      "term": "Semantic Scholar",
+      "full_name": "Semantic Scholar",
+      "zh": "—",
+      "plain_explanation": "Ai2 的免费学术搜索引擎（含会议论文）",
+      "url": "https://www.semanticscholar.org/"
+    },
+    {
+      "term": "SJR",
+      "full_name": "SCImago Journal Rank",
+      "zh": "Scimago 期刊排名",
+      "plain_explanation": "按引用来源声望加权的期刊影响力",
+      "url": "https://www.scimagojr.com/"
+    },
+    {
+      "term": "Scimago",
+      "full_name": "SCImago Lab",
+      "zh": "—",
+      "plain_explanation": "发布 SJR 的数据公司",
+      "url": "https://www.scimagojr.com/"
+    },
+    {
+      "term": "Scopus",
+      "full_name": "Scopus",
+      "zh": "—",
+      "plain_explanation": "Elsevier 的摘要引文数据库",
+      "url": "https://www.scopus.com/sources （免费指标页）"
+    },
+    {
+      "term": "TIAB",
+      "full_name": "Title/Abstract",
+      "zh": "题名 / 摘要字段",
+      "plain_explanation": "PubMed 检索字段标签 [tiab]",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/advanced/"
+    },
+    {
+      "term": "TOC alert",
+      "full_name": "Table of Contents alert",
+      "zh": "期刊目录提醒",
+      "plain_explanation": "新刊目录自动发邮箱",
+      "url": "见第 11 章三例"
+    },
+    {
+      "term": "VUS",
+      "full_name": "Variant of Uncertain Significance",
+      "zh": "意义未明变异",
+      "plain_explanation": "临床遗传学中效应未知的基因变异",
+      "url": "https://academic.oup.com/nargab/article/6/4/lqae154/7906241"
+    },
+    {
+      "term": "WoS",
+      "full_name": "Web of Science",
+      "zh": "—",
+      "plain_explanation": "Clarivate 的引文数据库",
+      "url": "https://mjl.clarivate.com/ （免费查收录）"
+    },
+    {
+      "term": "zero-shot",
+      "full_name": "zero-shot",
+      "zh": "零样本",
+      "plain_explanation": "模型不经微调直接执行新任务（评测方式：检验\"通用性\"声称）",
+      "url": "https://doi.org/10.1186/s13059-025-03574-x （实例）"
+    },
+    {
+      "term": "—",
+      "full_name": "—",
+      "zh": "中科院分区表",
+      "plain_explanation": "中科院文献情报中心的分区产品（2004 起，2026 起停更）",
+      "url": "https://www.fenqubiao.com/ （需登录，个人免费）"
+    },
+    {
+      "term": "—",
+      "full_name": "hijacked journal",
+      "zh": "劫持期刊",
+      "plain_explanation": "冒充真刊的克隆网站骗局",
+      "url": "https://docs.google.com/spreadsheets/d/1ak985WGOgGbJRJbZFanoktAN_UFeExpE/"
+    },
+    {
+      "term": "—",
+      "full_name": "predatory journal",
+      "zh": "掠夺性期刊",
+      "plain_explanation": "以欺骗流程牟利的期刊",
+      "url": "https://thinkchecksubmit.org/"
+    }
+  ]
+}

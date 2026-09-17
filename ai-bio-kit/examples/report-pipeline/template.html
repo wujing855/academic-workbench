@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 与生物学交叉研究报告</title>
+<meta name="description" content="截至 2026 年年中，人工智能在生物学研究中的真实能力边界——单文件离线阅读版">
+<style>
+/* ============ 基础与配色 ============ */
+:root{
+  --bg:#faf9f5;
+  --bg-raise:#ffffff;
+  --ink:#1f2a2e;
+  --ink-soft:#52616a;
+  --teal:#14595d;
+  --teal-mid:#3d7f7c;
+  --teal-pale:#e7f0ee;
+  --teal-line:#b9d4d0;
+  --accent:#b8470e;
+  --accent-deep:#93380a;
+  --amber-bg:#fdf3e3;
+  --amber-line:#b45309;
+  --amber-ink:#7c3d06;
+  --line:#e3e0d8;
+  --serif:"Songti SC","STSong","Noto Serif CJK SC","SimSun",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+  --mono:"SF Mono",Menlo,Consolas,"Courier New",monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:17.5px;line-height:1.78;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+a{color:var(--teal);text-decoration:none}
+a:hover{text-decoration:underline}
+strong{font-weight:700}
+/* 跳转链接（无障碍） */
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--teal);color:#fff;padding:.5em 1em;z-index:99}
+.skip-link:focus{left:8px;top:8px}
+/* 顶部进度条 */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:60;transition:width .1s linear}
+/* noscript 提示 */
+.js-warn{display:none;background:var(--amber-bg);border-bottom:1px solid var(--amber-line);color:var(--amber-ink);font-size:.85em;padding:.5em 1.2em;text-align:center}
+/* ============ 封面 ============ */
+.cover{max-width:900px;margin:0 auto;padding:64px 24px 30px}
+.cover .kicker{font-size:.82em;letter-spacing:.22em;color:var(--ink-soft);text-transform:uppercase}
+.cover h1{
+  font-family:var(--serif);font-weight:700;font-size:clamp(30px,5vw,44px);
+  line-height:1.28;margin:.5em 0 .35em;color:var(--ink);letter-spacing:.02em;
+}
+.cover .subtitle{font-family:var(--serif);font-size:clamp(16px,2.2vw,20px);color:var(--teal);margin:0 0 1.6em;line-height:1.6}
+.cover .meta-line{font-size:.9em;color:var(--ink-soft);margin-bottom:26px}
+.cover .meta-line b{color:var(--ink);font-weight:600}
+/* 规模摘要 */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:0 0 30px}
+.stats .stat{background:var(--bg-raise);padding:14px 16px}
+.stats .num{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--teal);line-height:1.2}
+.stats .num em{font-style:normal;color:var(--accent)}
+.stats .lab{font-size:.82em;color:var(--ink-soft);margin-top:2px}
+/* 如何阅读图例 */
+.howto{border-left:4px solid var(--teal);background:var(--teal-pale);padding:16px 20px;margin:0 0 34px}
+.howto h2{font-family:var(--serif);font-size:1.05em;margin:0 0 .6em;color:var(--teal)}
+.howto .h-row{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;margin:.45em 0;font-size:.92em}
+.howto .h-row .h-name{font-weight:600;white-space:nowrap}
+/* 三类陈述图例小样 */
+.legend-demo{border:1px solid var(--line);background:#fff;padding:3px 10px;border-radius:4px}
+.legend-demo.pre{background:var(--amber-bg);border-left:3px solid var(--amber-line);border-radius:0 4px 4px 0}
+.legend-demo.pre .src-badge{display:inline-block;font-size:.72em;padding:0 .45em;border:1px solid var(--amber-line);border-radius:3px;color:var(--amber-ink);margin-left:.4em;vertical-align:.1em}
+.legend-demo.ana{background:var(--teal-pale);border-left:3px solid var(--teal);border-radius:0 4px 4px 0;font-style:normal}
+/* 快速通道 */
+.quick{max-width:900px;margin:0 auto 26px;padding:0 24px;display:flex;flex-wrap:wrap;gap:10px}
+.quick a{
+  display:inline-block;border:1.5px solid var(--teal);color:var(--teal);
+  padding:6px 16px;border-radius:999px;font-size:.9em;background:var(--bg-raise);
+}
+.quick a:hover{background:var(--teal);color:#fff;text-decoration:none}
+/* ============ 布局 ============ */
+.layout{max-width:1240px;margin:0 auto;padding:0 24px 80px;display:block}
+@media (min-width:1140px){
+  .layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:44px}
+  .toc{position:sticky;top:16px;align-self:start;max-height:calc(100vh - 32px);overflow-y:auto;display:block!important}
+}
+main{min-width:0;max-width:44em;margin:0 auto;width:100%}
+/* ============ 侧栏目录 ============ */
+.toc{border-right:1px solid var(--line);padding-right:18px;font-size:.86em;display:none}
+.toc .toc-title{font-family:var(--serif);font-weight:700;font-size:1.05em;margin:0 0 .6em;color:var(--ink)}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc .toc-l1{margin-bottom:.7em}
+.toc .toc-l1>a{font-weight:600;color:var(--ink);display:block;padding:.18em .4em;border-radius:4px}
+.toc .toc-l2{padding-left:1.1em;margin:.1em 0}
+.toc .toc-l2 a{color:var(--ink-soft);display:block;padding:.12em .4em;border-radius:4px;line-height:1.5}
+.toc a:hover{background:var(--teal-pale);text-decoration:none;color:var(--teal)}
+.toc a.active{background:var(--teal);color:#fff}
+.toc a.active:hover{background:var(--teal)}
+.toc .toc-viz{color:var(--accent-deep);font-size:.95em}
+/* 小屏目录抽屉 */
+.toc-toggle{display:none;position:fixed;top:12px;right:14px;z-index:55;border:1.5px solid var(--teal);background:var(--bg-raise);color:var(--teal);border-radius:8px;padding:6px 14px;font-size:.88em;font-family:var(--sans);cursor:pointer}
+@media (max-width:1139px){
+  .toc-toggle{display:block}
+  .toc{position:fixed;top:0;right:0;bottom:0;width:min(300px,86vw);background:var(--bg-raise);z-index:56;padding:18px 20px;overflow-y:auto;box-shadow:-6px 0 24px rgba(31,42,46,.12);display:none;border-right:none}
+  .toc.open{display:block}
+}
+/* ============ 正文 ============ */
+article h2{
+  font-family:var(--serif);font-size:1.72em;font-weight:700;color:var(--ink);
+  margin:2.2em 0 .8em;line-height:1.4;letter-spacing:.01em;
+  padding-top:.6em;border-top:3px double var(--teal-line);scroll-margin-top:20px;
+}
+article h3{font-family:var(--serif);font-size:1.28em;font-weight:700;color:var(--teal);margin:1.9em 0 .6em;scroll-margin-top:20px}
+article p{margin:0 0 1.15em}
+article ul,article ol{margin:0 0 1.15em;padding-left:1.6em}
+article li{margin-bottom:.45em}
+/* 引用编号 */
+.cite{font-size:.72em;color:var(--teal);vertical-align:.32em;padding:0 .08em;white-space:nowrap}
+.cite:hover{text-decoration:underline}
+.cite-flag{color:var(--amber-ink);text-decoration:underline dotted var(--amber-line);text-underline-offset:2px}
+/* 分析段落 */
+blockquote.analysis{
+  margin:1.4em 0;padding:14px 18px;background:var(--teal-pale);
+  border-left:4px solid var(--teal);border-radius:0 6px 6px 0;
+}
+blockquote.analysis p{margin:0}
+blockquote.analysis p::before{content:"分析";display:inline-block;font-size:.72em;font-weight:700;color:#fff;background:var(--teal);border-radius:3px;padding:0 .5em;margin-right:.6em;vertical-align:.18em;letter-spacing:.1em}
+/* 参考文献链接 */
+.reflink{word-break:break-all;font-size:.92em}
+.reflink:hover{text-decoration:underline}
+/* ============ 表格 ============ */
+.tablewrap{margin:1.3em 0;overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--bg-raise)}
+.tablewrap .scroll-hint{display:none;font-size:.78em;color:var(--ink-soft);padding:4px 10px;border-top:1px dashed var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.93em;line-height:1.62}
+th,td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:var(--teal);color:#fff;font-weight:600;white-space:nowrap;border-bottom:2px solid var(--teal)}
+tbody tr:nth-child(even){background:#f4f3ee}
+tbody tr:hover{background:var(--teal-pale)}
+tbody tr:last-child td{border-bottom:none}
+/* 年表表头吸顶（宽屏表格不横向滚动时生效） */
+@media (min-width:1000px){
+  .tbl-events thead th{position:sticky;top:0;z-index:5}
+}
+@media (max-width:999px){
+  .tbl-events .scroll-hint{display:block}
+  .tbl-events table{min-width:720px}
+}
+/* 可排序列 */
+th.sortable{cursor:pointer;user-select:none}
+th.sortable:hover{background:var(--teal-mid)}
+th.sortable::after{content:" ⇅";font-size:.8em;opacity:.7}
+th.sorted-asc::after{content:" ↑";opacity:1}
+th.sorted-desc::after{content:" ↓";opacity:1}
+/* 六栏任务表 */
+.tbl-sixpanel th{width:8.5em}
+.tbl-sixpanel td,.tbl-sixpanel th{font-size:.95em}
+tr.row-cannot td{border-left:3px solid var(--accent);background:#fbf1ea}
+tr.row-cannot td:first-child{font-weight:600;color:var(--accent-deep)}
+/* 术语表 */
+.term-list li{margin-bottom:.6em}
+/* ============ 参考文献 ============ */
+.refs-list{list-style:none;margin:1em 0;padding:0}
+.ref-item{
+  padding:8px 12px;margin-bottom:6px;border-radius:0 6px 6px 0;
+  font-size:.9em;line-height:1.65;background:var(--bg-raise);border:1px solid var(--line);
+}
+.ref-item .ref-no{color:var(--teal);font-weight:700;margin-right:.35em}
+.ref-item.ref-dim{background:var(--amber-bg);border-left:3px solid var(--amber-line);border-color:#eeddc2}
+.rt{display:inline-block;font-size:.7em;font-weight:600;padding:.05em .5em;border-radius:3px;margin-left:.55em;vertical-align:.14em;white-space:nowrap}
+.rt-peer{background:var(--teal);color:#fff}
+.rt-preprint{background:var(--amber-ink);color:#fff}
+.rt-official{background:#e8eef4;color:#2b4a6b;border:1px solid #b9cadd}
+.rt-media{background:#efe9f4;color:#5d3a75;border:1px solid #cdb9dd}
+.rt-personal{background:#f3ede4;color:#6b5233;border:1px solid #d5c4a8}
+.rt-single{display:inline-block;font-size:.7em;font-weight:600;padding:.05em .5em;border-radius:3px;margin-left:.35em;vertical-align:.14em;background:#fff;color:var(--amber-ink);border:1px dashed var(--amber-line)}
+.ref-back{font-size:.75em;margin-left:.5em;color:var(--ink-soft);border:1px solid var(--line);border-radius:4px;padding:0 .45em;white-space:nowrap}
+.ref-back:hover{color:var(--teal);border-color:var(--teal);text-decoration:none}
+/* 筛选条 */
+.ref-filter,.cap-filter{display:flex;flex-wrap:wrap;gap:8px;margin:1em 0 1.2em}
+.ref-filter button,.cap-filter button{
+  font-family:var(--sans);font-size:.84em;padding:4px 14px;border-radius:999px;cursor:pointer;
+  border:1.5px solid var(--line);background:var(--bg-raise);color:var(--ink-soft);
+}
+.ref-filter button:hover,.cap-filter button:hover{border-color:var(--teal);color:var(--teal)}
+.ref-filter button[aria-pressed="true"],.cap-filter button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.ref-filter .count{font-size:.85em;opacity:.8}
+.ref-section-hidden{display:none!important}
+/* ============ 可视化通用 ============ */
+.viz{margin:2.4em 0;padding:20px 20px 16px;border:1px solid var(--line);border-radius:10px;background:var(--bg-raise)}
+.viz .viz-title{font-family:var(--serif);font-size:1.22em;font-weight:700;margin:0 0 .2em;color:var(--ink)}
+.viz .viz-sub{font-size:.83em;color:var(--ink-soft);margin:0 0 14px;line-height:1.6}
+.viz .viz-note{font-size:.8em;color:var(--ink-soft);margin:12px 0 0;line-height:1.65;border-top:1px dashed var(--line);padding-top:10px}
+.viz svg{width:100%;height:auto;display:block}
+.viz .viz-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.82em;color:var(--ink);margin:4px 0 10px}
+.viz .viz-legend .lg{display:inline-flex;align-items:center;gap:6px}
+.viz .viz-legend .sw{width:16px;height:12px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.15)}
+/* 时间轴 tooltip */
+#tl-tip{
+  position:fixed;z-index:70;pointer-events:none;display:none;max-width:320px;
+  background:#1f2a2e;color:#f4f6f5;padding:10px 13px;border-radius:8px;font-size:.82em;line-height:1.6;
+  box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+#tl-tip .tip-year{font-weight:700;color:#ffc59e;margin-right:.5em}
+/* 时间轴 SVG 元素 */
+.tl-node{cursor:pointer}
+.tl-node circle{transition:r .12s}
+.tl-node:hover circle,.tl-node:focus circle{stroke-width:3}
+.tl-axis{stroke:#c9c4b8;stroke-width:2}
+.tl-tick{stroke:#d8d3c6;stroke-width:1}
+.tl-tick-label{font-size:11px;fill:#52616a}
+.tl-band{opacity:.16}
+.tl-node-label{font-size:11.5px;fill:#1f2a2e;font-weight:600}
+.tl-node-label.major{fill:var(--accent-deep);font-weight:700}
+/* 谱系图 */
+.gk-node rect{transition:opacity .15s}
+.gk-node text{font-size:12.5px;fill:#1f2a2e}
+.gk-node .gk-sub{font-size:10.5px;fill:#52616a}
+.gk-edge{fill:none;stroke-width:1.8}
+.gk-edge.solid{stroke:#3d7f7c}
+.gk-edge.dashed{stroke:#8a6d3b;stroke-dasharray:6 4}
+.gk-edge-label{font-size:10.5px;fill:#52616a}
+.gk-q{font-size:11px;fill:var(--amber-ink);font-weight:700}
+.gk-dimmed{opacity:.13}
+.gk-group-box{fill:none;stroke:var(--accent);stroke-dasharray:5 4;stroke-width:1.4;opacity:.55}
+/* ============ 能力面板卡片 ============ */
+.cap-panel{margin:1.4em 0}
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.cap-card{
+  border:1px solid var(--line);border-radius:10px;background:var(--bg-raise);
+  overflow:hidden;scroll-margin-top:20px;
+}
+.cap-card[open]{border-color:var(--teal);box-shadow:0 3px 14px rgba(20,89,93,.09)}
+.cap-card summary{
+  list-style:none;cursor:pointer;padding:13px 15px;display:block;
+}
+.cap-card summary::-webkit-details-marker{display:none}
+.cap-card summary:hover{background:#f6f5f0}
+.cap-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.cap-no{font-family:var(--mono);font-size:.8em;color:var(--ink-soft)}
+.cap-name{font-weight:700;font-size:1.02em}
+.lv{font-size:.74em;font-weight:700;padding:.1em .55em;border-radius:4px;white-space:nowrap}
+.lv-4{background:var(--teal);color:#fff}
+.lv-3{background:var(--teal-mid);color:#fff}
+.lv-2{background:#cfe0dd;color:#144d50}
+.lv-1{background:var(--amber-bg);color:var(--amber-ink);border:1.5px solid var(--amber-line)}
+.lv-mix{background:#e3ecec;color:#144d50;border:1.5px solid var(--teal-mid)}
+.cap-brief{font-size:.87em;color:var(--ink-soft);margin:.45em 0 0;line-height:1.6}
+.cap-body{padding:4px 15px 15px;border-top:1px dashed var(--line)}
+.cap-bottleneck{font-size:.9em;margin:.8em 0 .5em}
+.cap-bottleneck strong{color:var(--accent-deep)}
+.cap-detail-link{font-size:.85em;margin:.3em 0 .8em}
+.cap-detail-link a{border:1px solid var(--teal-line);border-radius:5px;padding:2px 10px;background:var(--teal-pale)}
+.cap-body .tablewrap{margin:.6em 0}
+/* ============ 祛魅对峙 ============ */
+.myth-card{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0 0 16px;background:var(--bg-raise)}
+.myth-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+@media (max-width:820px){.myth-row{grid-template-columns:1fr}}
+.myth-left{background:#f3f1ea;border-right:1px solid var(--line);padding:14px 16px}
+@media (max-width:820px){.myth-left{border-right:none;border-bottom:1px solid var(--line)}}
+.myth-right{padding:14px 16px}
+.myth-side{display:inline-block;font-size:.72em;font-weight:700;letter-spacing:.14em;padding:.15em .6em;border-radius:3px;margin-bottom:.7em}
+.myth-left .myth-side{background:#e8e4d8;color:#5f5433}
+.myth-right .myth-side{background:var(--teal-pale);color:var(--teal)}
+.myth-left p{margin:0;font-weight:600;line-height:1.65}
+.myth-check{margin:0 0 .8em;font-size:.95em}
+.myth-fix{margin:0;padding:10px 12px;background:var(--teal-pale);border-left:3px solid var(--teal);border-radius:0 5px 5px 0;font-size:.95em}
+.myth-clear{clear:both}
+/* ============ 回到顶部 ============ */
+#back-top{
+  position:fixed;right:20px;bottom:22px;z-index:50;width:44px;height:44px;border-radius:50%;
+  border:1.5px solid var(--teal);background:var(--bg-raise);color:var(--teal);
+  font-size:19px;cursor:pointer;display:none;box-shadow:0 3px 10px rgba(31,42,46,.15);
+}
+#back-top:hover{background:var(--teal);color:#fff}
+#back-top.show{display:block}
+/* 页脚 */
+footer{border-top:1px solid var(--line);margin-top:60px;padding-top:18px;font-size:.82em;color:var(--ink-soft)}
+/* 焦点可见性 */
+a:focus-visible,button:focus-visible,summary:focus-visible,.tl-node:focus-visible{
+  outline:2.5px solid var(--accent);outline-offset:2px;border-radius:3px;
+}
+</style>
+</head>
+<body>
+<div id="progress" role="progressbar" aria-label="阅读进度" aria-hidden="true"></div>
+<a class="skip-link" href="#main">跳到正文</a>
+<div class="js-warn" id="js-warn">JavaScript 未启用：目录高亮、交互时间轴、筛选与排序不可用；正文、表格与全部图表内容仍可完整阅读。</div>
+<noscript><div class="js-warn" style="display:block">JavaScript 未启用：交互时间轴、筛选与排序不可用；正文与表格完整可读，完整年表见第 3 章"十年关键事件年表"。</div></noscript>
+
+<!-- ============ 封面 ============ -->
+<header class="cover" id="cover">
+  <p class="kicker">研究报吿 · 单文件离线版</p>
+  <h1>AI 与生物学交叉研究报告</h1>
+  <p class="subtitle">截至 2026 年年中，人工智能（AI）在生物学研究中的真实能力边界在哪里——哪些任务已被可靠解决，哪些任务的能力声称尚未获得独立验证，哪些流行说法属于误解或夸大。</p>
+  <p class="meta-line">检索日期 <b>2026-09-01</b> · 时间主体 <b>2016–2026</b>，前史回溯至 1950 年代</p>
+
+  <div class="stats" role="list" aria-label="报告规模">
+    <div class="stat" role="listitem"><div class="num">约 5.2 万<em>字</em></div><div class="lab">全文规模（正文约 3.6 万字）</div></div>
+    <div class="stat" role="listitem"><div class="num">95 <em>条</em></div><div class="lab">参考文献（编号连续，可点击跳转）</div></div>
+    <div class="stat" role="listitem"><div class="num">8 <em>章</em></div><div class="lab">正文 + 术语表与待核实清单</div></div>
+    <div class="stat" role="listitem"><div class="num">20 <em>项</em></div><div class="lab">十年关键事件（另含前史节点）</div></div>
+  </div>
+
+  <div class="howto">
+    <h2>如何阅读：三类陈述的视觉约定</h2>
+    <div class="h-row"><span class="h-name">其一，来源分级——</span>同行评议文献（期刊论文）<span class="legend-demo">常规正文样式</span>；预印本或单一来源 <span class="legend-demo pre">正文标注<span class="src-badge">预印本 / 单一来源</span></span>，其引用编号以琥珀色虚线标出；作者推断 <span class="legend-demo ana">分析段落样式</span>。</div>
+    <div class="h-row"><span class="h-name">其二，性能三要素——</span>凡涉及模型能力的主张，尽可能同时给出指标、测试集、年份。</div>
+    <div class="h-row"><span class="h-name">其三，企业作为研究主体——</span>营销性声明不作证据使用，企业来源均标注"单一来源"。</div>
+  </div>
+</header>
+
+<!-- 快速通道 -->
+<nav class="quick" aria-label="快速通道">
+  <a href="#sec-1-2">五条核心判断</a>
+  <a href="#cap-panel">能力清单（交互）</a>
+  <a href="#sec-4-8">祛魅清单</a>
+  <a href="#appendix-b">待核实清单</a>
+  <a href="#timeline-viz">交互式时间轴</a>
+</nav>
+
+<button class="toc-toggle" id="toc-toggle" aria-expanded="false" aria-controls="toc">目录</button>
+
+<div class="layout">
+<!-- ============ 侧边目录 ============ -->
+<nav class="toc" id="toc" aria-label="报告目录">
+  <p class="toc-title">目录</p>
+  <ul>
+    <li class="toc-l1"><a href="#ch-1">第 1 章 摘要与核心判断</a>
+      <ul>
+        <li class="toc-l2"><a href="#sec-1-1">1.1 问题与方法论承诺</a></li>
+        <li class="toc-l2"><a href="#sec-1-2">1.2 五条核心判断</a></li>
+        <li class="toc-l2"><a href="#sec-1-3">1.3 结构与读法</a></li>
+        <li class="toc-l2"><a href="#ladder-viz" class="toc-viz">▣ 能力阶梯图</a></li>
+      </ul>
+    </li>
+    <li class="toc-l1"><a href="#ch-2">第 2 章 前史：2015 年之前</a>
+      <ul>
+        <li class="toc-l2"><a href="#sec-2-1">2.1 计算机科学一侧</a></li>
+        <li class="toc-l2"><a href="#sec-2-2">2.2 生物学一侧</a></li>
+        <li class="toc-l2"><a href="#sec-2-3">2.3 交汇点</a></li>
+        <li class="toc-l2"><a href="#lineage-viz" class="toc-viz">▣ 技术谱系图</a></li>
+      </ul>
+    </li>
+    <li class="toc-l1"><a href="#ch-3">第 3 章 近十年分期详述</a>
+      <ul>
+        <li class="toc-l2"><a href="#sec-3-1">3.1 导入期 2016–2018</a></li>
+        <li class="toc-l2"><a href="#sec-3-2">3.2 突破期 2019–2020</a></li>
+        <li class="toc-l2"><a href="#sec-3-3">3.3 基础设施化 2021–2022</a></li>
+        <li class="toc-l2"><a href="#sec-3-4">3.4 从预测走向设计 2023–2024</a></li>
+        <li class="toc-l2"><a href="#sec-3-5">3.5 多模态扩张 2025–2026</a></li>
+        <li class="toc-l2"><a href="#timeline-viz" class="toc-viz">▣ 交互式时间轴</a></li>
+        <li class="toc-l2"><a href="#timeline-events">十年关键事件年表</a></li>
+      </ul>
+    </li>
+    <li class="toc-l1"><a href="#ch-4">第 4 章 AI 工具当下能做什么</a>
+      <ul>
+        <li class="toc-l2"><a href="#sec-4-0">4.0 组织方式与成熟度分级</a></li>
+        <li class="toc-l2"><a href="#sec-4-1">4.1 任务一：预测蛋白质结构</a></li>
+        <li class="toc-l2"><a href="#sec-4-2">4.2 任务二：设计新蛋白质</a></li>
+        <li class="toc-l2"><a href="#sec-4-3">4.3 任务三：解读基因组变异</a></li>
+        <li class="toc-l2"><a href="#sec-4-4">4.4 任务四：预测细胞状态</a></li>
+        <li class="toc-l2"><a href="#sec-4-5">4.5 任务五：发现小分子药物</a></li>
+        <li class="toc-l2"><a href="#sec-4-6">4.6 任务六：文献与假设</a></li>
+        <li class="toc-l2"><a href="#sec-4-7">4.7 任务七：AI 科学家</a></li>
+        <li class="toc-l2"><a href="#sec-4-8">4.8 祛魅清单</a></li>
+        <li class="toc-l2"><a href="#sec-4-9">4.9 总览（交互面板）</a></li>
+      </ul>
+    </li>
+    <li class="toc-l1"><a href="#ch-5">第 5 章 数据、评测与可复现性</a>
+      <ul>
+        <li class="toc-l2"><a href="#sec-5-1">5.1 数据偏倚</a></li>
+        <li class="toc-l2"><a href="#sec-5-2">5.2 评测的三种制度形态</a></li>
+        <li class="toc-l2"><a href="#sec-5-3">5.3 可复现性与幸存者偏差</a></li>
+        <li class="toc-l2"><a href="#sec-5-4">5.4 验证侧的补贴</a></li>
+      </ul>
+    </li>
+    <li class="toc-l1"><a href="#ch-6">第 6 章 局限、争议与认识论</a>
+      <ul>
+        <li class="toc-l2"><a href="#sec-6-1">6.1 结构性局限总括</a></li>
+        <li class="toc-l2"><a href="#sec-6-2">6.2 预测与解释的分离</a></li>
+        <li class="toc-l2"><a href="#sec-6-3">6.3 "发现"的边界</a></li>
+        <li class="toc-l2"><a href="#sec-6-4">6.4 愿景先行与叙事锁定</a></li>
+        <li class="toc-l2"><a href="#sec-6-5">6.5 表述纪律</a></li>
+      </ul>
+    </li>
+    <li class="toc-l1"><a href="#ch-7">第 7 章 风险与治理</a>
+      <ul>
+        <li class="toc-l2"><a href="#sec-7-1">7.1 两用风险的真实图景</a></li>
+        <li class="toc-l2"><a href="#sec-7-2">7.2 已发生事件的证据状态</a></li>
+        <li class="toc-l2"><a href="#sec-7-3">7.3 技术性防线</a></li>
+        <li class="toc-l2"><a href="#sec-7-4">7.4 公平性与可及性</a></li>
+        <li class="toc-l2"><a href="#sec-7-5">7.5 治理现状与缺口</a></li>
+      </ul>
+    </li>
+    <li class="toc-l1"><a href="#ch-8">第 8 章 趋势展望</a>
+      <ul>
+        <li class="toc-l2"><a href="#sec-8-1">8.1 一年尺度</a></li>
+        <li class="toc-l2"><a href="#sec-8-2">8.2 三至五年尺度</a></li>
+        <li class="toc-l2"><a href="#sec-8-3">8.3 十年尺度</a></li>
+        <li class="toc-l2"><a href="#sec-8-4">8.4 反预测</a></li>
+        <li class="toc-l2"><a href="#sec-8-5">8.5 结语</a></li>
+      </ul>
+    </li>
+    <li class="toc-l1"><a href="#appendix-a">附录 A 术语表</a></li>
+    <li class="toc-l1"><a href="#appendix-b">附录 B 待核实清单</a></li>
+    <li class="toc-l1"><a href="#refs-1">参考文献</a></li>
+  </ul>
+</nav>
+
+<main id="main">
+<article>
+{{PART1}}
+{{PART2}}
+{{PART3}}
+</article>
+</main>
+</div>
+
+<button id="back-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="tl-tip" role="tooltip" aria-hidden="true"></div>
+
+<script>
+/* ============ 工具 ============ */
+function $(s,el){return (el||document).querySelector(s);}
+function $$(s,el){return Array.prototype.slice.call((el||document).querySelectorAll(s));}
+
+/* ============ 进度条 ============ */
+(function(){
+  var bar=$('#progress');
+  function upd(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?Math.min(100,(h.scrollTop/max*100)):0)+'%';
+  }
+  window.addEventListener('scroll',upd,{passive:true});
+  window.addEventListener('resize',upd);
+  upd();
+})();
+
+/* ============ 回到顶部 ============ */
+(function(){
+  var b=$('#back-top');
+  window.addEventListener('scroll',function(){
+    b.classList.toggle('show',window.scrollY>700);
+  },{passive:true});
+  b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+})();
+
+/* ============ 小屏目录抽屉 ============ */
+(function(){
+  var t=$('#toc-toggle'),toc=$('#toc');
+  if(!t||!toc)return;
+  t.addEventListener('click',function(){
+    var open=toc.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    t.textContent=open?'关闭':'目录';
+  });
+  toc.addEventListener('click',function(e){
+    if(e.target.tagName==='A'&&window.innerWidth<1140){
+      toc.classList.remove('open');
+      t.setAttribute('aria-expanded','false');
+      t.textContent='目录';
+    }
+  });
+})();
+
+/* ============ scrollspy ============ */
+(function(){
+  var links={};
+  $$('#toc a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a;});
+  var targets=Object.keys(links).map(function(id){return document.getElementById(id);}).filter(Boolean);
+  if(!('IntersectionObserver' in window)||!targets.length){
+    for(var id in links){links[id].classList.add('active');}
+    return;
+  }
+  var current=null;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){current=en.target.id;}
+    });
+    if(current&&links[current]){
+      $$('#toc a').forEach(function(a){a.classList.remove('active');});
+      links[current].classList.add('active');
+    }
+  },{rootMargin:'-15% 0px -70% 0px',threshold:0});
+  targets.forEach(function(t){io.observe(t);});
+})();
+
+/* ============ 时间轴 ============ */
+(function(){
+  var mount=$('#timeline-svg');
+  if(!mount)return;
+  /* 节点数据：名称与说明全部摘自正文原文（第 2 章前史、第 3 章年表） */
+  var N=[
+    {y:1953,n:'DNA 双螺旋',d:'确立了遗传的分子载体',h:'#sec-2-2',lv:2},
+    {y:1958,n:'感知机',d:'一个可从样本中学习二分类的单层神经元模型',h:'#sec-2-1',lv:2},
+    {y:1969,n:'《Perceptrons》出版',d:'单层网络无法解决线性不可分问题，连接主义研究在 1970 年代大幅萎缩——第一次"AI 寒冬"',h:'#sec-2-1',lv:2},
+    {y:1969.6,n:'Levinthal 悖论',d:'搜索不可能是盲目的，结构必须"可从序列推断"',h:'#sec-2-3',lv:2},
+    {y:1971,n:'PDB 建立',d:'全球第一个开放的分子生物学数字资源',h:'#sec-2-2',lv:1},
+    {y:1977,n:'Sanger 测序法',d:'使读取 DNA 序列成为常规操作',h:'#sec-2-2',lv:2},
+    {y:1986,n:'反向传播',d:'使训练深度（多层）网络在原则上成为可能',h:'#sec-2-1',lv:2},
+    {y:1989,n:'卷积网络识别邮编',d:'深度学习最早的工业级落地之一',h:'#sec-2-1',lv:2},
+    {y:1990,n:'BLAST',d:'以启发式近似换取约千倍加速，成为生物学史上被引用最多的工具之一',h:'#sec-2-2',lv:2},
+    {y:1994,n:'CASP 创立',d:'预测者在不知答案的前提下提交预测，由独立评估人统一打分',h:'#sec-2-3',lv:1},
+    {y:2009,n:'共同进化统计（Weigt）',d:'用信息论方法从细菌双组分系统的序列族中提取残基接触',h:'#sec-2-3',lv:2},
+    {y:2009.5,n:'Adam 机器人科学家',d:'自动生成酵母功能基因组学假设、设计实验、由机器人执行并解读结果',h:'#sec-4-7',lv:2},
+    {y:2011,n:'DCA 直接耦合分析',d:'证明纯序列统计即可恢复蛋白质折叠模式的主要骨架',h:'#sec-2-3',lv:2},
+    {y:2012,n:'AlexNet',d:'top-5 错误率 15.3%，显著低于第二名 26.2%；"规模可以兑换性能"的工程信念由此确立',h:'#sec-2-1',lv:1},
+    {y:2012.7,n:'冷冻电镜分辨率革命',d:'因直接电子探测相机实现"分辨率革命"',h:'#sec-2-2',lv:2},
+    {y:2016,n:'AlphaGo 击败李世乭',d:'深度学习能力获得跨领域关注；此后两年大量计算团队转向生物学应用',h:'#sec-3-1',lv:1},
+    {y:2016.4,n:'ResNet 残差网络',d:'使超深网络可训练，成为后续深度生物模型的基本构件',h:'#timeline-events',lv:2},
+    {y:2017,n:'Transformer',d:'蛋白质语言模型的直接技术前提',h:'#sec-3-1',lv:2},
+    {y:2017.5,n:'接触图深度学习',d:'结构预测的关键中间问题被攻克',h:'#sec-3-1',lv:2},
+    {y:2018,n:'DeepVariant',d:'深度学习首次改写基因组学日常流水线',h:'#sec-3-1',lv:2},
+    {y:2018.6,n:'CASP13：AlphaFold1 夺冠',d:'24/43 自由建模域达 TM≥0.7（第二名 14/43），范式转变的第一个盲测信号',h:'#sec-3-1',lv:1},
+    {y:2019,n:'ESM 预印本',d:'语言模型路线起点',h:'#sec-3-1',lv:2},
+    {y:2020,n:'CASP14：AlphaFold2',d:'中位 GDT_TS 92.4，单体结构预测在基准意义上解决',h:'#sec-3-2',lv:1},
+    {y:2021,n:'AlphaFold2 开源 · AFDB 发布',d:'"论文+代码+数据库"发表范式确立',h:'#sec-3-3',lv:1},
+    {y:2022.2,n:'ColabFold',d:'把 AlphaFold2 变成浏览器内可运行的免费服务',h:'#sec-3-3',lv:2},
+    {y:2022.5,n:'AFDB 扩容至约 2 亿',d:'覆盖科学界已知的几乎全部蛋白质序列',h:'#sec-3-3',lv:2},
+    {y:2022.6,n:'ProteinMPNN',d:'对给定蛋白骨架逆向设计氨基酸序列，显著超过基于物理能量的旧方法',h:'#sec-3-4',lv:2},
+    {y:2022.8,n:'ESM Metagenomic Atlas',d:'结构覆盖扩展至环境宏基因组蛋白质，多数为此前无结构信息的序列',h:'#sec-3-3',lv:2},
+    {y:2023.1,n:'ESMFold 正式发表',d:'证明无需 MSA 检索即可从单序列预测结构，预测速度提升数十倍',h:'#sec-3-3',lv:2},
+    {y:2023.4,n:'RFdiffusion',d:'用扩散模型从随机噪声"去噪"出自然界不存在的全新蛋白骨架',h:'#sec-3-4',lv:1},
+    {y:2023.6,n:'AlphaMissense',d:'对人类蛋白质组全部约 7,100 万种可能错义变异给出致病性预测',h:'#sec-3-3',lv:2},
+    {y:2023.8,n:'Geneformer',d:'细胞层数据基础模型同年落地',h:'#sec-4-4',lv:2},
+    {y:2024.3,n:'AlphaFold3',d:'把预测范围扩展到蛋白-蛋白、蛋白-核酸、蛋白-配体复合物及化学修饰',h:'#sec-3-4',lv:2},
+    {y:2024.5,n:'ESM3 预印本',d:'在序列、结构、函数三种模态上联合训练',h:'#sec-3-4',lv:2},
+    {y:2024.7,n:'AlphaProteo',d:'在 8 个靶标中的 7 个上取得 9%–88% 的实验结合成功率',h:'#sec-3-4',lv:2},
+    {y:2024.9,n:'虚拟细胞愿景论文',d:'细胞层宏大叙事与最大规模蛋白-配体盲测同场',h:'#sec-3-4',lv:2},
+    {y:2024.95,n:'诺贝尔化学奖',d:'建制科学对 AI-生物学的最高确认',h:'#sec-3-4',lv:1},
+    {y:2025.05,n:'ESM3 正式发表',d:'ESM3 正式发表于 Science',h:'#sec-3-5',lv:2},
+    {y:2025.15,n:'Evo 2 预印本',d:'基因组层基础模型竞赛启动',h:'#sec-3-5',lv:2},
+    {y:2025.45,n:'AlphaGenome 发布',d:'输入长达 100 万碱基的 DNA 序列，统一预测 11 类基因调控输出',h:'#sec-3-5',lv:2},
+    {y:2025.6,n:'CASP16 评估结果',d:'独立盲测为"设计-筛选"叙事降温',h:'#sec-3-5',lv:2},
+    {y:2025.7,n:'单细胞模型独立评测',d:'独立评测显示单细胞模型不稳定优于简单基线',h:'#sec-3-5',lv:2},
+    {y:2025.85,n:'十亿细胞计划',d:'验证侧与数据侧的大额补贴',h:'#sec-3-5',lv:2},
+    {y:2026.1,n:'Robin 发表于 Nature',d:'"AI 科学家"获得首个端到端同行评议案例',h:'#sec-3-5',lv:1},
+    {y:2026.4,n:'AlphaGenome / Evo 2 正刊',d:'基因组层模型进入正刊',h:'#sec-3-5',lv:2}
+  ];
+  /* 能力阶梯色带：分期依据 3.3–3.5 节 */
+  var BANDS=[
+    {a:2018,b:2022.5,name:'预测已有',note:'从 CASP13 到 AFDB 基础设施化（3.1–3.3 节）',color:'#14595d'},
+    {a:2022.5,b:2024.4,name:'生成新物',note:'问题重心从预测迁移到设计（3.4 节）',color:'#3d7f7c'},
+    {a:2024.4,b:2026.6,name:'模拟系统',note:'虚拟细胞议程与多模态扩张（3.4–3.5 节）',color:'#b8470e'}
+  ];
+  var YMIN=1950,YMAX=2026.8;
+  function frac(y){
+    if(y<=2000)return (y-YMIN)/(2000-YMIN)*0.30;
+    if(y<=2015)return 0.30+(y-2000)/(2015-2000)*0.16;
+    return 0.46+(y-2015)/(YMAX-2015)*0.54;
+  }
+  var SVGNS='http://www.w3.org/2000/svg';
+  function el(tag,attrs){
+    var e=document.createElementNS(SVGNS,tag);
+    for(var k in attrs)e.setAttribute(k,attrs[k]);
+    return e;
+  }
+  var tip=$('#tl-tip');
+  function showTip(evt,d){
+    tip.innerHTML='<span class="tip-year">'+(d.lv===1?'◆ ':'')+(d.y%1?Math.floor(d.y):d.y)+'</span><b>'+d.n+'</b><br>'+d.d;
+    tip.style.display='block';
+    moveTip(evt);
+  }
+  function moveTip(evt){
+    var x=evt.clientX+14,y=evt.clientY+16;
+    var r=tip.getBoundingClientRect();
+    if(x+r.width>window.innerWidth-10)x=evt.clientX-r.width-12;
+    if(y+r.height>window.innerHeight-10)y=evt.clientY-r.height-12;
+    tip.style.left=x+'px';tip.style.top=y+'px';
+  }
+  function hideTip(){tip.style.display='none';}
+
+  function render(){
+    var box=mount.parentElement.getBoundingClientRect();
+    var vertical=box.width<700;
+    var W=vertical?Math.max(320,box.width):1200;
+    var H=vertical?N.length*34+120:330;
+    mount.setAttribute('viewBox','0 0 '+W+' '+H);
+    mount.innerHTML='';
+    var svg=mount;
+    var padX=vertical?60:26;
+    function fx(y){return padX+frac(y)*(W-padX*2);}
+    var axisY=vertical?0:236;
+    /* 色带 */
+    BANDS.forEach(function(b){
+      if(vertical){
+        svg.appendChild(el('rect',{x:0,y:0,width:0,height:0}));
+      }else{
+        svg.appendChild(el('rect',{class:'tl-band',x:fx(b.a),y:24,width:Math.max(2,fx(b.b)-fx(b.a)),height:170,fill:b.color,'data-band':b.name}));
+      }
+    });
+    /* 主轴 */
+    if(!vertical){
+      svg.appendChild(el('line',{class:'tl-axis',x1:padX,y1:axisY,x2:W-padX,y2:axisY}));
+      /* 刻度 */
+      [1950,1960,1970,1980,1990,2000,2005,2010,2015,2017,2019,2021,2023,2025,2026].forEach(function(y){
+        var x=fx(y);
+        svg.appendChild(el('line',{class:'tl-tick',x1:x,y1:axisY,x2:x,y2:axisY+6}));
+        var t=el('text',{class:'tl-tick-label',x:x,y:axisY+22,'text-anchor':'middle'});
+        t.textContent=y;svg.appendChild(t);
+      });
+    }else{
+      svg.appendChild(el('line',{class:'tl-axis',x1:padX-18,y1:14,x2:padX-18,y2:H-14}));
+      [1950,1970,1990,2010,2016,2020,2024,2026].forEach(function(y){
+        var yy=14+frac(y)*(H-28);
+        svg.appendChild(el('line',{class:'tl-tick',x1:padX-22,y1:yy,x2:padX-14,y2:yy}));
+        var t=el('text',{class:'tl-tick-label',x:padX-26,y:yy+4,'text-anchor':'end'});
+        t.textContent=y;svg.appendChild(t);
+      });
+    }
+    /* 节点 */
+    var lastX={},lastX2={};
+    N.forEach(function(d){
+      var g=el('g',{class:'tl-node'+(d.lv===1?' major':''),tabindex:'0',role:'link','aria-label':(d.lv===1?'里程碑：':'事件：')+d.y+' '+d.n+'——'+d.d});
+      var t=el('title');t.textContent=d.n+'（'+(d.y%1?Math.floor(d.y):d.y)+'）：'+d.d;g.appendChild(t);
+      var x,y;
+      if(vertical){
+        x=padX-18;y=14+frac(d.y)*(H-28);
+        g.appendChild(el('circle',{cx:x,cy:y,r:d.lv===1?7:4,fill:d.lv===1?'#b8470e':'#14595d',stroke:'#faf9f5','stroke-width':2}));
+        var lb=el('text',{x:x+14,y:y+4,class:'tl-node-label'+(d.lv===1?' major':'')});
+        lb.textContent=(d.lv===1?'◆ ':'')+(d.y%1?Math.floor(d.y):d.y)+' '+d.n;
+        g.appendChild(lb);
+      }else{
+        x=fx(d.y);
+        /* 稀疏区上下交错；密集区仅大节点带标签 */
+        var up;
+        if(d.y<2010){up=(lastX[d.y%1?'a':'b']||0)%2===0;}
+        else{up=true;}
+        if(d.y>=2010&&d.lv===2){y=axisY;}
+        else{y=axisY+(up?-1:1)*52;}
+        y=axisY+(d.lv===1?-58:((Math.floor(d.y*10))%2===0?-30:30));
+        g.appendChild(el('circle',{cx:x,cy:y,r:d.lv===1?7:4.5,fill:d.lv===1?'#b8470e':'#14595d',stroke:'#faf9f5','stroke-width':2}));
+        g.appendChild(el('line',{x1:x,y1:y+(y<axisY?7:-7),x2:x,y2:axisY+(y<axisY?-4:4),stroke:d.lv===1?'#b8470e':'#8fb5b1','stroke-width':d.lv===1?2:1}));
+        var showLabel=d.lv===1||d.y<2010;
+        if(showLabel){
+          var anchor=x<80?'start':(x>W-90?'end':'middle');
+          var lb2=el('text',{x:x,y:y+(y<axisY?-13:20),class:'tl-node-label'+(d.lv===1?' major':''),'text-anchor':anchor});
+          lb2.textContent=(d.lv===1?'◆ ':'')+(d.y%1?Math.floor(d.y):d.y)+' '+d.n;
+          g.appendChild(lb2);
+        }
+      }
+      g.addEventListener('mouseenter',function(e){showTip(e,d);});
+      g.addEventListener('mousemove',moveTip);
+      g.addEventListener('mouseleave',hideTip);
+      g.addEventListener('focus',function(e){showTip(e,d);});
+      g.addEventListener('blur',hideTip);
+      function go(){hideTip();window.location.hash=d.h.slice(1);}
+      g.addEventListener('click',go);
+      g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
+      svg.appendChild(g);
+    });
+  }
+  render();
+  var rto;
+  window.addEventListener('resize',function(){clearTimeout(rto);rto=setTimeout(render,180);});
+})();
+
+/* ============ 谱系图 hover 高亮 ============ */
+(function(){
+  var svg=$('#lineage-svg');
+  if(!svg)return;
+  var edges=[];
+  $$('.gk-edge',svg).forEach(function(e){
+    edges.push({from:e.getAttribute('data-from'),to:e.getAttribute('data-to'),el:e});
+  });
+  function collect(id,dir,acc){
+    acc=acc||{};
+    edges.forEach(function(e){
+      if(dir>0&&e.from===id&&!acc[e.to]){acc[e.to]=1;collect(e.to,dir,acc);}
+      if(dir<0&&e.to===id&&!acc[e.from]){acc[e.from]=1;collect(e.from,dir,acc);}
+    });
+    return acc;
+  }
+  $$('.gk-node',svg).forEach(function(node){
+    var id=node.getAttribute('data-node');
+    function hi(on){
+      var up=collect(id,-1),down=collect(id,1);
+      up[id]=1;down[id]=1;
+      $$('.gk-node',svg).forEach(function(n){
+        var nid=n.getAttribute('data-node');
+        n.classList.toggle('gk-dimmed',on&&!(nid in up)&&!(nid in down));
+      });
+      edges.forEach(function(e){
+        var rel=on&&((e.from===id)||(e.to===id)||(e.from in up&&e.to in down)||(e.from in up&&e.to===id)||(e.from===id&&e.to in down));
+        e.el.classList.toggle('gk-dimmed',on&&!rel);
+        if(e.el.nextElementSibling&&e.el.nextElementSibling.classList&&e.el.nextElementSibling.classList.contains('gk-edge-label')){
+          e.el.nextElementSibling.classList.toggle('gk-dimmed',on&&!rel);
+        }
+      });
+    }
+    node.addEventListener('mouseenter',function(){hi(true);});
+    node.addEventListener('mouseleave',function(){hi(false);});
+    node.addEventListener('focus',function(){hi(true);});
+    node.addEventListener('blur',function(){hi(false);});
+  });
+})();
+
+/* ============ 能力面板筛选 ============ */
+(function(){
+  var panel=$('#cap-panel');
+  if(!panel)return;
+  $$('.cap-filter button',panel).forEach(function(btn){
+    btn.addEventListener('click',function(){
+      $$('.cap-filter button',panel).forEach(function(b){b.setAttribute('aria-pressed','false');});
+      btn.setAttribute('aria-pressed','true');
+      var lv=btn.getAttribute('data-lv');
+      $$('.cap-card',panel).forEach(function(card){
+        var lvs=(card.getAttribute('data-levels')||'').split(' ');
+        card.style.display=(lv==='all'||lvs.indexOf(lv)>=0)?'':'none';
+      });
+    });
+  });
+})();
+
+/* ============ 参考文献筛选 ============ */
+(function(){
+  var bar=$('#ref-filter');
+  if(!bar)return;
+  $$('button',bar).forEach(function(btn){
+    btn.addEventListener('click',function(){
+      $$('button',bar).forEach(function(b){b.setAttribute('aria-pressed','false');});
+      btn.setAttribute('aria-pressed','true');
+      var t=btn.getAttribute('data-type');
+      $$('.refs-list .ref-item').forEach(function(li){
+        li.style.display=(t==='all'||li.getAttribute('data-type')===t)?'':'none';
+      });
+    });
+  });
+})();
+
+/* ============ 年表排序 ============ */
+(function(){
+  $$('.tbl-sortable').forEach(function(wrap){
+    var table=$('table',wrap);
+    var tbody=$('tbody',table);
+    var ths=$$('th',table);
+    ths.forEach(function(th,idx){
+      if(idx===3)return; /* 意义与来源列不排序 */
+      th.classList.add('sortable');
+      th.setAttribute('tabindex','0');
+      th.setAttribute('role','button');
+      th.setAttribute('aria-label','按此列排序');
+      function sortBy(dir){
+        var rows=$$('tr',tbody);
+        rows.sort(function(a,b){
+          var x=a.children[idx].textContent.trim();
+          var y=b.children[idx].textContent.trim();
+          var nx=parseFloat(x),ny=parseFloat(y);
+          if(!isNaN(nx)&&!isNaN(ny))return (nx-ny)*dir;
+          return x.localeCompare(y,'zh-CN')*dir;
+        });
+        rows.forEach(function(r){tbody.appendChild(r);});
+        ths.forEach(function(t2){t2.classList.remove('sorted-asc','sorted-desc');});
+        th.classList.add(dir>0?'sorted-asc':'sorted-desc');
+      }
+      var cur=1;
+      th.addEventListener('click',function(){sortBy(cur);cur=-cur;});
+      th.addEventListener('keydown',function(e){
+        if(e.key==='Enter'||e.key===' '){e.preventDefault();sortBy(cur);cur=-cur;}
+      });
+    });
+  });
+})();
+
+/* JS 已启用：隐藏 noscript 警告条 */
+(function(){var w=$('#js-warn');if(w)w.style.display='none';})();
+</script>
+</body>
+</html>

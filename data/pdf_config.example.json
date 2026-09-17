@@ -1,0 +1,6 @@
+{
+  "cloud_token": "在此填入你的 MinerU Precision Token（领取/重置：https://mineru.net/apiManage/token）",
+  "token_created_at": "YYYY-MM-DD",
+  "token_validity_days": 90,
+  "note": "用法：把本文件复制为 pdf_config.json 并填入真实 Token 与签发日期。pdf_config.json 已被 .gitignore 排除，不会进入 git，避免泄露。"
+}

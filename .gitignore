@@ -1,0 +1,47 @@
+# ============================================================
+#  密钥与个人配置（绝不入库）
+#  各项模板见同目录的 *.example.json，复制改名后填写
+#  注意：.gitignore 只认行首的 # 注释，行尾注释会让整行失效
+# ============================================================
+data/llm_config.json
+data/pdf_config.json
+data/weather_config.json
+data/settings.json
+
+# ============================================================
+#  运行时数据（用起来之后才会产生，属于你个人，不入库）
+# ============================================================
+data/pdf_jobs/
+data/summaries/
+data/translations/
+data/readings/
+data/reviews/
+data/frontier/
+data/cache.json
+data/journal.json
+data/title_translations.json
+data/weekly_cache.json
+data/backup_state.json
+data/publications.json
+*.log
+
+# 待办默认入库（里面是 2 条示例）。
+# 如果你不想把自己的待办推上 GitHub，删掉下面一行的行首 #
+#data/todos.json
+
+# ============================================================
+#  Python / 编辑器 / 系统
+# ============================================================
+pdf_worker/.venv/
+__pycache__/
+*.pyc
+*.pyo
+pdf_worker/test_output/
+pdf_worker/test_output_cloud/
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
+data_snapshots/
+_archives/

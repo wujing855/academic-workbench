@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "text": "阅读一篇本领域论文并做精读笔记",
+    "done": false,
+    "created": "2026-01-01 09:00",
+    "deadline": "",
+    "priority": "高"
+  },
+  {
+    "id": 2,
+    "text": "把想到的问题记进研究日志",
+    "done": true,
+    "created": "2026-01-01 09:00",
+    "deadline": "",
+    "priority": "中"
+  }
+]

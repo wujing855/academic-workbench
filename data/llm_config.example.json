@@ -1,0 +1,7 @@
+{
+  "provider": "dashscope_bailian",
+  "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "api_key": "在此填入阿里云百炼 API Key（控制台获取）",
+  "default_model": "qwen3.8-flash",
+  "note": "复制本文件为 llm_config.json 并填入真实 Key。llm_config.json 已被 .gitignore 排除，不会进入 git。"
+}

@@ -1,0 +1,111 @@
+{
+  "module": "search_queries",
+  "title": "PubMed 已验证检索式（附返回条数）",
+  "source": "《外文期刊入门手册》第二部分 第 7 章",
+  "extracted_at": "2026-09-05",
+  "verified_on": "2026-09-03",
+  "verification_channel": "PubMed 网页 + NCBI E-utilities（esearch.fcgi）双通道实测",
+  "note": "返回条数会随数据库更新变动；检索式语法（字段标签、逻辑词、日期区间）不变可长期复用",
+  "count": 11,
+  "items": [
+    {
+      "query": "\"Bioinformatics\"[Journal]",
+      "query_syntax_note": "",
+      "label": "零件一：[Journal]——把检索锁死在一本期刊内",
+      "returned_count": 19626,
+      "verified_on": "2026-09-03",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/?term=%22Bioinformatics%22%5BJournal%5D",
+      "purpose": "看一本刊里发表过什么；配合主题词就是\"单刊 + 主题\"检索（见 7.4 第 1 条）。"
+    },
+    {
+      "query": "AlphaFold[tiab]",
+      "query_syntax_note": "",
+      "label": "零件二：[tiab]——只在标题和摘要里找",
+      "returned_count": 3605,
+      "verified_on": "2026-09-03",
+      "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/?term=AlphaFold%5Btiab%5D",
+      "purpose": "最常用的主题检索方式——一个词出现在标题或摘要，说明论文内容与它直接相关。多个同义词用 OR 并联：(AlphaFold[tiab] OR AlphaFold2[tiab])。"
+    },
+    {
+      "query": "AlphaFold[tiab] AND 2021/01/01:2026/09/03[dp]",
+      "query_syntax_note": "写法示例：2021/01/01:2026/09/03[dp]",
+      "label": "零件三：[dp]——限定发表日期",
+      "returned_count": 3587,
+      "verified_on": "2026-09-03",
+      "pubmed_url": "",
+      "purpose": "只要近 N 年的文献。注意 3,605（全部年份）与 3,587（2021 起）只差 18 条——AlphaFold 一词 2021 年才出现，这个对比本身就是\"热门新词几乎全是近年论文\"的直观体现。"
+    },
+    {
+      "query": "AlphaFold[tiab] AND review[pt]",
+      "query_syntax_note": "写法示例：review[pt]",
+      "label": "零件四：[pt]——按出版类型筛选",
+      "returned_count": 319,
+      "verified_on": "2026-09-03",
+      "pubmed_url": "",
+      "purpose": "入门读综述（review）、排除预印本（NOT preprint[pt]，见 7.4 第 5 条）。常见类型：Review、Journal Article（默认大类）、Comparative Study、Editorial、Letter、Comment。"
+    },
+    {
+      "query": "\"Machine Learning\"[MeSH Terms] AND AlphaFold[tiab]",
+      "query_syntax_note": "写法示例：\"Machine Learning\"[MeSH Terms]",
+      "label": "零件五：[MeSH Terms]——用官方主题词检索",
+      "returned_count": 264,
+      "verified_on": "2026-09-03",
+      "pubmed_url": "",
+      "purpose": "比 [tiab] 更\"懂同义词\"的检索方式——论文摘要里没出现 \"machine learning\" 字样、但被标了该 MeSH 词的，也能命中。代价是：MeSH 词是受控词表（得用官方那套词，不能自造），且标注有滞后（新论文未标完时 MeSH 检索会漏）。"
+    },
+    {
+      "query": "(\"artificial intelligence\"[tiab] OR \"machine learning\"[tiab] OR \"deep learning\"[tiab]) AND \"Bioinformatics\"[Journal]",
+      "query_syntax_note": "",
+      "label": "① 单刊 × AI 主题——这本刊里有多少 AI 论文",
+      "returned_count": 1724,
+      "verified_on": "2026-09-03",
+      "pubmed_url": "",
+      "purpose": "改刊名即查别刊；加三个同义词是 AI 主题检索的惯例（不同论文用词不同，只搜一个词会漏）。"
+    },
+    {
+      "query": "\"protein structure prediction\"[tiab] AND review[pt] AND 2021/01/01:2026/09/03[dp]",
+      "query_syntax_note": "",
+      "label": "② 跨刊只筛综述——这个领域有哪些综述可读",
+      "returned_count": 299,
+      "verified_on": "2026-09-03",
+      "pubmed_url": "",
+      "purpose": "换掉引号里的主题词即可用于任何领域；日期区间控制\"近期综述\"。"
+    },
+    {
+      "query": "AlphaFold[tiab] AND 2021/01/01:2026/09/03[dp]",
+      "query_syntax_note": "",
+      "label": "③ 某子方向近 5 年全貌——这个方向五年里都做了什么",
+      "returned_count": 3587,
+      "verified_on": "2026-09-03",
+      "pubmed_url": "",
+      "purpose": "子方向用其标志性名词；同义词多时用 OR 并联（如 (AlphaFold[tiab] OR \"AlphaFold2\"[tiab] OR \"AlphaFold3\"[tiab])）。"
+    },
+    {
+      "query": "(\"Bioinformatics\"[Journal] OR \"Bioinformatics Advances\"[Journal] OR \"Nature Methods\"[Journal]) AND \"machine learning\"[tiab] AND 2021/01/01:2026/09/03[dp]",
+      "query_syntax_note": "",
+      "label": "④ 只筛方法学论文——这个领域有哪些新方法 / 新工具",
+      "returned_count": 644,
+      "verified_on": "2026-09-03",
+      "pubmed_url": "",
+      "purpose": "这里必须说明口径：PubMed 的出版类型 [pt] 里没有\"方法学论文\"这一类（可核对：AlphaFold[tiab] AND \"validation studies\"[pt] 无效，返回 0），所以\"筛方法学论文\"的可行做法是限定到方法学期刊（Bioinformatics、Nature Methods 等以发表方法与工具为主业的刊，见第三部分期刊地图\"方法与资源\"层）。另一个免费组合：\"computational biology\"[MeSH Terms] AND \"machine learning\"[tiab] AND 2024/01/01:2026/09/03[dp]（已验证，2026-09-03，返回 6,014 条）——按主题词收，量大，适合粗筛。"
+    },
+    {
+      "query": "AlphaFold[tiab] NOT preprint[pt]",
+      "query_syntax_note": "",
+      "label": "⑤ 排除预印本——只要正式发表的",
+      "returned_count": 3331,
+      "verified_on": "2026-09-03",
+      "pubmed_url": "",
+      "purpose": "（对比不排除时的 3,605 条，差 274 条 = 该主题下的预印本数，AlphaFold[tiab] AND preprint[pt] 已验证返回 274 条）。"
+    },
+    {
+      "query": "\"protein structure prediction\"[tiab] AND review[pt] AND 2021/01/01:2023/12/31[dp]",
+      "query_syntax_note": "",
+      "label": "⑥ 高被引起点文献——刚进一个领域先读什么",
+      "returned_count": 102,
+      "verified_on": "2026-09-03",
+      "pubmed_url": "",
+      "purpose": "早期的领域综述会替你梳理起点文献——综述的参考文献列表就是现成的\"高被引起点清单\"。"
+    }
+  ]
+}

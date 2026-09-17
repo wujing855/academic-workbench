@@ -1,0 +1,771 @@
+{
+  "module": "journals",
+  "title": "期刊地图示例 · AI×生物学（五层结构 + 知名度/小众对照）",
+  "source": "《外文期刊入门手册》第三部分 第 13–14 章",
+  "extracted_at": "2026-09-05",
+  "data_notes": [
+    "SJR 与 h 指数来自 Scimago 官方 CSV 本地导出（scimagojr 2025.csv），⬜ 年份待核——见 verification_checklist.json 第 6 项",
+    "OA 模式与刊期来自各刊官网 / NLM Catalog，核实日期见 frequency 字段内标注",
+    "group: map=第13章五层地图 / fame=14.2 知名度组 / niche=14.3 小众高水平组",
+    "kind: journal=期刊条目 / conf=会议 / simple·nameonly=简化条目（无指标）"
+  ],
+  "count": 40,
+  "items": [
+    {
+      "name": "Cell",
+      "url": "https://www.cell.com/cell/home",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.1",
+      "layer_label": "第一层·综合顶刊",
+      "publisher": "Cell Press（Elsevier）",
+      "oa_mode": "混合（订阅 + 单篇 OA 选项）",
+      "metrics": {
+        "sjr": 24.592,
+        "h_index": 956,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 24.592、h 指数 956（⬜ 年份待核）"
+      },
+      "frequency": "",
+      "scope": "生物学的原创研究（多种文章类型）与综述",
+      "when_to_read": "想知道\"细胞与分子生物学最重要的新结果\"时"
+    },
+    {
+      "name": "Nature",
+      "url": "https://www.nature.com/nature/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.1",
+      "layer_label": "第一层·综合顶刊",
+      "publisher": "Nature Portfolio（Springer Nature）",
+      "oa_mode": "订阅/混合",
+      "metrics": {
+        "sjr": 19.713,
+        "h_index": 1495,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 19.713、h 指数 1495（⬜ 年份待核）"
+      },
+      "frequency": "周刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "自然科学全学科的原创研究与新闻评论",
+      "when_to_read": "追跨学科的重大结果与科学界公共议题（AlphaFold2 论文即发表于 Nature，见第 15 章）"
+    },
+    {
+      "name": "Science",
+      "url": "https://www.science.org/journal/science",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.1",
+      "layer_label": "第一层·综合顶刊",
+      "publisher": "AAAS（美国科学促进会）",
+      "oa_mode": "订阅/混合",
+      "metrics": {
+        "sjr": 10.948,
+        "h_index": 1433,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 10.948、h 指数 1433（⬜ 年份待核）"
+      },
+      "frequency": "周刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "自然科学全学科的原创研究、新闻与政策报道",
+      "when_to_read": "与 Nature 同类——重大结果 + 科学政策/共同体动态（ESMFold 论文发表于 Science）"
+    },
+    {
+      "name": "Nature Communications",
+      "url": "https://www.nature.com/ncomms/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.1",
+      "layer_label": "第一层·综合顶刊",
+      "publisher": "Nature Portfolio",
+      "oa_mode": "全 OA（作者付费，读者免费）",
+      "metrics": {
+        "sjr": 4.904,
+        "h_index": 634,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 4.904、h 指数 634（⬜ 年份待核）"
+      },
+      "frequency": "",
+      "scope": "自然科学全学科的研究论文（Nature 系列的全 OA 大刊，发表量大）",
+      "when_to_read": "想要\"Nature 系出品但免费可读\"的综合刊；单细胞基础模型独立评测即发表于此（第 15 章节点 6）"
+    },
+    {
+      "name": "Science Advances",
+      "url": "https://www.science.org/journal/sciadv",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.1",
+      "layer_label": "第一层·综合顶刊",
+      "publisher": "AAAS",
+      "oa_mode": "全 OA",
+      "metrics": {
+        "sjr": 4.534,
+        "h_index": 325,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 4.534、h 指数 325（⬜ 年份待核）"
+      },
+      "frequency": "",
+      "scope": "自然科学全学科的研究论文（AAAS 的全 OA 大刊）",
+      "when_to_read": "与 Nature Communications 同类定位，AAAS 版；免费可读"
+    },
+    {
+      "name": "PNAS",
+      "url": "https://www.pnas.org/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.1",
+      "layer_label": "第一层·综合顶刊",
+      "publisher": "National Academy of Sciences（美国国家科学院）",
+      "oa_mode": "混合",
+      "metrics": {
+        "sjr": 3.283,
+        "h_index": 929,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 3.283、h 指数 929（⬜ 年份待核）"
+      },
+      "frequency": "周刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "全学科研究（美国国家科学院的院刊；注意认准官网 pnas.org，有假冒站，见第一部分 4.3）",
+      "when_to_read": "蛋白质语言模型的开创性工作（ESM，Rives 等）正式版发表于 PNAS（第 15 章节点 1）"
+    },
+    {
+      "name": "Nature Biotechnology",
+      "url": "https://www.nature.com/nbt/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.2",
+      "layer_label": "第二层·领域旗舰",
+      "publisher": "Nature Portfolio",
+      "oa_mode": "混合",
+      "metrics": {
+        "sjr": 23.109,
+        "h_index": 553,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 23.109、h 指数 553（⬜ 年份待核）"
+      },
+      "frequency": "年出 13 期（NLM Catalog，2026-09-03 查询）",
+      "scope": "生物技术的应用导向研究（含 AI 工具的生物应用）",
+      "when_to_read": "AI 方法落到生物产业与应用的标志性节点（DeepVariant 2018 年即发表于此）"
+    },
+    {
+      "name": "Nature Medicine",
+      "url": "https://www.nature.com/nm/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.2",
+      "layer_label": "第二层·领域旗舰",
+      "publisher": "Nature Portfolio",
+      "oa_mode": "混合",
+      "metrics": {
+        "sjr": 17.496,
+        "h_index": 676,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 17.496、h 指数 676（⬜ 年份待核）"
+      },
+      "frequency": "月刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "医学与转化研究（AI 的临床落地多在此）",
+      "when_to_read": "AI×生物的成果走到临床与转化阶段时（你的阅读重点偏基础研究的话，此刊可降低优先级）"
+    },
+    {
+      "name": "Nature Methods",
+      "url": "https://www.nature.com/nmeth/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.2",
+      "layer_label": "第二层·领域旗舰",
+      "publisher": "Nature Portfolio",
+      "oa_mode": "混合",
+      "metrics": {
+        "sjr": 15.624,
+        "h_index": 432,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 15.624、h 指数 432（⬜ 年份待核）"
+      },
+      "frequency": "月刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "生物学方法学（实验方法与计算方法并重）",
+      "when_to_read": "新方法被学界认可为\"标准工具\"的时刻（ColabFold 2022 年发表于此，见第 15 章节点 2）"
+    },
+    {
+      "name": "Nature Genetics",
+      "url": "https://www.nature.com/natgenet/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.2",
+      "layer_label": "第二层·领域旗舰",
+      "publisher": "Nature Portfolio",
+      "oa_mode": "混合",
+      "metrics": {
+        "sjr": 15.377,
+        "h_index": 679,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 15.377、h 指数 679（⬜ 年份待核）"
+      },
+      "frequency": "月刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "遗传学与基因组学研究",
+      "when_to_read": "基因组学层的重大发现（偏生物学侧，AI 应用是工具而非主角）"
+    },
+    {
+      "name": "Nucleic Acids Research",
+      "url": "https://academic.oup.com/nar/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.2",
+      "layer_label": "第二层·领域旗舰",
+      "publisher": "Oxford University Press",
+      "oa_mode": "全 OA",
+      "metrics": {
+        "sjr": 8.111,
+        "h_index": 714,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 8.111、h 指数 714（⬜ 年份待核）"
+      },
+      "frequency": "",
+      "scope": "核酸（DNA/RNA）研究的方方面面 + 年度数据库专刊与 Web 服务专刊（该刊的传统，收录各领域核心数据库的年度更新论文）",
+      "when_to_read": "查\"某个生物数据库现在什么样了\"——数据库年度更新论文是现成的入口（AlphaFold DB 的 2022 与 2024 论文均发表于 NAR，见第 15 章）"
+    },
+    {
+      "name": "Nature Machine Intelligence",
+      "url": "https://www.nature.com/natmachintell/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.2",
+      "layer_label": "第二层·领域旗舰",
+      "publisher": "Nature Portfolio",
+      "oa_mode": "混合",
+      "metrics": {
+        "sjr": 6.902,
+        "h_index": 118,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 6.902、h 指数 118（⬜ 年份待核）"
+      },
+      "frequency": "月刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "AI 研究与 AI 在各领域的应用（含 AI 伦理与治理）",
+      "when_to_read": "AI×生物的方法论与伦理讨论（如 AI 药物发现的滥用手臂风险论文，见第 16 章方向 4 相关讨论）"
+    },
+    {
+      "name": "Genome Biology",
+      "url": "https://genomebiology.biomedcentral.com/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.2",
+      "layer_label": "第二层·领域旗舰",
+      "publisher": "BMC（Springer Nature）",
+      "oa_mode": "全 OA",
+      "metrics": {
+        "sjr": 5.792,
+        "h_index": 332,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 5.792、h 指数 332（⬜ 年份待核）"
+      },
+      "frequency": "月刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "基因组学与计算生物学研究",
+      "when_to_read": "基因组学与计算生物学的较重要进展（单细胞基础模型的独立评测 2025 年发表于此，见第 15 章节点 6）"
+    },
+    {
+      "name": "Cell Systems",
+      "url": "https://www.elsevier.com/journals/cell-systems/2405-4712",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.2",
+      "layer_label": "第二层·领域旗舰",
+      "publisher": "Cell Press",
+      "oa_mode": "混合",
+      "metrics": {
+        "sjr": 4.954,
+        "h_index": 107,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 4.954、h 指数 107（⬜ 年份待核）"
+      },
+      "frequency": "月刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "从系统视角研究生物学（建模、网络、多组学）",
+      "when_to_read": "计算与系统生物学交叉、且想留在 Cell Press 体系内时"
+    },
+    {
+      "name": "Nature Computational Science",
+      "url": "https://www.nature.com/natcomputsci/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.2",
+      "layer_label": "第二层·领域旗舰",
+      "publisher": "Nature Portfolio",
+      "oa_mode": "混合",
+      "metrics": {
+        "sjr": 4.252,
+        "h_index": 56,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 4.252、h 指数 56（⬜ 年份待核）"
+      },
+      "frequency": "月刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "计算方法在各科学领域的应用（2021 年创刊，较新）",
+      "when_to_read": "计算科学跨学科成果（h 指数低是创刊晚的自然结果，不是质量问题——见第 2 章 h 指数说明）"
+    },
+    {
+      "name": "Genome Research",
+      "url": "https://genome.cshlp.org/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.2",
+      "layer_label": "第二层·领域旗舰",
+      "publisher": "Cold Spring Harbor Laboratory Press（冷泉港实验室出版社）",
+      "oa_mode": "混合",
+      "metrics": {
+        "sjr": 3.688,
+        "h_index": 347,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 3.688、h 指数 347（⬜ 年份待核）"
+      },
+      "frequency": "月刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "基因组学研究（测序技术、基因组结构、群体基因组等）",
+      "when_to_read": "基因组学的扎实研究（冷泉港出品，与 bioRxiv 同一机构，见第 9 章）"
+    },
+    {
+      "name": "Bioinformatics",
+      "url": "https://academic.oup.com/bioinformatics",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.2",
+      "layer_label": "第二层·领域旗舰",
+      "publisher": "Oxford University Press",
+      "oa_mode": "混合（DOAJ 有收录记录）",
+      "metrics": {
+        "sjr": 2.527,
+        "h_index": 511,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 2.527、h 指数 511（⬜ 年份待核；SJR 2025 = 2.527 已由读者在 scimagojr.com 官网亲自核实）"
+      },
+      "frequency": "年出 24 期（NLM Catalog，2026-09-03 查询）",
+      "scope": "生物信息学的方法、软件、数据库（含 ISMB 会议特刊，见 13.5）",
+      "when_to_read": "生物信息学的本领域核心刊——日常追方法学进展的第一站；它也是国际计算生物学学会（ISCB）的官方刊物（来源：ISCB 官网官方期刊页 https://www.iscb.org/nucleus/journals/official-journals ，2026-09-03 经检索核实）"
+    },
+    {
+      "name": "Briefings in Bioinformatics",
+      "url": "https://academic.oup.com/bib",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.2",
+      "layer_label": "第二层·领域旗舰",
+      "publisher": "Oxford University Press",
+      "oa_mode": "混合（DOAJ 有收录记录）",
+      "metrics": {
+        "sjr": 2.264,
+        "h_index": 174,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 2.264、h 指数 174（⬜ 年份待核）"
+      },
+      "frequency": "双月刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "生物信息学方法的综述与评述（以综述性文章为主）",
+      "when_to_read": "入门某个子方向时先找它的综述（综述密度高是此刊特点）"
+    },
+    {
+      "name": "PLOS Computational Biology",
+      "url": "https://journals.plos.org/ploscompbiol",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.2",
+      "layer_label": "第二层·领域旗舰",
+      "publisher": "PLOS（Public Library of Science）",
+      "oa_mode": "全 OA",
+      "metrics": {
+        "sjr": 1.466,
+        "h_index": 237,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 1.466、h 指数 237（⬜ 年份待核）"
+      },
+      "frequency": "月刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "计算生物学研究论文与教程类文章",
+      "when_to_read": "免费读的计算生物学方法论文；ISCB 官方刊物（2005 年起，来源同上 ISCB 官网）"
+    },
+    {
+      "name": "Cell Reports Methods",
+      "url": "https://www.elsevier.com/journals/cell-reports-methods/2667-2375",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.3",
+      "layer_label": "第三层·方法与资源",
+      "publisher": "Cell Press",
+      "oa_mode": "全 OA",
+      "metrics": {
+        "sjr": 2.518,
+        "h_index": 32,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 2.518、h 指数 32（⬜ 年份待核）"
+      },
+      "frequency": "",
+      "scope": "生物学新方法（实验与计算）",
+      "when_to_read": "方法本身成为贡献时（创刊 2021，h 指数低是年限问题）"
+    },
+    {
+      "name": "Patterns",
+      "url": "https://www.elsevier.com/journals/patterns/2666-3899",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.3",
+      "layer_label": "第三层·方法与资源",
+      "publisher": "Cell Press",
+      "oa_mode": "全 OA",
+      "metrics": {
+        "sjr": 2.066,
+        "h_index": 62,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 2.066、h 指数 62（⬜ 年份待核）"
+      },
+      "frequency": "",
+      "scope": "数据科学在各领域的应用（跨学科数据方法）",
+      "when_to_read": "机器学习方法的科学应用与可复现性讨论（机器学习可复现性危机的综述即发表于 Patterns：Kapoor & Narayanan, 2023，见第 18 章）"
+    },
+    {
+      "name": "Scientific Data",
+      "url": "https://www.nature.com/sdata/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.3",
+      "layer_label": "第三层·方法与资源",
+      "publisher": "Nature Portfolio",
+      "oa_mode": "全 OA",
+      "metrics": {
+        "sjr": 1.907,
+        "h_index": 165,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 1.907、h 指数 165（⬜ 年份待核）"
+      },
+      "frequency": "",
+      "scope": "数据集描述论文（Data Descriptor）——不报道新发现，专门描述数据集的采集与验证",
+      "when_to_read": "查\"某个领域有哪些可用的公开数据集\"时（数据集的正式出版物）"
+    },
+    {
+      "name": "GigaScience",
+      "url": "https://academic.oup.com/gigascience",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.3",
+      "layer_label": "第三层·方法与资源",
+      "publisher": "Oxford University Press",
+      "oa_mode": "全 OA",
+      "metrics": {
+        "sjr": 1.387,
+        "h_index": 106,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 1.387、h 指数 106（⬜ 年份待核）"
+      },
+      "frequency": "",
+      "scope": "大规模生物数据的生成、分析与软件工具（该刊评审指南明确要求\"数据可用性、许可、文档与测试\"的高标准，来源：https://academic.oup.com/gigascience/pages/reviewer_guidelines ，2026-09-03 实测可访问）",
+      "when_to_read": "看\"数据 + 工具 + 可复现性\"导向的论文；也是第一部分 2.5 陷阱一的真实案例（指标骤降 + 编委辞职 + 仍是 Q1 同时发生——指标不等于质量）"
+    },
+    {
+      "name": "Bioinformatics Advances",
+      "url": "https://academic.oup.com/bioinformaticsadvances",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.3",
+      "layer_label": "第三层·方法与资源",
+      "publisher": "Oxford University Press",
+      "oa_mode": "全 OA",
+      "metrics": {
+        "sjr": 1.353,
+        "h_index": 23,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 1.353、h 指数 23（⬜ 年份待核）"
+      },
+      "frequency": "",
+      "scope": "生物信息学方法与应用（Bioinformatics 的姊妹刊，2021 年由 ISCB 与 OUP 创办，来源：ISCB 官网公告，检索于 2026-09-03）",
+      "when_to_read": "Bioinformatics 的全 OA 替代入口；ISCB 官方刊物（来源同上）"
+    },
+    {
+      "name": "Nature Reviews Genetics",
+      "url": "https://www.nature.com/nrg/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.4",
+      "layer_label": "第四层·综述",
+      "publisher": "Nature Portfolio（Springer Nature）",
+      "oa_mode": "订阅",
+      "metrics": {
+        "sjr": 20.403,
+        "h_index": 458,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 20.403、h 指数 458（⬜ 年份待核）"
+      },
+      "frequency": "月刊（NLM Catalog，2026-09-03 查询）",
+      "scope": "遗传学与基因组学的综述（Nature Reviews 系列是综述系列）",
+      "when_to_read": "建立基因组学某个子方向的全景时（综述刊的指标天然偏高——被引密度大，见第一部分 2.5 陷阱，这不是\"比研究刊更好\"的意思）"
+    },
+    {
+      "name": "Nature Reviews Methods Primers",
+      "url": "https://www.nature.com/nrmp/",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.4",
+      "layer_label": "第四层·综述",
+      "publisher": "Nature Portfolio",
+      "oa_mode": "订阅",
+      "metrics": {
+        "sjr": 14.459,
+        "h_index": 88,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 14.459、h 指数 88（⬜ 年份待核）"
+      },
+      "frequency": "NLM Catalog 记录为年出 1 卷（2026-09-03 查询）",
+      "scope": "方法入门综述（Primer，\"入门指南\"类文章——每篇讲透一个方法，从原理到实践）",
+      "when_to_read": "第一次接触某方法（如单细胞测序、结构预测）时，先找它的 Primer——为非专家写的"
+    },
+    {
+      "name": "Annual Review of Biomedical Data Science",
+      "url": "https://www.annualreviews.org/content/journals/annualrev-biodatasci",
+      "kind": "journal",
+      "group": "map",
+      "layer": "13.4",
+      "layer_label": "第四层·综述",
+      "publisher": "Annual Reviews（专门出版综述的出版机构，1932 年起）",
+      "oa_mode": "订阅",
+      "metrics": {
+        "sjr": 3.626,
+        "h_index": 33,
+        "year_note": "⬜ 年份待核",
+        "raw": "SJR 3.626、h 指数 33（⬜ 年份待核）"
+      },
+      "frequency": "年刊（Annual Reviews 系列的命名与出版惯例；官网本轮被反爬拦截未能直接核实，见待核清单 #12）",
+      "scope": "生物医学数据科学年度综述（2018 年创刊）",
+      "when_to_read": "每年一篇的\"某子方向这一年\"式回顾——数据科学×生物交叉的体系化入门材料（「分析」：年刊节奏意味着内容更新慢但成体系，适合补基础，不适合追新）"
+    },
+    {
+      "name": "NeurIPS",
+      "full": "Conference on Neural Information Processing Systems，神经信息处理系统大会",
+      "kind": "conf",
+      "group": "map",
+      "layer": "13.5",
+      "layer_label": "第五层·会议",
+      "publisher": "https://neurips.cc/",
+      "oa_mode": "每年一届",
+      "metrics": {
+        "sjr": null,
+        "h_index": null,
+        "year_note": "",
+        "raw": "免费浏览论文目录与摘要（部分年份的论文集在官网免费）；全称与官网经前轮核实、官网本轮实测可访问（2026-09-03）"
+      },
+      "frequency": "",
+      "scope": "",
+      "when_to_read": "AI 方法的主战场——Transformer 架构（后来一切蛋白质语言模型的技术前提）的原始论文即发表于 NeurIPS 2017"
+    },
+    {
+      "name": "ICML",
+      "full": "International Conference on Machine Learning，国际机器学习大会",
+      "kind": "conf",
+      "group": "map",
+      "layer": "13.5",
+      "layer_label": "第五层·会议",
+      "publisher": "https://icml.cc/",
+      "oa_mode": "每年一届",
+      "metrics": {
+        "sjr": null,
+        "h_index": null,
+        "year_note": "",
+        "raw": "论文集经 PMLR（https://proceedings.mlr.press/ ）免费全文"
+      },
+      "frequency": "",
+      "scope": "",
+      "when_to_read": "机器学习方法学成果（与 NeurIPS 并列的两大方法会议）"
+    },
+    {
+      "name": "ICLR",
+      "full": "International Conference on Learning Representations，国际学习表征会议",
+      "kind": "conf",
+      "group": "map",
+      "layer": "13.5",
+      "layer_label": "第五层·会议",
+      "publisher": "https://iclr.cc/",
+      "oa_mode": "每年一届",
+      "metrics": {
+        "sjr": null,
+        "h_index": null,
+        "year_note": "",
+        "raw": "论文与公开评审经 OpenReview（https://openreview.net/ ）免费"
+      },
+      "frequency": "",
+      "scope": "",
+      "when_to_read": "表征学习方向；也是\"公开评审\"文化的代表（第 10 章已述）"
+    },
+    {
+      "name": "RECOMB",
+      "full": "Annual International Conference on Research in Computational Molecular Biology，计算分子生物学国际年会",
+      "kind": "conf",
+      "group": "map",
+      "layer": "13.5",
+      "layer_label": "第五层·会议",
+      "publisher": "https://www.recomb.org/",
+      "oa_mode": "每年一届（2026 年为第 30 届，来源：recomb.org/recomb2026 页面，检索于 2026-09-03）",
+      "metrics": {
+        "sjr": null,
+        "h_index": null,
+        "year_note": "",
+        "raw": ""
+      },
+      "frequency": "",
+      "scope": "",
+      "when_to_read": "计算生物学自己的会议——算法导向的生物学问题（与 NeurIPS/ICML 的\"AI 方法为主、生物为应用\"互补）"
+    },
+    {
+      "name": "ISMB",
+      "full": "Intelligent Systems for Molecular Biology，分子生物学智能系统会议",
+      "kind": "conf",
+      "group": "map",
+      "layer": "13.5",
+      "layer_label": "第五层·会议",
+      "publisher": "https://www.iscb.org/",
+      "oa_mode": "每年一届",
+      "metrics": {
+        "sjr": null,
+        "h_index": null,
+        "year_note": "",
+        "raw": "由 ISCB 主办"
+      },
+      "frequency": "",
+      "scope": "",
+      "when_to_read": "计算生物学的综合性年会；会议论文以特刊形式发表在 Bioinformatics 期刊（来源：ISCB 官网 ISMB 2026 征稿页，2026-09-03 经检索核实——\"Proceedings publications are part of an online-only special issue of Bioinformatics and are open access (CC-BY)\"）——这是\"会议与期刊互通\"的一个具体实例"
+    },
+    {
+      "name": "Nature",
+      "cn": "自然",
+      "kind": "simple",
+      "group": "fame",
+      "layer": "14.2",
+      "layer_label": "知名度最高的一组",
+      "publisher": "",
+      "oa_mode": "",
+      "metrics": {
+        "sjr": null,
+        "h_index": null,
+        "year_note": "",
+        "raw": ""
+      },
+      "frequency": "",
+      "scope": "",
+      "when_to_read": ""
+    },
+    {
+      "name": "Science",
+      "cn": "科学",
+      "kind": "simple",
+      "group": "fame",
+      "layer": "14.2",
+      "layer_label": "知名度最高的一组",
+      "publisher": "",
+      "oa_mode": "",
+      "metrics": {
+        "sjr": null,
+        "h_index": null,
+        "year_note": "",
+        "raw": ""
+      },
+      "frequency": "",
+      "scope": "",
+      "when_to_read": ""
+    },
+    {
+      "name": "Cell",
+      "cn": "细胞",
+      "kind": "simple",
+      "group": "fame",
+      "layer": "14.2",
+      "layer_label": "知名度最高的一组",
+      "publisher": "",
+      "oa_mode": "",
+      "metrics": {
+        "sjr": null,
+        "h_index": null,
+        "year_note": "",
+        "raw": ""
+      },
+      "frequency": "",
+      "scope": "",
+      "when_to_read": ""
+    },
+    {
+      "name": "PNAS",
+      "cn": "美国国家科学院院刊",
+      "kind": "simple",
+      "group": "fame",
+      "layer": "14.2",
+      "layer_label": "知名度最高的一组",
+      "publisher": "",
+      "oa_mode": "",
+      "metrics": {
+        "sjr": null,
+        "h_index": null,
+        "year_note": "",
+        "raw": ""
+      },
+      "frequency": "",
+      "scope": "",
+      "when_to_read": ""
+    },
+    {
+      "name": "Bioinformatics",
+      "kind": "nameonly",
+      "group": "niche",
+      "layer": "14.3",
+      "layer_label": "小众但高水平的一组",
+      "publisher": "",
+      "oa_mode": "",
+      "metrics": {
+        "sjr": null,
+        "h_index": null,
+        "year_note": "",
+        "raw": ""
+      },
+      "frequency": "",
+      "scope": "",
+      "when_to_read": ""
+    },
+    {
+      "name": "Nucleic Acids Research",
+      "kind": "nameonly",
+      "group": "niche",
+      "layer": "14.3",
+      "layer_label": "小众但高水平的一组",
+      "publisher": "",
+      "oa_mode": "",
+      "metrics": {
+        "sjr": null,
+        "h_index": null,
+        "year_note": "",
+        "raw": ""
+      },
+      "frequency": "",
+      "scope": "",
+      "when_to_read": ""
+    },
+    {
+      "name": "Genome Research",
+      "kind": "nameonly",
+      "group": "niche",
+      "layer": "14.3",
+      "layer_label": "小众但高水平的一组",
+      "publisher": "",
+      "oa_mode": "",
+      "metrics": {
+        "sjr": null,
+        "h_index": null,
+        "year_note": "",
+        "raw": ""
+      },
+      "frequency": "",
+      "scope": "",
+      "when_to_read": ""
+    },
+    {
+      "name": "GigaScience",
+      "kind": "nameonly",
+      "group": "niche",
+      "layer": "14.3",
+      "layer_label": "小众但高水平的一组",
+      "publisher": "",
+      "oa_mode": "",
+      "metrics": {
+        "sjr": null,
+        "h_index": null,
+        "year_note": "",
+        "raw": ""
+      },
+      "frequency": "",
+      "scope": "",
+      "when_to_read": ""
+    }
+  ]
+}

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>热点日报 · 2026年9月10日 上午版</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; }
+  body {
+    background:#efe7d3;
+    color:#141414;
+    font-family:"Songti SC","STSong","SimSun","Noto Serif CJK SC",serif;
+    line-height:1.95;
+    padding:28px 14px 60px;
+  }
+  .paper {
+    max-width:980px; margin:0 auto;
+    background:#fbf6e7;
+    padding:50px 58px 56px;
+    box-shadow:0 2px 18px rgba(60,45,25,.10);
+  }
+  /* 报头 */
+  .topbar { display:flex; justify-content:space-between; font-size:13.5px; color:#5a5347; letter-spacing:.08em; }
+  .masthead { text-align:center; padding:18px 0 10px; border-top:3px double #141414; border-bottom:1px solid #141414; margin-top:10px; }
+  .masthead h1 { font-size:54px; letter-spacing:.42em; text-indent:.42em; font-weight:900; color:#101014; }
+  .metaline { display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; font-size:13.5px; color:#4a443b; padding:8px 2px; border-bottom:3px double #141414; }
+  /* 说明框 */
+  .dedup { background:#f7efd9; border-left:4px solid #b3261e; padding:13px 18px; margin:22px 0 8px; font-size:14.5px; line-height:1.9; color:#3a342b; }
+  .dedup b { color:#b3261e; }
+  /* 版面 */
+  .sec { margin-top:34px; }
+  .sec-head { display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid #141414; padding-bottom:7px; margin-bottom:16px; }
+  .sec-head h2 { font-size:21px; letter-spacing:.32em; text-indent:.32em; font-weight:900; }
+  .sec-head .kw { font-size:13px; color:#8a8174; letter-spacing:.12em; }
+  .art { margin-bottom:20px; }
+  .atitle { font-size:20px; font-weight:900; line-height:1.6; margin-bottom:10px; }
+  .ptag { display:inline-block; color:#b3261e; font-size:13.5px; border:1px solid #b3261e; border-radius:3px; padding:0 6px; margin-right:8px; vertical-align:2px; letter-spacing:.1em; font-weight:700; }
+  p.body { font-size:16px; text-align:justify; text-indent:2em; margin-bottom:9px; }
+  p.body.noind { text-indent:0; }
+  .dropcap::first-letter { float:left; font-size:46px; line-height:.95; padding:4px 8px 0 0; color:#b3261e; font-weight:900; }
+  .highlight { background:#f7efd9; border-left:4px solid #b3261e; padding:11px 18px; margin:12px 0; font-size:15.5px; text-align:justify; text-indent:2em; color:#332d24; }
+  .srcline { font-size:13px; color:#8a8174; margin-top:10px; border-top:1px dashed #d8d0c2; padding-top:7px; }
+  .tip { font-size:14.5px; color:#5a5347; text-indent:2em; text-align:justify; }
+  /* 头版双栏 */
+  .head-grid { display:grid; grid-template-columns:1.85fr 1.15fr; gap:30px; }
+  .rail .rblock { padding:11px 0; border-top:1px dashed #c9bfae; }
+  .rail .rblock:first-child { border-top:none; padding-top:2px; }
+  .rlabel { display:inline-block; font-size:12.5px; color:#b3261e; border:1px solid #b3261e; padding:0 7px; border-radius:2px; margin-bottom:5px; letter-spacing:.15em; }
+  .rblock h4 { font-size:16.5px; font-weight:900; margin-bottom:4px; }
+  .rblock p { font-size:14px; color:#332d24; text-align:justify; line-height:1.85; }
+  /* 表格 */
+  table.data { width:100%; border-collapse:collapse; margin:12px 0; font-size:14.5px; }
+  table.data th { background:#f2ead6; border:1px solid #d8d0c2; padding:8px 10px; font-weight:700; text-align:left; }
+  table.data td { border:1px solid #d8d0c2; padding:7px 10px; vertical-align:top; }
+  table.data tr:nth-child(even) td { background:#faf5e9; }
+  table.data .c { text-align:center; white-space:nowrap; }
+  /* 图表框 */
+  .fig { border:1px solid #d8d0c2; background:#fdfaf0; padding:18px 20px 14px; margin:14px 0 6px; }
+  .fig h5 { text-align:center; font-size:16px; font-weight:900; margin-bottom:4px; }
+  .fig .sub { text-align:center; font-size:13px; color:#8a8174; margin-bottom:10px; }
+  .figcap { text-align:center; font-size:13.5px; color:#6b6357; margin:8px 4px 0; line-height:1.8; }
+  .figcap b { color:#141414; }
+  /* 图二 流程图 */
+  .flow { display:flex; flex-direction:column; gap:12px; margin:6px 0; }
+  .flow-row { display:grid; grid-template-columns:1fr 46px 1.5fr; align-items:stretch; gap:0; }
+  .flow-left { background:#f4eddd; border:1px solid #d8d0c2; display:flex; flex-direction:column; justify-content:center; padding:10px 14px; }
+  .flow-left .lv { font-size:13px; color:#8a8174; }
+  .flow-left .bn { font-size:19px; font-weight:900; color:#b3261e; }
+  .flow-arrow { display:flex; align-items:center; justify-content:center; color:#b3261e; font-size:24px; font-weight:900; }
+  .flow-right { background:#fbf6e9; border:1px solid #d8d0c2; border-left:none; padding:10px 14px; font-size:14px; line-height:1.8; }
+  .flow-right b { color:#b3261e; }
+  /* 图三 堆叠条 */
+  .stackbar { display:flex; height:48px; margin:14px 30px 8px; border:1px solid #c9bfae; }
+  .stackbar div { display:flex; align-items:center; justify-content:center; color:#fff; font-size:15px; font-weight:700; letter-spacing:.05em; }
+  .seg-d { background:#8e3028; width:45.5%; }
+  .seg-g { background:#46604a; width:27.3%; }
+  .seg-o { background:#a0703d; width:27.2%; }
+  .scale-note { text-align:center; font-size:13.5px; color:#6b6357; margin-bottom:10px; }
+  .cumline { display:flex; justify-content:space-around; flex-wrap:wrap; gap:8px; border-top:1px solid #d8d0c2; padding-top:12px; font-size:14.5px; }
+  .cumline span b { font-size:16px; }
+  /* 速览列表 */
+  ul.briefs { list-style:none; margin:6px 0 4px; }
+  ul.briefs li { font-size:15px; line-height:1.9; padding:6px 0 6px 18px; position:relative; text-align:justify; border-bottom:1px dashed #e4ddcf; }
+  ul.briefs li:last-child { border-bottom:none; }
+  ul.briefs li::before { content:"▪"; color:#b3261e; position:absolute; left:2px; top:6px; }
+  ul.briefs li b { font-weight:900; }
+  /* 观察哨 */
+  .watch-grid { display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  .watch-grid h4 { font-size:15.5px; margin-bottom:6px; }
+  .watch-grid p, .watch-grid li { font-size:14.5px; color:#332d24; }
+  ul.track-list { list-style:none; }
+  ul.track-list li { padding:5px 0 5px 16px; position:relative; line-height:1.85; border-bottom:1px dashed #e4ddcf; }
+  ul.track-list li:last-child { border-bottom:none; }
+  ul.track-list li::before { content:"—"; color:#b3261e; position:absolute; left:0; }
+  /* 跨日追踪 */
+  .track-row { display:grid; grid-template-columns:200px 1fr; gap:14px; font-size:14.5px; padding:8px 2px; border-bottom:1px dashed #d8d0c2; }
+  .track-row .ev { font-weight:900; }
+  .track-row .st { color:#3a342b; text-align:justify; }
+  /* 页脚 */
+  .footer { margin-top:36px; border-top:3px double #141414; padding-top:14px; text-align:center; font-size:13px; color:#7a7265; line-height:2; }
+  .footer .disc { margin-top:4px; color:#5a5347; }
+  @media (max-width:760px){
+    .paper { padding:30px 20px; }
+    .masthead h1 { font-size:38px; }
+    .head-grid, .watch-grid { grid-template-columns:1fr; gap:14px; }
+    .flow-row { grid-template-columns:1fr; }
+    .flow-arrow { transform:rotate(90deg); height:22px; }
+    .flow-right { border-left:1px solid #d8d0c2; border-top:none; }
+    .track-row { grid-template-columns:1fr; gap:2px; }
+    .stackbar { margin:14px 0 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="paper">
+
+  <!-- 报头 -->
+  <div class="topbar">
+    <span>热点日报 · 全网热点检测</span>
+    <span>2026年9月10日 星期四 · 农历七月廿九</span>
+  </div>
+  <div class="masthead"><h1>热点日报</h1></div>
+  <div class="metaline">
+    <span>第 2026-0910 期 · 上午版</span>
+    <span>采集时间 11:05—12:08 ｜ 19 次检索</span>
+    <span>版本 v2.7.0 ｜ 豆包输出首期</span>
+  </div>
+
+  <!-- 跨期去重说明 -->
+  <div class="dedup">
+    <b>首期说明：</b>本报告为“豆包输出”首期热点日报，暂无往期对照。自今日 16:00 下午场起，将按“已报且无实质进展不复述”规则对照本版去重——上午场已完整展开的苹果发布会、8 月物价数据、第八批新职业等，下午若无新增官方信息不再展开；其中<b>苹果发布会属于有实质进展</b>：昨日下午场报的是“今夜发布”的预告，今晨产品、定价、发售时间已全部落地，本期头版完整展开。
+  </div>
+
+  <!-- 头版 -->
+  <section class="sec">
+    <div class="sec-head"><h2>头版 · 科技与消费</h2><span class="kw">苹果发布会 · 折叠屏</span></div>
+    <div class="head-grid">
+      <div>
+        <div class="art">
+          <div class="atitle">史上最贵 iPhone 落地：Duo 15999 元起，特努斯交出首份答卷</div>
+          <p class="body dropcap">北京时间 9 月 10 日凌晨 1 点，苹果在库比蒂诺 Apple Park 举行 2026 年秋季发布会，主题为“亮新篇，来耀眼”。这是约翰·特努斯（John Ternus）接任 CEO 后的首场发布会，也是过去 15 年来第一场没有库克以 CEO 身份主持的 iPhone 发布会——库克已于 9 月 1 日卸任，转任执行董事长。</p>
+          <p class="body">全场真正的主角在尾声以乔布斯式的“还有一件事”登场：首款折叠屏 iPhone Duo。横向书本式折叠，闭合外屏 5.4 英寸、展开内屏 7.6 英寸，是 iPhone 迄今最大的显示屏。国行 256GB 版本 15999 元起，顶配 2TB 高达 26499 元，创下 iPhone 售价的历史纪录，美国起售价 1999 美元；10 月 16 日晚 8 点接受预购，10 月 23 日正式发售，提供星光白、夜空色两种配色。</p>
+          <p class="body">与折叠屏同台的是例行迭代的 iPhone 18 Pro 与 Pro Max：搭载台积电 2 纳米 A20 Pro 芯片、首次引入可变光圈主摄、首发苹果自研 C2 基带。但更牵动普通人神经的是价格——iPhone 18 Pro 起售 9999 元、Pro Max 10999 元，较上一代双双上涨 1000 元；大容量版本涨幅更甚，顶配 Pro Max 2TB 从 17999 元涨到 21499 元，贵了 3500 元，9 月 12 日预购、9 月 18 日发售。</p>
+          <div class="srcline">责任编辑：热点检测 ｜ 信息来源：苹果中国官网、新华社、每日经济新闻、南方都市报（2026 年 9 月 10 日）</div>
+        </div>
+      </div>
+      <div class="rail">
+        <div class="rblock">
+          <span class="rlabel">头版</span>
+          <h4>折痕这道题，苹果答了十年</h4>
+          <p>铰链由 100 多个精密组件构成，苹果用 3D 打印出 25 层定制光敏聚合物微层来消除折痕，内屏采用纳米纹理工艺减少眩光。代价是为极致轻薄做了减法：取消 Face ID 改用侧边 Touch ID，后置双 4800 万像素、无独立长焦，实体 SIM 卡槽被彻底去除，全球版本只支持 eSIM。</p>
+        </div>
+        <div class="rblock">
+          <span class="rlabel">定价</span>
+          <h4>四档存储，顶配贵过入门一万</h4>
+          <p>256GB 15999、512GB 17999、1TB 21499、2TB 26499 元，仅从 1TB 升到 2TB 就要多花 5000 元。发布后“苹果折叠屏 丑”一度登上快手热榜，微博相关话题阅读量 324 万，知乎相关提问以 4305 万热度居热榜第一。</p>
+        </div>
+        <div class="rblock">
+          <span class="rlabel">成本</span>
+          <h4>涨价的账，摊在存储上</h4>
+          <p>库克今年 7 月曾把存储涨价形容为“百年一遇的洪水”。据 TrendForce 预估，iPhone 18 系列 256GB 版本物料成本年增幅约 38%。苹果此次选择部分自担、部分转嫁，Pro 系列涨价 1000—3500 元不等。</p>
+        </div>
+        <div class="rblock">
+          <span class="rlabel">供链</span>
+          <h4>A 股产业链的增量在哪里</h4>
+          <p>据公开披露，长信科技（UTG 超薄柔性玻璃）、蓝思科技（UTG、CPI 膜、支撑板）、精研科技（MIM 铰链结构件）、宜安科技（液态金属铰链主轴）等进入折叠屏供应体系。据郭明錤预估，折叠屏 iPhone 下半年组装出货约 700 万—800 万部，三季度仅 50 万—100 万部，供货紧张。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="fig">
+      <h5>iPhone Duo 与 18 Pro 系列国行价格阶梯（元）</h5>
+      <div class="sub">柱高为等比示意；10/16 预购 · 10/23 发售（18 Pro 系列 9/12 预购 · 9/18 发售）</div>
+      <svg viewBox="0 0 900 300" width="100%" role="img" aria-label="iPhone 国行价格阶梯柱状图">
+        <line x1="55" y1="252" x2="885" y2="252" stroke="#141414" stroke-width="1.6"/>
+        <!-- bars: heights proportional to price, baseline y=252 -->
+        <rect x="82"  y="176" width="88" height="76"  fill="#b07d4a"/>
+        <rect x="218" y="169" width="88" height="83"  fill="#b07d4a"/>
+        <rect x="354" y="131" width="88" height="121" fill="#9c3a31"/>
+        <rect x="490" y="116" width="88" height="136" fill="#92332c"/>
+        <rect x="626" y="90"  width="88" height="162" fill="#872b25"/>
+        <rect x="762" y="52"  width="88" height="200" fill="#74201b"/>
+        <g font-size="15" text-anchor="middle" fill="#141414" font-weight="700">
+          <text x="126" y="168">9999</text><text x="262" y="161">10999</text><text x="398" y="123">15999</text>
+          <text x="534" y="108">17999</text><text x="670" y="82">21499</text><text x="806" y="44">26499</text>
+        </g>
+        <g font-size="14" text-anchor="middle" fill="#332d24">
+          <text x="126" y="274">18 Pro</text><text x="262" y="274">18 Pro Max</text><text x="398" y="274">Duo 256GB</text>
+          <text x="534" y="274">Duo 512GB</text><text x="670" y="274">Duo 1TB</text><text x="806" y="274">Duo 2TB</text>
+          <text x="126" y="292" fill="#8a8174">256GB 起</text><text x="262" y="292" fill="#8a8174">256GB 起</text>
+          <text x="398" y="292" fill="#b3261e" font-weight="700">史上最贵 iPhone</text>
+          <text x="806" y="292" fill="#8a8174">顶配</text>
+        </g>
+      </svg>
+      <div class="figcap"><b>图一</b> iPhone Duo 四个存储版本与 18 Pro 系列起售价对照。Duo 顶配 2TB 的 26499 元已超过多数国产新能源入门车型。数据来源：苹果中国官网（2026 年 9 月 10 日）</div>
+    </div>
+  </section>
+
+  <!-- 第二版 体育 -->
+  <section class="sec">
+    <div class="sec-head"><h2>第二版 · 体育</h2><span class="kw">止步八强 · 晋级八强</span></div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">深度</span>郑钦文先赢后输止步美网八强，莱巴金娜获胜后锁定世界第一</div>
+      <p class="body">北京时间 9 月 10 日凌晨，2026 年美网女单四分之一决赛，从资格赛一路闯关的郑钦文苦战三盘，以 6-3、1-6、4-6 不敌 2 号种子莱巴金娜，无缘四强，全场鏖战 2 小时 14 分钟。获胜后的莱巴金娜首进美网四强，并锁定下一期女单世界第一。</p>
+      <p class="body">首盘郑钦文一改前两轮慢热，发球胜盘局连救 5 个破发点以 6-3 先下一城，这也是莱巴金娜本届美网丢掉的第一盘；第二盘郑钦文状态回落，被两次破发，1-6 速败；决胜盘双方咬到 4-4，第 9 局郑钦文在破发点上出现双误被破，莱巴金娜随后兑现发球胜赛局，以 6-4 收下比赛。</p>
+      <p class="body">本届美网郑钦文从资格赛打起，8 场比赛一共打了 21 盘，前两轮两度上演“让五追七”——均在 0-5 落后时连下七局逆转凯斯与斯瓦泰克，排名飙升 41 位，七连胜就此终结。赛后阿瑟·阿什球场全场起立鼓掌，“逆风绽放”登上全网热词。</p>
+      <div class="highlight">输赢之外还有一种东西叫体面。赛后郑钦文说自己已经拼完最后一颗子弹：她没有把失利推给体能或签表，而是承认决胜盘关键分上“没有敢出手”。对一个半年前还在澳网首轮出局、温网因伤退赛的人来说，能站到八强，本身就是答案。</div>
+      <p class="body">这场失利也留下两个观察点：连续两轮“让五追七”对体能的透支，在第三盘末段显现；硬地赛季与年终总决赛资格仍是接下来的考验。比起一场胜负，更值得追踪的是她的发球状态与关键分出手信心能否延续。</p>
+    </div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">赛况</span>中国女篮 75-72 险胜波多黎各，成为八强唯一亚洲球队</div>
+      <p class="body">女篮世界杯八强附加赛，中国女篮以 75-72 险胜波多黎各晋级八强，也是八强中唯一一支亚洲球队。韩旭拿下 21 分、11 个篮板的两双，杨舒予贡献 15 分、11 次助攻。比赛末段对手连续追分，中国队靠防守轮转与关键篮板守住三分优势。</p>
+      <div class="srcline">信息来源：新华社、央视网、人民网（2026 年 9 月 10 日）</div>
+    </div>
+  </section>
+
+  <!-- 第三版 时政与纪念 -->
+  <section class="sec">
+    <div class="sec-head"><h2>第三版 · 时政与纪念</h2><span class="kw">哀悼 · 教师节</span></div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">哀悼</span>董建华先生逝世，享年 89 岁</div>
+      <p class="body">新华社 9 月 9 日电：“一国两制”杰出贡献者，著名爱国人士、杰出社会活动家，中国人民政治协商会议第十届至十三届全国委员会副主席，香港特别行政区第一任、第二任行政长官董建华先生，因病于 2026 年 9 月 8 日 21 时 57 分在香港逝世，享年 89 岁。</p>
+      <p class="body">作为香港回归后的首任行政长官，董建华是“一国两制”方针落实的第一位执行者，任内带领香港抵御亚洲金融风暴、推动经济复苏，并促成内地与香港关于建立更紧密经贸关系的安排（CEPA）签署。香港特区行政长官李家超发文沉痛哀悼，称其一生以“报效国家，服务香港”为己任。</p>
+      <p class="tip">口径提示：部分早报援引其办公室消息称“昨晚安详离世”，与新华社发布的逝世时间存在时差，本报告以新华社口径为准。</p>
+    </div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">教师节</span>第 42 个教师节：1870 万教师与一组学历变化</div>
+      <p class="body">9 月 10 日是我国第 42 个教师节。教育部数据显示，2025 年全国专任教师达 1870 万人，义务教育阶段本科及以上学历专任教师比例增至 83.2%。当天热搜呈现两条线：一条是各地景区、商家推出的教师专属优惠；另一条是网友集中分享“我和恩师的故事”，集体回忆成为情绪主线。</p>
+    </div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">要闻速览</span>三则值得留档的时政信息</div>
+      <ul class="briefs">
+        <li><b>在韩志愿军烈士遗骸即将回国：</b>相关消息登上百度热搜前列，称 9 月 16 日将有在韩志愿军烈士遗骸归国。不同信源对“第几批”与人数的表述存在差异，具体批次与人数以退役军人事务部官方发布为准。</li>
+        <li><b>服贸会在京开幕：</b>2026 年中国国际服务贸易交易会 9 月 9 日在北京首钢园开幕，持续至 9 月 13 日；90 个国家（地区）和国际组织设展办会，1830 余家企业线下参展，其中 473 家为世界 500 强或行业龙头企业。</li>
+        <li><b>外贸持续回暖：</b>“我国进出口连续 4 个月保持两位数增长”登上微博热搜，具体数据以海关总署月度发布为准。</li>
+      </ul>
+      <div class="srcline">信息来源：新华社、教育部、央视新闻、百度热搜（2026 年 9 月 9—10 日）</div>
+    </div>
+  </section>
+
+  <!-- 第四版 宏观数据 -->
+  <section class="sec">
+    <div class="sec-head"><h2>第四版 · 宏观数据</h2><span class="kw">物价回升 · 外围承压</span></div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">数据</span>8 月 CPI 同比 0.8%、核心 CPI 回到 1.0%，PPI 同比涨幅扩至 3.8%</div>
+      <p class="body">国家统计局 9 月 9 日发布数据，8 月 CPI 环比由上月下降 0.1%转为上涨 0.4%，同比上涨 0.8%，结束连续两个月回落、涨幅比上月扩大 0.3 个百分点；扣除食品和能源价格的核心 CPI 同比上涨 1.0%，涨幅比上月扩大 0.1 个百分点。PPI 环比由上月下降 0.7%转为上涨 0.4%，同比上涨 3.8%，连续 6 个月上涨。</p>
+      <p class="body">结构上三条线最清晰。一是能源：国际油价传导下，能源价格同比上涨 4.1%，其中汽油上涨 9.3%、涨幅扩大 8.3 个百分点，单汽油一项就影响 CPI 上涨约 0.28 个百分点。二是算力与芯片相关消费电子：受存储与面板涨价传导，平板价格上涨 21.5%、计算机上涨 19.6%、移动电话机上涨 11.0%。三是黄金：金饰品价格上涨 33.6%，环比再涨 7.6%。食品价格同比下降 1.4%，仍是主要拖累；非食品上涨 1.2%，居住价格下降 0.3%。</p>
+      <table class="data">
+        <tr><th>指标</th><th class="c">8 月同比</th><th class="c">8 月环比</th><th>较上月变化</th></tr>
+        <tr><td>CPI</td><td class="c">+0.8%</td><td class="c">+0.4%（上月 -0.1%）</td><td>涨幅扩大 0.3 个百分点，结束两连落</td></tr>
+        <tr><td>核心 CPI</td><td class="c">+1.0%</td><td class="c">—</td><td>涨幅扩大 0.1 个百分点</td></tr>
+        <tr><td>PPI</td><td class="c">+3.8%</td><td class="c">+0.4%（上月 -0.7%）</td><td>连续 6 个月上涨</td></tr>
+        <tr><td>汽油</td><td class="c">+9.3%</td><td class="c">—</td><td>涨幅扩大 8.3 个百分点，拉动 CPI 约 0.28pct</td></tr>
+        <tr><td>金饰品</td><td class="c">+33.6%</td><td class="c">+7.6%</td><td>涨幅扩大 9.0 个百分点</td></tr>
+      </table>
+      <p class="body">东方金诚首席宏观分析师冯琳预计，9 月 CPI 同比或回升到 1%左右。机构普遍判断，当前物价整体温和，不会成为央行降息的主要掣肘；真正需要观察的，是上游成本向中下游消费电子的传导时长。</p>
+      <div class="fig">
+        <h5>三条曲线与三条推力对照</h5>
+        <div class="flow">
+          <div class="flow-row">
+            <div class="flow-left"><span class="lv">居民端</span><span class="bn">CPI 同比 +0.8%</span></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-right"><b>能源推力：</b>汽油 +9.3%、涨幅扩大 8.3pct，单汽油拉动 CPI 约 0.28 个百分点；能源整体 +4.1%</div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-left"><span class="lv">剔除食品能源</span><span class="bn">核心 CPI +1.0%</span></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-right"><b>算力推力：</b>平板 +21.5%、计算机 +19.6%、移动电话机 +11.0%，存储与面板涨价向下游传导</div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-left"><span class="lv">工业端</span><span class="bn">PPI 同比 +3.8%</span></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-right"><b>黄金推力：</b>金饰品 +33.6%、环比再涨 7.6%；国际金价与避险需求共同推升</div>
+          </div>
+        </div>
+        <div class="figcap"><b>图二</b> 8 月物价的三条曲线与三条推力对照。CPI 回升主要靠能源，核心 CPI 受算力链条拉动，PPI 连续上涨中黄金最醒目。数据来源：国家统计局（2026 年 9 月 9 日）</div>
+      </div>
+    </div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">外围</span>利空突袭，欧美股市全线下挫</div>
+      <p class="body">隔夜美股三大指数集体收跌：道指跌 0.77%报 52380.66 点，创一个多月新低；标普 500 跌 0.48%报 7636.36 点；纳指跌 0.64%报 26253.34 点。欧洲主要股指同步下挫，欧洲斯托克 600 指数创两个月最大单日跌幅。市场焦点集中在美联储加息预期升温——美联储主席沃什在杰克逊霍尔会议上表态偏鹰。今晚 20:30 美国将公布 8 月 PPI，同日欧央行公布利率决议；国际油价一度逼近每桶 100 美元。</p>
+      <table class="data">
+        <tr><th>指数</th><th class="c">收盘点位</th><th class="c">涨跌幅</th><th>备注</th></tr>
+        <tr><td>道琼斯工业指数</td><td class="c">52380.66</td><td class="c">-0.77%</td><td>一个多月新低</td></tr>
+        <tr><td>标普 500</td><td class="c">7636.36</td><td class="c">-0.48%</td><td>加息预期压制</td></tr>
+        <tr><td>纳斯达克综合</td><td class="c">26253.34</td><td class="c">-0.64%</td><td>科技股普跌</td></tr>
+      </table>
+      <div class="srcline">信息来源：国家统计局、东方财富、财联社（2026 年 9 月 9—10 日）；外围行情不构成投资建议</div>
+    </div>
+  </section>
+
+  <!-- 第五版 就业与产业 -->
+  <section class="sec">
+    <div class="sec-head"><h2>第五版 · 就业与产业</h2><span class="kw">新职业发布 · AI 上新</span></div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">政策</span>11 个新职业、23 个新工种发布：数字与绿色占七成</div>
+      <p class="body">人力资源社会保障部等部门 9 月 9 日向社会发布船舶岸基管理工程技术人员等 11 个新职业、23 个新工种，同步调整变更农产品经纪人等 6 个职业（工种）信息。自 2019 年以来，我国已累计发布 8 批、共 121 个新职业。</p>
+      <p class="body">这批新职业的结构很能说明产业方向。11 个新职业中，数字职业有 5 个（数字孪生工程技术人员、具身智能机器人应用技术员、工业产品数字建模师等），占比 45.5%；绿色职业 3 个（微电网管理员、氢燃料电池制造工、电解水制氢工），占比 27.3%，其中微电网管理员兼具绿色与数字双重属性。至此，我国发布的数字职业已达 113 个、绿色职业 142 个。</p>
+      <p class="body">新工种里几个值得留意的名字：低空物流员、低空智能网联系统管理员、智能体开发员、适老化改造设计师、新能源汽车检测员、制香香艺师、冰雪雕塑工。前两个指向低空经济与 AI 应用这两个正在成形的产业；适老化改造设计师与新能源汽车检测员，则分别对应老龄化社会与新能源车保有量的现实需求。据相关机构测算，仅具身智能领域当前人才缺口就达约 100 万。</p>
+      <table class="data">
+        <tr><th>类别</th><th class="c">数量</th><th class="c">占新职业总数</th><th>代表职业</th></tr>
+        <tr><td>数字职业</td><td class="c">5 个</td><td class="c">45.5%</td><td>数字孪生工程技术人员、具身智能机器人应用技术员、工业产品数字建模师</td></tr>
+        <tr><td>绿色职业</td><td class="c">3 个</td><td class="c">27.3%</td><td>微电网管理员、氢燃料电池制造工、电解水制氢工</td></tr>
+        <tr><td>现代服务及其他</td><td class="c">3 个</td><td class="c">—</td><td>企业可持续发展规划师、运动数据分析师、制香香艺师</td></tr>
+      </table>
+      <p class="body">人社部职业能力建设司相关负责人表示，未来一段时期数字技术技能人才的缺口将会较大，下一步将加快新职业国家职业标准开发。对新职业的观察价值在于：职业目录的变化，往往比产业数据更早反映资本与人才的流向。</p>
+      <div class="fig">
+        <h5>11 个新职业的结构分布（按属性）</h5>
+        <div class="stackbar">
+          <div class="seg-d">数字职业 5 个 · 45.5%</div>
+          <div class="seg-g">绿色 3 个 · 27.3%</div>
+          <div class="seg-o">其他 3 个</div>
+        </div>
+        <div class="scale-note">条长为占 11 个新职业总数的比例示意（5/11≈45.5%、3/11≈27.3%）</div>
+        <div class="cumline">
+          <span><b>累计发布规模</b></span>
+          <span>数字职业已达 <b>113 个</b></span>
+          <span>绿色职业已达 <b>142 个</b></span>
+          <span>2019 年以来 8 批 <b>121 个</b>新职业</span>
+        </div>
+        <div class="figcap" style="text-align:left;font-size:12.5px;color:#8a8174;">注：微电网管理员同时计入数字职业与绿色职业，故分类占比合计不等于 100%。<br><b>图三</b> 11 个新职业的属性结构，数字与绿色两类合计超过七成，指向产业数字化与“双碳”战略在就业端的落地。数据来源：人力资源社会保障部、光明日报（2026 年 9 月 9—10 日）</div>
+      </div>
+    </div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">产业速览</span>AI 与车市的两条线</div>
+      <ul class="briefs">
+        <li><b>DeepSeek V4.1 Flash 今日上线：</b>官方称其比 V4 Pro 便宜 77% 且性能全面反超，实测生成速度约 427 tokens/s，原生支持多模态、三模式合并；V4 Pro 将于 9 月 14 日 12 时下线路由至 Flash。</li>
+        <li><b>8 月车市油电分化：</b>新能源乘用车零售约 100.5 万辆，同比下降 10.1%；燃油车零售约 54 万辆，同比下降 40%、近乎腰斩，渗透率约 65.2%。</li>
+      </ul>
+      <div class="srcline">信息来源：人力资源社会保障部官网、新华社、乘联会（2026 年 9 月 9—10 日）</div>
+    </div>
+  </section>
+
+  <!-- 第六版 社会与法治 -->
+  <section class="sec">
+    <div class="sec-head"><h2>第六版 · 社会与法治</h2><span class="kw">资助边界 · 陈年积案</span></div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">争议</span>资助五年发现对方用 iPhone 17 Pro Max，停捐后遭“不然我曝光你”</div>
+      <p class="body">甘肃嘉峪关资助人姚先生从一名女生高一开始资助，连续五年，上大学后每月 1500 元。近期他发现对方使用 iPhone 17 Pro Max、妆容精致，认为不符合资助标准后暂停打款，女生则发来“请你尽快打过来，不然我曝光你”的短信。经沟通，女生表示愿意换用百元手机并勤工俭学，姚先生补发 1500 元生活费并为其安排勤工俭学岗位，他坦言“有时候感觉自己被架起来了”。</p>
+      <p class="body">这件事之所以引发大规模讨论，是因为它撞在了一个没有标准答案的位置上。资助人一方的主张是：善款应花在“刀刃”上，受助者使用高端消费品与“困难”的认定不符。受助者一方的处境是：身处大学环境，一部体面的手机与基本的妆容，往往是融入同龄人的最低成本。</p>
+      <div class="highlight">两边都没有明显的恶意，但放在一起就是别扭。真正缺位的，是资助关系里那张“约定”——什么算困难、钱能怎么花、谁来判断，事先没说清楚，事后就只能靠舆论公审。</div>
+      <p class="tip">需要提示：目前事件细节主要来自资助人自述与媒体转述，双方表述以后续权威报道为准。此事真正的建设性出口，或许在于公益资助的协议化与透明化，而不是对某一方进行道德审判。</p>
+    </div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">辟谣</span>宁德时代回应“车间员工过激行为”视频：系恶意造谣，已报警</div>
+      <p class="body">一段与“禁止上厕所”“员工裸奔”相关的视频在网络流传，被指向宁德时代宜宾基地。宁德时代官方回应称，视频中并非宁德时代，防尘服颜色、车间风格均对不上，实为另一家电池厂的离职纠纷被移花接木炒作，公司已报警；另有网传视频实际指向青山控股旗下瑞浦兰钧车间，该说法尚未证实。</p>
+      <p class="body">这条值得记录的原因在于它的传播路径：一段与事实不符的视频，被贴上知名企业的标签后迅速扩散。对企业而言，辟谣成本远高于造谣成本；对公众而言，“先核实再转发”在情绪动员面前往往失效。</p>
+      <p class="body">资本市场层面，宁德时代股价自 5 月 7 日高点 467.34 元（总市值约 2.12 万亿元）持续回落，9 月 8 日盘中触及 326 元年内低点，9 月 9 日收报 336.84 元微涨 0.40%，9 月 10 日盘中报 338.73 元；区间市值蒸发超 5200 亿元、回撤接近 27%，叠加部分车企“去宁化”与公司回购尚未落地，情绪面承压。</p>
+      <div class="fig">
+        <h5>宁德时代关键价位示意（元）</h5>
+        <svg viewBox="0 0 900 190" width="100%" role="img" aria-label="宁德时代股价关键价位">
+          <line x1="60" y1="150" x2="860" y2="150" stroke="#d8d0c2"/>
+          <g>
+            <line x1="130" y1="40" x2="130" y2="150" stroke="#8e3028" stroke-width="26"/>
+            <text x="130" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#141414">467.34</text>
+            <text x="130" y="172" text-anchor="middle" font-size="13.5" fill="#5a5347">5/7 高点</text>
+          </g>
+          <g>
+            <line x1="370" y1="112" x2="370" y2="150" stroke="#a0703d" stroke-width="26"/>
+            <text x="370" y="102" text-anchor="middle" font-size="15" font-weight="700" fill="#141414">326.00</text>
+            <text x="370" y="172" text-anchor="middle" font-size="13.5" fill="#5a5347">9/8 年内低点</text>
+          </g>
+          <g>
+            <line x1="610" y1="107" x2="610" y2="150" stroke="#46604a" stroke-width="26"/>
+            <text x="610" y="97" text-anchor="middle" font-size="15" font-weight="700" fill="#141414">336.84</text>
+            <text x="610" y="172" text-anchor="middle" font-size="13.5" fill="#5a5347">9/9 收盘 +0.40%</text>
+          </g>
+          <g>
+            <line x1="800" y1="106" x2="800" y2="150" stroke="#46604a" stroke-width="26" stroke-dasharray="4 3"/>
+            <text x="800" y="96" text-anchor="middle" font-size="15" font-weight="700" fill="#141414">338.73</text>
+            <text x="800" y="172" text-anchor="middle" font-size="13.5" fill="#5a5347">9/10 盘中</text>
+          </g>
+        </svg>
+        <div class="figcap"><b>图四</b> 高点至年内低点回撤约 27%，区间市值蒸发超 5200 亿元；柱线仅作关键价位示意，不构成投资建议。数据来源：公开行情（2026 年 9 月 10 日）</div>
+      </div>
+    </div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">法治</span>两则陈年与新近案件</div>
+      <ul class="briefs">
+        <li><b>2004 年西安行李箱碎尸案告破：</b>沉睡 21 年的悬案，靠 DNA 家族溯源技术锁定嫌疑人。2024 年技术人员从当年包裹尸块的塑料袋上提取到男性生物检材，经家族比对指向四川乐山周氏家族，2025 年 2 月周某、马某英夫妻在四川落网；但受害者“阳阳”的身份至今成谜。DNA 家族溯源近年已多次用于陈年积案，是刑侦能力升级的具体体现。</li>
+        <li><b>广东东莞女子杀害同居男友：</b>嫌疑人胡某涉嫌今年 2 月 1 日趁 49 岁男友午睡时将其杀害分尸，作案后用死者手机回消息、发朋友圈伪造“在世”假象，却被儿子从三处细节识破——朋友圈截图露出安卓返回键与 Home 键、长期只回文字不接电话与视频、死者常骑的电动车一直停在楼下未动。目前案件已移送检察院审查起诉，涉嫌故意杀人罪。</li>
+      </ul>
+      <p class="body">两案的共同点是“细节决定真相”：前者靠技术手段跨越二十余年，后者靠亲属对生活习惯的熟悉识破伪装。</p>
+      <div class="srcline">信息来源：新京报、金羊网、网易新闻、宁德时代官方回应（2026 年 9 月 8—10 日）</div>
+    </div>
+  </section>
+
+  <!-- 第七版 平台治理与民生 -->
+  <section class="sec">
+    <div class="sec-head"><h2>第七版 · 平台治理与民生</h2><span class="kw">下架 · 辟谣 · 消费</span></div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">平台</span>抖音擦边礼物上线即下架，官方称系第三方自定义插件</div>
+      <p class="body">9 月 9 日晚，抖音直播间礼物广场出现多款低俗、带有性暗示的虚拟礼物，名称与图标直白、多数标价仅 1 钻或 99 钻。这些礼物并非官方出品，而是来自平台开放的“自定义礼物投稿（灵感投稿）”功能与第三方互动插件，用户可自行编辑名称与特效、仅在特定直播间生效，部分内容绕过审核短暂上线。</p>
+      <p class="body">不少游戏主播直播时意外刷到此类礼物当场错愕，英雄联盟主播陈泽多次呼吁粉丝举报，甚至怀疑平台是否被入侵。事件发酵后，抖音客服回应称已对涉事低俗投稿礼物全部下架，刷新页面即不可见，并紧急关停自定义礼物功能，相关话题冲上微博与抖音双热搜。</p>
+      <p class="body">平台反应不可谓不快，但真正的问题被留在了后面：第三方插件是如何通过审核上线的？内容安全的第一道关口在何处失守？“下架”是处置结果，不是机制解释。</p>
+    </div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">辟谣</span>两条需要澄清的传言</div>
+      <ul class="briefs">
+        <li><b>“湖南医保可办理二次报销”系假消息：</b>网传湖南医保可办理二次报销，湖南省医保局 9 月 8 日发布郑重声明辟谣——基本医疗保险、大病保险均已实现“一站式”结算，不存在所谓“二次报销”；凡以“二次报销”“补充保障到账”名义要求点击链接、下载软件或提供个人信息的，均为诈骗。医保类谣言的传播特点是“看起来像好事”，因此更容易被转发。</li>
+        <li><b>开学季骗术提醒：</b>多地警方与平台联合发布开学季常见骗术预警，相关话题登上抖音热榜与百度热搜。开学季是缴费类、冒充老师类诈骗的高发期，家长群内的缴费通知需二次核实。</li>
+      </ul>
+    </div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">企业回应</span>两条短消息</div>
+      <ul class="briefs">
+        <li><b>小米回应“澎程试驾事故”：</b>9 月 8 日晚四川自贡一辆澎程试驾车为给前车让道，销售人员误踩油门冲入绿化带，无人受伤；小米 9 月 9 日凌晨回应，明确非车辆失控、非智驾问题。</li>
+        <li><b>小红书博主“安澜”伪造捐款：</b>其自称向广西灾区捐款百万元，实际仅捐 1 元并晒出万元截图，被红十字会反馈戳穿，平台已介入处理。</li>
+      </ul>
+    </div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">民生速览</span>四则正在讨论中的话题</div>
+      <ul class="briefs">
+        <li><b>江西低保女生赴港看演唱会：</b>赣州一名中专女生用暑假打工积蓄赴港观看演唱会，触发低保对象动态监测预警，家属担心全家低保被取消而上网求助；赣州经开区社会事务管理局 9 月 7 日通报正按程序核查。人民日报 9 月 9 日评论指出，低保认定以家庭为单位、成员共享收支；律师则认为关键看家庭收入是否瞒报。具体认定以当地民政部门规定为准。</li>
+        <li><b>瑞幸“大桶倒咖啡”：</b>知乎热搜前列，有顾客称看到店员将大桶咖啡液直接倒入，质疑现制咖啡的实际制作流程。目前为网友自述，未获品牌方公开回应，标注“待核实”。</li>
+        <li><b>ETC 该不该取消：</b>交通运输部回应称将推广“手机+”无卡便捷通行模式。讨论的另一面是，ETC 推广多年后形成的设备存量与用户习惯如何过渡。</li>
+        <li><b>赵一鸣等零食品牌被多地严查：</b>“缺斤短两”问题持续发酵，内蒙古包头、山西运城、江苏盐城等地市场监管部门已开展计量专项整治；河北沧州曾有顾客 4 块牛肉干称重收费 64.58 元、复称仅值 17.29 元。鸣鸣很忙集团自 9 月 7 日起承诺称错按差价十倍赔付，并上线全国门店秤具监控。具体处罚以市场监管部门通报为准。</li>
+      </ul>
+    </div>
+    <div class="art">
+      <div class="atitle"><span class="ptag">网传待核实</span>两则，先记录不采信</div>
+      <ul class="briefs">
+        <li>网传长江武汉段三艘驳船十秒内倾倒黑色物质，相关部门已紧急巡查，截至发稿未见官方结论，待核实。</li>
+        <li>OpenAI 首席科学家宣称造出“异星心智”并警告“全人类都要刹车”，信息源存疑，暂不采信，仅记录其在中文社交平台的传播热度。</li>
+      </ul>
+      <div class="srcline">信息来源：羊城晚报、湖南省医保局、人民日报、新京报、知乎热榜、微博热搜（2026 年 9 月 8—10 日）</div>
+    </div>
+  </section>
+
+  <!-- 观察哨 -->
+  <section class="sec">
+    <div class="sec-head"><h2>观 察 哨</h2><span class="kw">关键词 · 待追踪</span></div>
+    <div class="watch-grid">
+      <div>
+        <h4>本期高频关键词</h4>
+        <p class="body noind" style="font-size:14.5px;">折叠屏、存储涨价、iPhone 定价、教师节、新职业、具身智能、CPI 回升、算力需求、资助边界、陈年积案、擦边礼物、缺斤短两。</p>
+        <h4 style="margin-top:12px;">三重共振</h4>
+        <p class="body noind" style="font-size:14.5px;">苹果涨价（存储成本）、8 月 CPI 中的电子产品涨价（平板 +21.5%、手机 +11.0%）、以及此前的手机集体涨价——这三条是同一条产业链在不同时点的投影。上游存储涨价的传导尚未结束，四季度消费电子价格仍可能继续上行。</p>
+      </div>
+      <div>
+        <h4>待追踪清单</h4>
+        <ul class="track-list">
+          <li><b>苹果供应链：</b>折叠屏初期产能爬坡节奏（三季度仅 50 万—100 万部），是判断供货紧张持续时长的关键。</li>
+          <li><b>志愿军烈士遗骸：</b>批次表述在不同信源存在差异，以退役军人事务部官方发布为准。</li>
+          <li><b>资助风波：</b>双方表述待权威报道确认；公益资助协议化是否会因此进入公共讨论。</li>
+          <li><b>抖音擦边礼物：</b>第三方插件的审核机制缺失如何补位，追踪平台后续说明。</li>
+          <li><b>瑞幸咖啡制作流程：</b>网友自述，待品牌方回应或监管部门介入。</li>
+          <li><b>宁德时代：</b>造谣视频的警方调查结论与真实来源实锤。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 跨日与跨期追踪 -->
+  <section class="sec">
+    <div class="sec-head"><h2>跨日与跨期追踪</h2><span class="kw">9/9 已报 · 本期正文不复述</span></div>
+    <div class="track-row"><span class="ev">苹果发布会</span><span class="st">9/9 下午版报“今夜发布”预告 → 今晨产品、定价、发售时间全部落地，属实质进展，本期头版完整展开。</span></div>
+    <div class="track-row"><span class="ev">郑钦文与中国女篮</span><span class="st">9/9 已报赛果，本期第二版展开比赛过程与复盘。</span></div>
+    <div class="track-row"><span class="ev">车市油电分化</span><span class="st">8 月燃油车零售近乎腰斩、新能源渗透率 65.2%，9/9 已报，属月度数据，本期并入第五版产业速览。</span></div>
+    <div class="track-row"><span class="ev">铜价历史新高</span><span class="st">LME 14779 美元/吨，9/9 已报，未见新突破，持续观察美元与库存变化。</span></div>
+    <div class="track-row"><span class="ev">星宇股份港股上市</span><span class="st">9/9 已报，进展缓慢，持续观察。</span></div>
+    <div class="track-row"><span class="ev">11 月 1 日增值税代扣新政</span><span class="st">9/9 已报政策要点，为既定生效日事项，本期不复述。</span></div>
+    <div class="track-row"><span class="ev">软裁员与硬座出差</span><span class="st">9/9 已报，话题降温。</span></div>
+    <div class="track-row"><span class="ev">西藏吉隆 / 尼泊尔灾情</span><span class="st">本日部分榜单出现“558 人失联、3 人遇难”表述，与此前中方 8 月 29 日 18 时口径（16 人遇难、546 人失联）差异较大，来源与统计范围均待核实，本期不作采信。</span></div>
+  </section>
+
+  <!-- 页脚 -->
+  <div class="footer">
+    <div>数据来源：微博热搜 · 抖音热榜 · 百度热搜 · 知乎热榜 · 今日头条 · 国家统计局 · 人力资源社会保障部 · 新华社 · 光明日报 · 每日经济新闻 · 南方都市报 · 上海证券报</div>
+    <div>生成时间：2026-09-10 12:10 ｜ 热点检测 v2.7.0 ｜ 第 2026-0910 期 · 上午版</div>
+    <div class="disc">本报告为公开信息汇编，不构成任何投资建议；涉及未决事件均标注来源与核实状态，以官方最终通报为准。</div>
+  </div>
+
+</div>
+</body>
+</html>
