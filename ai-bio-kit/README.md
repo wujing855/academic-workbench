@@ -1,6 +1,6 @@
 # AI×生物前沿监测套件（ai-bio-frontier-kit）
 
-从「AI 与生物学交叉研究报告」项目中提取的可复用资产，供任何具备联网搜索能力的 LLM Agent 使用（TRAE、国产 Agent 工作台等）。整个套件无第三方依赖、可整体拷贝到任意位置。
+从「AI 与生物学交叉研究报告」项目中提取的可复用资产，供任何具备联网搜索能力的 LLM Agent 使用（WorkBuddy / TRAE / Claude Code / Codex 等均可）。整个套件无第三方依赖、可整体拷贝到任意位置。
 
 ## 目录结构
 
@@ -33,10 +33,11 @@ ai-bio-frontier-kit/
 
 把 `agent-prompts/daily-digest.md` 全文作为任务指令（System Prompt 或任务消息），每日定时触发一次。该提示词自包含：五条铁律、七域检索策略、日报模板、执行规则都已内嵌，Agent 无需读文件即可执行。输出 Markdown 日报；若环境可执行 Python，再调用 `scripts/digest2html.py` 生成 HTML 阅读版。
 
-### 方式 B：TRAE
+### 方式 B：支持"技能 / 规则"机制的 Agent
 
-- 两个技能已安装到 TRAE 工作区 `.trae/skills/`，新会话中 Agent 可自动发现并调用（也可让用户以 `/rigorous-research`、`/ai-bio-frontier` 方式调用）
-- 每日定时任务已创建：每天北京时间 08:00 自动检索并产出日报到 `../data/digests/` 目录（工作台「前沿日报」面板读取该目录）；本套件自 2026-09-06 起部署于学术工作台 `09_工作台程序/`，规范引用与脚本路径均指向本副本
+- 若你的 Agent 有技能目录（如 WorkBuddy 的技能目录、TRAE 的 `.trae/skills/`），把 `skills/` 下两个技能整个放进去，新会话中即可被发现并调用（也可用 `/rigorous-research`、`/ai-bio-frontier` 手动调用）。
+- 若它只支持"项目规则 / 自定义指令"，把对应 `SKILL.md` 全文设为规则即可，用法本质相同。
+- 两者都没有也完全不影响：走方式 A，把提示词当任务指令贴给它。
 
 ### 方式 C：MCP（工作台定型后）
 

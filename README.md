@@ -42,7 +42,7 @@
 
 ## 怎么装
 
-**真的只需要把上面那段话发出去**（发给 WorkBuddy / TRAE / 豆包，或任何能读写文件的 AI），剩下交给你的 Agent。它会：
+**真的只需要把上面那段话发出去**——WorkBuddy、TRAE、豆包、Claude Code、Codex、Cursor、Cline、通义灵码……只要是能读写文件的 AI Agent 都行，不挑平台。剩下交给你的 Agent。它会：
 
 1. **一次问你 10 个问题**（读哪个学段、几年级、什么研究领域、用哪家模型……）—— 你只要答这些
 2. **自己把工作台装好并配成你的**：进度卡是你的学段年级、侧栏是你的研究领域、资讯源换成你领域的期刊
@@ -175,13 +175,14 @@ python3 server.py          # macOS 也可以直接双击 start.command
 这个仓库的设计是**留空缺**：资讯源关键词、前沿日报主题、文献检索式都是填空位。
 [`SKILL/`](SKILL/) 里是一份给 **AI Agent** 看的说明书（不是给人看的教程）—— 把仓库丢给你的 Agent，它会先问你要 10 个信息，再把这套骨架改造成你自己的，并帮你装好 PDF 引擎、配好模型、建好每日自动化，最后逐项自检。
 
-| 你用的 Agent | 怎么接 |
-|---|---|
-| **WorkBuddy** | 把 `SKILL/SKILL.md` 放进技能目录，或直接说「按这个仓库的 SKILL.md 帮我装」 |
-| **TRAE** | 见 [`SKILL/TRAE-规则适配.md`](SKILL/TRAE-规则适配.md)，设为项目规则 |
-| **豆包** | 见 [`SKILL/豆包-提示词适配.md`](SKILL/豆包-提示词适配.md)，当提示词贴 |
+**不挑平台** —— `SKILL/SKILL.md` 是一份通用说明书，不绑定任何一家：WorkBuddy、TRAE、豆包、Claude Code、Codex、Cursor、Cline、通义灵码……只要它能读写文件、能跑命令，把上面那段话发给它就行。
 
-三者都有免费额度（WorkBuddy / TRAE 可签到领积分，豆包学生认证有会员额度）。
+| 你的 Agent 有… | 可以更省事（可选，不做也行） |
+|---|---|
+| 技能 / 规则 / 项目指令机制（如 WorkBuddy 技能目录、TRAE 项目规则） | 把 `SKILL/SKILL.md` 放进对应位置，以后它会自动记得这套流程 |
+| 什么机制都没有 | 什么都不用做，每次把那段话发它即可 |
+
+各家 Agent 都有免费额度（WorkBuddy / TRAE 可签到领积分，豆包学生认证有会员额度），一个任务用一家、轮着来。
 
 ## 项目结构
 
@@ -192,7 +193,7 @@ academic-workbench/
 ├── pdf_worker/            PDF 转写引擎（8766 端口，MinerU 驱动，本地/云端双引擎）
 ├── web/                   前端（原生 HTML/CSS/JS，无框架）
 ├── ai-bio-kit/            「前沿瞭望」Agent 指令包（领域可换）
-├── SKILL/                 给 AI Agent 的部署向导（SKILL.md + 两个适配）
+├── SKILL/                 给 AI Agent 的部署向导（通用，不绑定平台）
 ├── docs/screenshots/      README 用的界面截图
 └── data/                  所有数据与配置（业务数据都在这里）
 ```
@@ -254,6 +255,6 @@ academic-workbench/
 MIT License —— 随便用、随便改，保留版权声明即可。
 
 数据源与服务：[阿里云百炼](https://bailian.console.aliyun.com) · [MinerU](https://mineru.net) · [和风天气](https://www.qweather.com) · Nature / Science / Cell / bioRxiv / Hacker News 等公开 RSS。
-AI Agent 协作：[WorkBuddy](https://www.workbuddy.cn) · TRAE · 豆包。
+AI Agent 协作：[WorkBuddy](https://www.workbuddy.cn) · TRAE · 豆包；同样适用于 Claude Code、Codex、Cursor、Cline 等任何能读写文件的 Agent。
 
 如果这套工作台帮你省下了一点时间，欢迎点个 ⭐ —— 也欢迎告诉我你加了什么我没想过的东西。
