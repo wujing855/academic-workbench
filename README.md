@@ -225,8 +225,15 @@ academic-workbench/
 **Q：数据能带走 / 备份吗？**
 整个 `data/` 目录就是你的全部数据，复制走即可。
 
-**Q：它会自动把我改的东西 git commit 吗？**
-不会，这个功能**默认关闭**。只有你在 `data/settings.json` 里写 `"auto_archive": true` 之后，它才会在每天凌晨 3 点后第一次运行时执行一次 `git add -A` + `git commit -m "自动存档 <日期>"`。之所以默认关：它会把**你当时所有未提交的改动**一起提交进这个目录的 git 历史——只有当你确定这个目录就是你自己的仓库时才该打开。
+**Q：日志说「git: 自动存档未启用」，怎么启用自动存档？它会自动 commit 我的东西吗？**
+这不是故障——这个功能**默认关闭**，而且您的数据**已经在备份了**：日志里的「快照完成」就是每天自动做的数据快照（存放在 `data_snapshots/`，保留最近 14 天）。
+
+「git 自动存档」是额外的保险：每天凌晨 3 点后第一次运行时执行一次 `git add -A` + `git commit -m "自动存档 <日期>"`，把整个目录的改动提交进 git 历史。开启方法（改完即生效，**无需重启**）：
+
+1. 用记事本打开 `data/settings.json`（若该文件不存在，把 `data/settings.example.json` 复制一份并改名为 `settings.json`）
+2. 把 `"auto_archive": false` 改成 `"auto_archive": true`，保存
+
+两个前提：① 这个目录必须是您自己的 git 仓库（文件夹里有 `.git`）——下载 zip 解压安装的没有 `.git`，先在文件夹里执行一次 `git init`，否则开启后日志会报「git：add 失败」；② 它会把您当时**所有未提交的改动**一起提交进 git 历史，确定这个目录归您管、没藏敏感文件时再开。
 
 **Q：端口被占了？**
 改 `server.py` 顶部的 `PORT` 和 `WORKER_BASE`（两处要一致），并在 `start.command` 里同步。
