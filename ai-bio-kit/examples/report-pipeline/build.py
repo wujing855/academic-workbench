@@ -5,7 +5,13 @@ import re
 import html as htmllib
 
 import os
-BASE = os.environ.get('TRAE_ASSISTANT_DIR', os.path.expanduser('~/.trae-cn/assistant/'))
+# 素材目录（放 template.html / meta.json / part1~3.html）：
+#   1) 通用环境变量 AGENT_OUTPUT_DIR
+#   2) 兼容历史变量 TRAE_ASSISTANT_DIR（旧默认值为 ~/.trae-cn/assistant/）
+#   3) 都没设则用脚本同级的 ./out/
+BASE = (os.environ.get('AGENT_OUTPUT_DIR')
+        or os.environ.get('TRAE_ASSISTANT_DIR')
+        or os.path.join(os.path.dirname(os.path.abspath(__file__)), 'out') + os.sep)
 
 template = open(BASE + 'tools/template.html', encoding='utf-8').read()
 meta = json.load(open(BASE + 'tools/meta.json', encoding='utf-8'))
