@@ -1,10 +1,12 @@
 {
   "field_name": "你的研究领域",
-  "phd_start": "2026-09-05",
+  "degree_level": "博士",
+  "program_years": 4,
+  "phd_start": "2026-09-01",
   "phd_end": "2030-06-30",
   "c_journal_required": 2,
   "c_journal_label": "C 刊论文",
   "workspace_dir": "",
   "auto_archive": false,
-  "note": "复制本文件为 data/settings.json 后按需修改。field_name 显示在侧栏品牌下方（如「AI × 生物学」「清代文献学」），也是浏览器标签页标题；phd_start/phd_end 是概览页进度条的起止日期（本科/硕士也填这里，按你的学制改）；c_journal_required/c_journal_label 是毕业要求（改成「SCI 一区」「CSSCI」等随你）；workspace_dir 留空则默认扫描工作台的上一级目录（「文件夹」面板的数据来源）；auto_archive 默认 false —— 开启后每天凌晨 3 点后第一次运行时，会自动把工作台目录里 git 的改动提交一次（执行 git add -A 并 commit「自动存档 <日期>」）。只有当你确定这个工作台目录就是你自己的 git 仓库、且愿意让它自动提交时才打开。"
+  "note": "⚠️ 复制本文件为 data/settings.json 后，务必把 field_name / degree_level / program_years / phd_start / phd_end 改成你自己的 —— 上面的学段与日期只是格式示范，照抄就会显示成别人的进度（这正是「博二的人看到博一」的原因）。degree_level 填「本科」/「硕士」/「博士」，进度卡标题与年级名会跟着变（本科进度·大三 / 硕士进度·研二 / 博士进度·博二）；program_years 是学制年数，本科一般 4 年、硕士 3 年、博士 4 年；phd_start / phd_end 是入学日期与预计毕业日期，国内一般 9 月开学、6 月毕业，两项留空时进度卡显示「待设置」并提示你，而不会瞎算一个进度。c_journal_required / c_journal_label 是毕业要求（改成「SCI 一区」「CSSCI」等随你）；workspace_dir 留空则默认扫描工作台的上一级目录（「文件夹」面板的数据来源）；auto_archive 默认 false —— 开启后每天凌晨 3 点后第一次运行时，会自动把工作台目录里的 git 改动提交一次（执行 git add -A 并 commit「自动存档 <日期>」），只有当你确定这个目录就是你自己的 git 仓库、且愿意让它自动提交时才打开。"
 }

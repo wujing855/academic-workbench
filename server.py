@@ -46,12 +46,18 @@ CACHE_MAX_AGE = 7 * 24 * 3600  # 缓存最长保留：7 天（之后即使断网
 
 # ---------------------------------------------------------------------------
 # 个人设定（可选）：复制 data/settings.example.json 为 data/settings.json 即可覆盖
+#   field_name           侧栏与浏览器标题上的研究领域名
+#   degree_level         学段：本科 / 硕士 / 博士（决定进度卡标题与年级名）
+#   program_years        学制年数（本科一般 4、硕士 3、博士 4）
 #   phd_start            入学日期 YYYY-MM-DD
 #   phd_end              预计毕业日期 YYYY-MM-DD
 #   c_journal_required   毕业要求论文数
 #   c_journal_label      毕业要求名称（如「C 刊论文」「SCI 一区」）
 #   workspace_dir        「文件夹」面板扫描的根目录（默认 = 工作台的上一级目录）
 #   auto_archive         每日自动 git 存档开关（默认关闭；开启后每天自动提交一次）
+#
+# 学制四项（degree_level / program_years / phd_start / phd_end）刻意**不设默认值**：
+# 没配置时界面显示「待设置」并给出提示，而不是拿内置日期算出一个不属于你的进度。
 # ---------------------------------------------------------------------------
 def _load_settings():
     """读取 data/settings.json；不存在或损坏时返回空 dict，全部走内置默认值。"""
@@ -67,9 +73,14 @@ SETTINGS = _load_settings()
 # 研究领域名：显示在侧栏品牌下方（改 data/settings.json 的 field_name 即可）
 FIELD_NAME = SETTINGS.get("field_name") or "你的研究领域"
 
-# 博士学制设定（可在 data/settings.json 覆盖）
-PHD_START = SETTINGS.get("phd_start") or "2026-09-05"
-PHD_END = SETTINGS.get("phd_end") or "2030-06-30"
+# 学段与学制（可在 data/settings.json 覆盖）。刻意不设默认日期，见上方注释。
+DEGREE_LEVEL = (SETTINGS.get("degree_level") or "").strip()
+try:
+    PROGRAM_YEARS = int(SETTINGS.get("program_years") or 0)
+except (TypeError, ValueError):
+    PROGRAM_YEARS = 0
+PHD_START = (SETTINGS.get("phd_start") or "").strip()
+PHD_END = (SETTINGS.get("phd_end") or "").strip()
 
 try:
     _C_JOURNAL_N = int(SETTINGS.get("c_journal_required") or 2)
@@ -187,22 +198,80 @@ def section_stats():
     return stats
 
 
+# 学段 → 年级单字（大一 / 研二 / 博三）
+_DEGREE_STAGE_CHAR = {"本科": "大", "硕士": "研", "博士": "博"}
+_CN_DIGITS = "〇一二三四五六七八九十"
+
+
+def degree_label():
+    """进度卡标题：设了学段就是「博士进度 / 硕士进度 / 本科进度」，否则「学业进度」。"""
+    return (DEGREE_LEVEL + "进度") if DEGREE_LEVEL else "学业进度"
+
+
+def _stage_name(year_no):
+    """第 N 学年 → 年级名（大一 / 研二 / 博三）。没设学段时返回空串。"""
+    ch = _DEGREE_STAGE_CHAR.get(DEGREE_LEVEL)
+    if not ch or year_no < 1:
+        return ""
+    num = _CN_DIGITS[year_no] if year_no <= 10 else str(year_no)
+    return ch + num
+
+
 def phd_progress():
-    """博士进度：入学至今的天数与百分比。"""
+    """学业进度：入学至今的天数与百分比。
+
+    未在 data/settings.json 里配置学制时返回 configured=False，由前端提示「待设置」——
+    绝不拿内置日期假装算出一个不属于用户的进度（这正是旧版「博二显示成博一」的原因）。
+    """
     from datetime import datetime
-    start = datetime.strptime(PHD_START, "%Y-%m-%d")
-    end = datetime.strptime(PHD_END, "%Y-%m-%d")
+
     today = datetime.now()
+    base = {
+        "configured": False,
+        "label": degree_label(),
+        "degree_level": DEGREE_LEVEL,
+        "total_years": PROGRAM_YEARS,
+        "stage": "",
+        "year_no": 0,
+        "start": PHD_START,
+        "end": PHD_END,
+        "elapsed_days": 0,
+        "total_days": 0,
+        "remain_days": 0,
+        "percent": 0.0,
+        "today": today.strftime("%Y-%m-%d"),
+    }
+    try:
+        start = datetime.strptime(PHD_START, "%Y-%m-%d")
+        end = datetime.strptime(PHD_END, "%Y-%m-%d")
+    except (TypeError, ValueError):
+        return base
+    if end <= start:
+        return base
+
     total = (end - start).days
     elapsed = max(0, (today - start).days)
     pct = min(100.0, elapsed / total * 100)
     remain = (end - today).days
-    return {
-        "start": PHD_START, "end": PHD_END,
-        "elapsed_days": elapsed, "total_days": total, "remain_days": max(0, remain),
+
+    # 当前是第几学年：按入学月日逐年滚动，跨过入学日才算升一级
+    years_passed = today.year - start.year - (
+        1 if (today.month, today.day) < (start.month, start.day) else 0
+    )
+    year_no = max(1, years_passed + 1)
+    if PROGRAM_YEARS:
+        year_no = min(year_no, PROGRAM_YEARS)
+
+    base.update({
+        "configured": True,
+        "stage": _stage_name(year_no),
+        "year_no": year_no,
+        "elapsed_days": elapsed,
+        "total_days": total,
+        "remain_days": max(0, remain),
         "percent": round(pct, 1),
-        "today": today.strftime("%Y-%m-%d"),
-    }
+    })
+    return base
 
 
 def get_publications():

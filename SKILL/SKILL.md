@@ -1,117 +1,190 @@
 ---
 name: academic-workbench-builder
-description: 帮用户搭建并定制「学术工作台」——一套免费的个人科研工作台（14 面板：资讯/文献/PDF转写/译文/精读/摘要卡/日志/专注等）。当用户说"想搭科研工作台/学术工作台/文献管理工作台"、"拿到这个包想跑起来"、"想改领域、换资讯源"时使用。
+description: 帮用户搭建并「一键装好」学术工作台——一套免费的个人科研工作台（14 面板：资讯/文献/PDF 转写/译文/精读/摘要卡/日志/专注等）。当用户说"想搭科研工作台/学术工作台/文献管理工作台"、"拿到这个网址/仓库想跑起来"、"帮我装这个"时使用。核心目标：让**没有编程基础**的用户只回答几个问题，剩下全部由 Agent 代劳，交付一个开箱可用、与他本人匹配的完整工作台。
 ---
 
-# 学术工作台 · 搭建与定制指南（Agent 说明书）
+# 学术工作台 · 一键部署向导（给 AI Agent 的执行说明书）
 
-你（AI Agent）的任务：帮助用户把**当前目录**这套代码跑起来，并**改造成用户自己的领域版本**。
-它是一个纯本地运行的 Web 工作台：Python 标准库后端（零第三方依赖，除 PDF 转写外）+ 原生 HTML/CSS/JS 前端，全部免费服务驱动。
+你（AI Agent）是用户**唯一的安装员**。动手前先记住三条原则，它们决定这次交付成不成功：
 
-## 第 0 步：先问，再动手（必做）
+1. **用户很可能不懂代码。** 不要让他打开终端、敲命令、装 Python、手改 JSON —— 这些**全部由你执行**。你只问他"必须由人回答的问题"。
+2. **他只答一次，你一次做完。** 别问一句、做一步、再问一句。先把问题列清（第 0 步），拿到答案后一口气把活干完。
+3. **不允许"点哪个都失败"。** 交付前必须跑完第 5 步自检清单 —— 资讯、天气、AI 摘要/翻译/精读、PDF 转写、进度卡、自动化**逐项亲眼确认可用**，不能只"配好了"就交差。
 
-拿到这份 Skill 后，**不要直接改代码**。先向用户确认四件事（一次问完）：
+**最终验收标准**：用户拿到的是**和他本人匹配**、**打开就能用**的工作台 —— 进度卡写着他自己的学段年级、侧栏是他自己的研究领域、能看资讯天气、能用 AI 做摘要翻译精读、能转写 PDF、每天自动产出前沿日报与热点日报。
 
-1. **你的研究方向是什么？**（决定资讯源关键词、前沿瞭望的主题、示例数据）
-2. **你处于哪个阶段？**（本科/硕士/博士——决定面板侧重：本科偏文献积累，博士偏精读与综述）
-3. **每天愿意花几分钟维护？**（0 分钟 → 只保留抓取类自动化；10 分钟 → 全开精读/日志）
-4. **电脑上有没有装 Python 3？**（没装就先带用户装；macOS 自带，Windows 需引导）
+---
 
-拿到答案后再进入下面步骤。**用户的领域信息回填到配置，而不是留在对话里。**
+## 第 0 步：把这 10 个问题一次问完（唯一需要用户动脑的地方）
 
-## 项目结构（30 秒理解）
+把下面这张表**整段发给用户**（保留编号与默认值），请他一次性回答：
 
-```
-（仓库根目录 = 工作台本体）
-├── server.py            # 主服务（端口 8765）：资讯/天气/待办/日志/周报 API + 静态页
-├── fetchers.py          # 资讯源抓取 + 天气（天气配置在 data/weather_config.json）
-├── start.command        # macOS 一键启动（双击）
-├── pdf_worker/          # PDF 转写引擎（端口 8766，独立 venv，MinerU 驱动）
-│   └── worker.py        #   转写/摘要/翻译/精读 四类 LLM 任务都在这
-├── web/                 # 前端（index.html / app.js / style.css）
-├── ai-bio-kit/          # 「前沿瞭望」Agent 指令包（领域可换）
-├── SKILL/               # 本说明书 + TRAE / 豆包 适配
-├── TRAE日报定时任务指令.md  # 每日热点日报的定时任务提示词（TRAE/其他 Agent 通用）
-└── data/                # 所有数据与配置
-    ├── llm_config.json       # ★ 百炼 API Key（免费 LLM）
-    ├── pdf_config.json       # ★ MinerU Token（云端转写，可选）
-    ├── weather_config.json   # ★ 和风天气 Host/Key/坐标/城市名
-    ├── settings.json         # ☆ 学制、毕业条件、扫描目录（模板 settings.example.json）
-    ├── literature/           # 文献工具：glossary(术语) / journals(期刊库) / search_queries(检索式)
-    └── summaries|translations|readings|...  # 各业务数据（自动生成）
-```
-
-带 ★ 的是必须填 Key 的文件，☆ 是按需覆盖的个性化设定。所有 *.json 都有同名 `.example.json` 模板。
-
-## 第 1 步：跑起来（10 分钟）
-
-1. **启动**：macOS 双击 `start.command`；或终端 `python3 server.py`，浏览器开 `http://127.0.0.1:8765`。
-   - 只有 Python 3，不需要 pip install 任何东西（主服务纯标准库）。
-2. **填三个 Key**（都在 `data/` 下，改完即生效，无需重启）：
-
-| 文件 | Key 去哪申请 | 免费额度 | 不填的后果 |
-|---|---|---|---|
-| `llm_config.json` | 阿里云百炼 bailian.console.aliyun.com | 各模型每天免费额度（qwen3.8-flash 最耐用） | 摘要/翻译/精读/标签建议不可用，其余正常 |
-| `weather_config.json` | 和风天气 qweather.cn（控制台→设置里还有**专属 API Host**，Host / Key / 坐标 / 城市名四项都要填） | 每天约 1000 次 | 概览页无天气卡片，其余正常 |
-| `pdf_config.json` | mineru.net/apiManage/token | 云端 Precision 每天 2000 页，90 天有效 | 云端引擎不可用；**本地引擎不需要 Token 也能转写** |
-
-3. **个性化设定（建议做）**：复制 `data/settings.example.json` 为 `data/settings.json`：
-   - `field_name` —— **用户的领域名**（显示在侧栏品牌下方 + 浏览器标题）。把第 0 步问到的方向填进去，这是"让它看起来属于用户"的第一件事。
-   - `phd_start` / `phd_end` —— 学制起止日期（本科/硕士也填这里，用他们的学制）；`c_journal_label` 改成他的毕业要求（C 刊论文 / SCI 一区 / CSSCI…）
-   - `workspace_dir` —— 「文件夹」面板扫描的目录，留空则扫描工作台上一级目录
-   - 不填也能跑：会用内置默认值（你的研究领域 + 示例学制日期）。
-4. **PDF 转写（可选增强）**：进入 `pdf_worker/` 建 venv 并装 MinerU：
-   ```
-   cd pdf_worker && python3 -m venv .venv && .venv/bin/pip install -U mineru
-   ```
-   不装也能用工作台，只是"PDF转写"面板用云端引擎（需 Token）。
-
-> Windows 用户没有 .command 脚本：直接 `python server.py` 即可，其余同理。
-
-## 第 2 步：定制成用户的领域（核心环节）
-
-这是"个人性"的落点——**骨架通用，领域由用户填空**。按第 0 步收集的答案改：
-
-### 2a. 资讯源（fetchers.py 顶部 SOURCES 数组）
-- 学术源按用户领域换：把 Nature/Science/Cell 的 RSS 换成用户领域的期刊 RSS（biorxiv/medrxiv 有学科分类集合源，改 URL 里的 `server_biorxiv_` 前缀即可）。
-- 技术源（HN/阮一峰）与领域无关，建议保留。
-- 想加源：复制一段 dict，改 key/name/url/limit 即可，`kind: "rss"`。
-
-### 2b. 前沿瞭望（ai-bio-kit/skills/ai-bio-frontier/）
-- 这是让 AI Agent 每天生成一页"你领域的新进展"。里面是 AI×生物的示例——**把 SKILL.md、references/queries.md、sources.md 里的领域词全部换成用户的领域**（_queries.md 是搜索词库，_sources.md 是信源白名单，digest-template.md 是版式，版式别动）。
-- 换完后把每日生成指令（SKILL.md 末尾附的 prompt 模板）设成 Agent 的定时任务（WorkBuddy 用"自动化"，TRAE 用定时任务，都是每天早上一次）。
-
-### 2c. 文献工具的检索式（data/literature/search_queries.json）
-- 把里面的检索式换成用户领域的（OpenAlex/Crossref 语法）。
-- `glossary.json` 填用户领域的核心术语对照，"文献工具"面板的术语速查会用。
-
-### 2d. 示例数据
-- `data/todos.json` 现在是 2 条通用示例，换成用户领域的真实待办。
-- 研究日志/摘要卡片/精读库都是空的——**这是故意的**，让用户的数据自己长出来。
-
-## 第 3 步：每日自动化（建议配置）
-
-| 任务 | 内容 | 频率 |
+| # | 问题 | 你会拿它做什么 |
 |---|---|---|
-| 前沿瞭望 | Agent 按改造后的 ai-bio-kit 指令生成一页领域进展 | 每天早上 |
-| 热点日报 | 按 `TRAE日报定时任务指令.md` 的提示词生成 | 每天两次 |
-| 科技周报 | 纯抓取，server 自动缓存，无需配置 | 每周五 |
+| 1 | 你想让工作台怎么称呼你的研究方向？（一句话，如「清代文献学」「AI × 生物学」） | 侧栏品牌 + 浏览器标题 |
+| 2 | 你现在读 **本科 / 硕士 / 博士**？ | 进度卡标题与年级名 |
+| 3 | 你现在**几年级**？或**哪一年入学**？ | 推算入学/毕业日期 |
+| 4 | 你所在学段**学制几年**？（默认：本科 4 年、硕士 3 年、博士 4 年） | 年级上限；不改就用默认 |
+| 5 | 你的**研究领域**是什么？给几个英文关键词更好（如 cancer immunology, single-cell） | 资讯源、前沿日报、检索式、术语表 |
+| 6 | 你平时**最想追踪什么**？（期刊 / 会议 / 关键词，随便列） | 资讯源与日报主题 |
+| 7 | **AI 模型**用哪家？（推荐**阿里云百炼**，免费额度多；也可填 DeepSeek 或其它） | 摘要/翻译/精读的引擎 |
+| 8 | **天气**要不要显示？（推荐注册**和风天气**，免费且准） | 概览页天气卡 |
+| 9 | **PDF 转写**：本地引擎我会帮你装好；要不要**再开一个云端加速**？（推荐开，注册 MinerU 免费，速度快且不占电脑） | 转写速度、是否吃本机性能 |
+| 10 | **每日自动化**要不要？（前沿日报 / 热点日报 / 周报） | 免维护的每日产出 |
 
-三个 Agent 的免费额度都够：**WorkBuddy**（签到领积分）、**TRAE**（签到）、**豆包**（学生认证有会员额度）。一个任务用一家，轮着来。
+**每道题都要把"用户要做什么"写清楚**。例如第 7 题应当这样说：
+> "你去阿里云百炼注册一下（免费额度挺多），把控制台里那一串 Key 贴给我就行 —— 剩下的配置我来做，你不用碰任何文件。"
 
-## 必须遵守的约定（改坏 = 用户损失数据）
+### 3、4 两题的换算规则（你算，别让用户算）
 
-1. **不要动 `data/` 下的业务 JSON 的结构**（字段名/嵌套关系），只加数据不改 schema。
-2. **`llm_config.json` / `pdf_config.json` 永远不入 git**（.gitignore 已排除，别解开）。
-3. **改 fetchers.py 的 SOURCES 前先备份**；改完让用户刷新页面确认资讯还能加载。
-4. **前端三件套（web/）改动前备份到 `_archives/`**（若用户 git init 过则先 commit）。
-5. 模型选择只改 `llm_config.json` 的 `models` 字段，**不要在代码里硬编码模型名**。
-6. 主服务 8765、worker 8766，端口被占时改 `server.py` 顶部 `PORT` 与 `WORKER_BASE`（两处要同步）。
+国内学制一般 **9 月开学、6 月毕业**：
 
-## 已知坑（Agent 排障速查）
+- **已知年级** → 入学日期 = 当前学年的 9 月 1 日往前推 (年级数 − 1) 年；毕业日期 = 入学日期 + 学制年数，月日改成 6 月 30 日。
+  - 例：用户**博二**、博士 4 年制，今天是 2026-09-18 → 入学 `2025-09-01`，毕业 `2029-06-30`。
+- **已知入学年份** → 入学 = 该年 9 月 1 日；毕业 = 入学 + 学制年数 的 6 月 30 日。
+- 用户跳过了 2/3/4 题 → **不要瞎填**：`data/settings.json` 里把日期留空，界面会显示「学业进度 · 待设置」并提示用户回来找你补。
 
-- **资讯/天气全空** → 用户开了代理：代码已默认禁用系统代理直连国内源；若源在国外（如 philsci）反而需要代理，属正常。
-- **LLM 报 HTTP 403 FreeTierOnly** → 该模型当日免费额度耗尽：让用户在 llm_config.json 里把对应任务换成 qwen3.8-flash。
-- **转写卡在 3% 不动** → 看 `data/pdf_worker.log`；MinerU Token 过期（90 天）会静默失败。
-- **页面打不开** → `lsof -ti :8765` 看进程；重启 `start.command`。
-- **天气卡片不显示** → weather_config.json 的 api_host 忘了填（和风的 Host 与 Key 是两个东西）。
+---
+
+## 第 1 步：跑起来（你执行，用户不用动手）
+
+1. **确认环境**：需要 Python 3（macOS 自带；Windows 引导用户去 python.org 装，或你代装）。主服务**零第三方依赖**，无需 pip install。
+2. **启动服务**：
+   - macOS：`python3 server.py`（也可双击 `start.command`）
+   - Windows：`python server.py`
+   - 浏览器打开 `http://127.0.0.1:8765`
+3. **别让它"关掉就没了"**：macOS 可引导用户运行 `install_autostart.command` 做开机保活。
+4. 服务没起来时先查 `lsof -ti :8765`，端口被占就改 `server.py` 顶部 `PORT`（**同时改 `WORKER_BASE`**）并同步 `start.command`。
+
+## 第 2 步：改成"属于他的"（个性化，必做）
+
+**这一步决定他看到的是"自己的工具"还是"别人的工具"。**
+
+### 2a. 写 `data/settings.json`（不存在就按 `settings.example.json` 新建）
+
+```json
+{
+  "field_name": "他的研究领域（第 1 题）",
+  "degree_level": "本科 | 硕士 | 博士（第 2 题）",
+  "program_years": 4,
+  "phd_start": "2025-09-01",
+  "phd_end": "2029-06-30",
+  "c_journal_required": 2,
+  "c_journal_label": "他的毕业要求（如 SCI 一区 / CSSCI / C 刊论文）",
+  "workspace_dir": "",
+  "auto_archive": false
+}
+```
+
+- `degree_level` 决定**进度卡标题**（本科进度 / 硕士进度 / 博士进度）和**年级名**（大三 / 研二 / 博二），三者会连带变化。
+- **`phd_start` / `phd_end` 留空就不显示进度**（界面提示"待设置"）—— 所以第 2/3/4 题一定要问到。
+- 改完**必须重启服务**（这些值在启动时读取）。**这一条最容易被漏掉，也最容易造成"怎么还是旧的"。**
+
+### 2b. 资讯源：`fetchers.py` 顶部的 `SOURCES`
+按他的领域替换学术源（Nature / Science / Cell → 他领域的期刊 RSS）。技术源（HN / 阮一峰）与领域无关，保留。改完刷新页面确认资讯能加载。
+
+### 2c. 前沿日报主题：`ai-bio-kit/`
+把 `skills/ai-bio-frontier/references/queries.md`（搜索词库）、`sources.md`（信源白名单）里的领域词换成他的；`SKILL.md` 与 `agent-prompts/daily-digest.md` 里的领域描述也一起换。**版式模板 `digest-template.md` 不要动。**
+
+### 2d. 文献工具：`data/literature/`
+- `search_queries.json` → 他领域的检索式（OpenAlex / Crossref 语法）
+- `glossary.json` → 他领域的核心术语对照
+- `journals.json` → 本领域重点期刊
+
+### 2e. 示例待办：`data/todos.json`
+换成他领域里真实的 2–3 条 —— 让他第一次打开就觉得"这是给我的"。
+
+## 第 3 步：三个 Key（配置你来写，用户只提供 Key 本身）
+
+### 3a. AI 模型（第 7 题）—— 决定摘要 / 翻译 / 精读能不能用
+
+写 `data/llm_config.json`（模板 `llm_config.example.json`）：
+
+| 渠道 | base_url | Key 去哪拿 |
+|---|---|---|
+| **阿里云百炼（推荐）** | `https://dashscope.aliyuncs.com/compatible-mode/v1` | bailian.console.aliyun.com（免费额度多，`qwen3.8-flash` 最耐用） |
+| DeepSeek | `https://api.deepseek.com/v1` | platform.deepseek.com |
+| 其它 OpenAI 兼容服务 | 按服务商给的地址 | —— |
+
+```json
+{
+  "provider": "渠道标识（如 dashscope_bailian / deepseek）",
+  "base_url": "上表对应地址",
+  "api_key": "用户给的 Key",
+  "default_model": "默认模型名",
+  "models": { "translation": "...", "summarize": "...", "title_translation": "...", "annotate": "..." }
+}
+```
+
+- `models` 是**按任务指定模型**（可选）：不写就都用 `default_model`。
+- 配好后**逐个任务实测一次**（翻译 / 摘要 / 精读），确认返回 `ok` 且内容非空 —— 这是"点哪个都不成功"最常见的根因。
+- 报 `HTTP 403 ... FreeTierOnly` = 该模型当日免费额度用完 → 换 `qwen3.8-flash`，或次日再用。
+
+### 3b. 天气（第 8 题）—— **主动推荐注册，但别劝第二次**
+
+推荐话术：**"和风天气注册是免费的，每天 1000 次，填了天气卡片才准 —— 我可以帮你配。"**
+写 `data/weather_config.json`：`api_host`（**Host 与 Key 是两个不同的值**，在控制台"设置"里拿）、`api_key`、`lat` / `lon` / `city`（问清用户所在城市）。
+用户不想注册 → 跳过即可，天气区显示"天气暂不可用"，其余功能不受影响，**不要再劝**。
+
+### 3c. PDF 转写 —— **本地引擎你装，云端加速让他选**
+
+| 方案 | 谁来做 | 推荐话术 |
+|---|---|---|
+| **本地引擎** | **你装**（默认必备） | 免费、离线、不吃额度；缺点是吃本机 CPU、首次装依赖要几分钟 |
+| **云端加速** | 用户注册，你配 | **"注册 MinerU 免费，每天 2000 页，转写速度快很多，而且完全不用你电脑的性能 —— 很推荐开。"** |
+
+- 本地引擎：`cd pdf_worker && python3 -m venv .venv && .venv/bin/pip install -U mineru`（Windows 用 `.venv\Scripts\pip`）。装完重启服务，选"本地引擎"试转一篇 PDF。
+- 云端加速：`data/pdf_config.json` 填 `cloud_token` + `token_created_at` + `token_validity_days`。**MinerU Token 90 天过期，过期会静默失败**，要提醒用户。
+- **两个都配上**：界面可随时切换，本地兜底、云端提速。
+
+## 第 4 步：自动化（第 10 题）—— 让他"不管也有产出"
+
+用 Agent 自带的**定时任务 / 自动化**能力建这三个（能代建就直接代建，别让用户去配）：
+
+| 任务 | 提示词来源 | 频率 |
+|---|---|---|
+| **前沿日报** | `ai-bio-kit/skills/ai-bio-frontier/SKILL.md` 末尾的生成指令（领域词已按 2c 换过） | 每天早上一次 |
+| **热点日报** | `TRAE日报定时任务指令.md` | 每天两次（早 / 晚） |
+| **科技周报** | 纯抓取，服务端自动缓存 | 每周五（一般无需配置） |
+
+- 建完**当场手动跑一次**确认能出内容 —— 这比"配好了"重要得多。
+- 免费额度：WorkBuddy / TRAE 可签到，豆包学生认证有额度；一个任务用一家，轮着来。
+
+## 第 5 步：交付前自检（必须全过，否则不算完成）
+
+| # | 检查 | 通过标准 |
+|---|---|---|
+| 1 | 服务在跑 | 打开 `http://127.0.0.1:8765` 有页面，不是白屏 |
+| 2 | 进度卡 | 显示**他的**学段与年级（如「博士进度 · 博二」），不是"待设置" |
+| 3 | 侧栏品牌 | 显示他的研究领域，不是"你的研究领域" |
+| 4 | 资讯 | 有内容，不是一片空白 |
+| 5 | 天气 | 有温度与城市；或已明确告知他"没配天气" |
+| 6 | AI 摘要 | 丢一段文字生成摘要，**成功且内容非空** |
+| 7 | 翻译 / 精读 | 各跑一次，成功 |
+| 8 | PDF 转写 | 转一篇 PDF 出 Markdown（本地或云端任一） |
+| 9 | 自动化 | 三个定时任务已建，且至少手动跑通过一个 |
+| 10 | 控制台 | 无红色报错（网络类噪音除外） |
+
+**任一项没过就继续修，不要交付半成品。**
+
+## 硬性约定（改坏 = 用户丢数据）
+
+1. **不要改 `data/` 下业务 JSON 的结构**（字段名 / 嵌套关系），只加数据。
+2. `llm_config.json` / `pdf_config.json` / `weather_config.json` / `settings.json` **永远不入 git**（`.gitignore` 已排除，别解开）；对外分享前必须确认这些文件没被打包进去（对外只应有 `*.example.json` 模板）。
+3. 改 `fetchers.py` 的 `SOURCES` 前先备份。
+4. 改 `web/` 前备份到 `_archives/`。
+5. 模型名只写在 `llm_config.json` 里，**不要在代码里硬编码**。
+6. 端口：主服务 8765、worker 8766；要改就同时改 `server.py` 顶部 `PORT` 与 `WORKER_BASE`，并同步 `start.command`。
+7. **对外文案统一叫「学术工作台」**。
+
+## 排障速查
+
+| 现象 | 原因 / 处理 |
+|---|---|
+| 资讯 / 天气全空 | 用户开了代理：代码默认直连国内源；个别国外源反而需要代理，属正常 |
+| AI 报 `403 FreeTierOnly` | 该模型当日免费额度用完 → 换 `qwen3.8-flash`，或次日再用 |
+| 转写卡在 3% | 看 `data/pdf_worker.log`；MinerU Token 90 天过期会静默失败 |
+| 页面打不开 | `lsof -ti :8765` 看进程；重启 `start.command` |
+| 天气卡片不显示 | `weather_config.json` 的 `api_host` 没填（Host 和 Key 是两个东西） |
+| 进度卡显示"待设置" | `data/settings.json` 的 `phd_start` / `phd_end` 没填，**或改完没重启服务** |
+| 侧栏显示"你的研究领域" | `field_name` 没填，**或改完没重启服务** |

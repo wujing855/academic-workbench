@@ -446,15 +446,37 @@
   // ===== 渲染：概览 =====
   function renderOverview() {
     var phd = state.overview.phd;
-    countUp($('#phdPercent'), phd.percent, 1500);
-    countUp($('#phdPercentMini'), phd.percent, 1500);
-    setTimeout(function () {
-      $('#phdBarFill').style.width = phd.percent + '%';
-      $('#phdBarMini').style.width = phd.percent + '%';
-    }, 100);
-    $('#phdDays').innerHTML = '已读 <strong>' + phd.elapsed_days + '</strong> 天 · 剩余 <strong>' + phd.remain_days + '</strong> 天';
-    $('#phdStartDate').textContent = phd.start;
-    $('#phdEndDate').textContent = phd.end;
+    /* 进度卡标题随学段走：设了学段就是「博士进度 / 硕士进度 / 本科进度」，否则「学业进度」 */
+    var phdLabel = phd.label || '学业进度';
+    var cardLabel = $('#phdCardLabel');
+    if (cardLabel) cardLabel.textContent = phd.stage ? (phdLabel + ' · ' + phd.stage) : phdLabel;
+    var miniLabel = $('#phdMiniLabel');
+    if (miniLabel) miniLabel.textContent = phdLabel;
+
+    if (phd.configured) {
+      countUp($('#phdPercent'), phd.percent, 1500);
+      countUp($('#phdPercentMini'), phd.percent, 1500);
+      setTimeout(function () {
+        $('#phdBarFill').style.width = phd.percent + '%';
+        $('#phdBarMini').style.width = phd.percent + '%';
+      }, 100);
+      $('#phdDays').innerHTML = '已读 <strong>' + phd.elapsed_days + '</strong> 天 · 剩余 <strong>' + phd.remain_days + '</strong> 天';
+      $('#phdStartDate').textContent = phd.start;
+      $('#phdEndDate').textContent = phd.end;
+      var miniRange = $('#phdMiniRange');
+      if (miniRange) miniRange.textContent = phd.start.slice(0, 7).replace('-', '.') + ' — ' + phd.end.slice(0, 7).replace('-', '.');
+    } else {
+      /* 未配置学制：明确说出来，不要拿别人的日期算出假进度 */
+      $('#phdPercent').textContent = '—';
+      $('#phdPercentMini').textContent = '—';
+      $('#phdBarFill').style.width = '0%';
+      $('#phdBarMini').style.width = '0%';
+      $('#phdStartDate').textContent = '待设置';
+      $('#phdEndDate').textContent = '待设置';
+      $('#phdDays').textContent = '还没设置学制 —— 对你的 AI Agent 说「帮我设置学段和学制」，它会替你填好';
+      var miniRange2 = $('#phdMiniRange');
+      if (miniRange2) miniRange2.textContent = '未设置学制';
+    }
     renderGraduation();
 
     var tree = state.overview.tree;
