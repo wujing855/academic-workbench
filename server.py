@@ -4,7 +4,7 @@ server.py —— 学术工作台本地后端
 功能：
   * 提供前端页面（web/ 目录）
   * API：概览统计、目录树、资讯缓存、待办、研究日志、打开文件夹
-  * 资讯缓存管理：6 小时 TTL，手动刷新立即拉取；断网时返回旧缓存
+  * 资讯缓存管理：1 小时 TTL（见下方 CACHE_TTL），手动刷新立即拉取；断网时返回旧缓存
   * 依赖：仅 Python 标准库
 运行：python3 server.py  →  浏览器打开 http://127.0.0.1:8765
 """
@@ -51,6 +51,7 @@ CACHE_MAX_AGE = 7 * 24 * 3600  # 缓存最长保留：7 天（之后即使断网
 #   c_journal_required   毕业要求论文数
 #   c_journal_label      毕业要求名称（如「C 刊论文」「SCI 一区」）
 #   workspace_dir        「文件夹」面板扫描的根目录（默认 = 工作台的上一级目录）
+#   auto_archive         每日自动 git 存档开关（默认关闭；开启后每天自动提交一次）
 # ---------------------------------------------------------------------------
 def _load_settings():
     """读取 data/settings.json；不存在或损坏时返回空 dict，全部走内置默认值。"""
@@ -841,6 +842,15 @@ class Handler(BaseHTTPRequestHandler):
 # ---------------------------------------------------------------------------
 BACKUP_STATE_FILE = os.path.join(DATA_DIR, "backup_state.json")
 SNAPSHOT_ROOT = os.path.join(BASE_DIR, "data_snapshots")
+
+# 不进快照的文件：给 data/ 做镜像会把 api_key / token 复制成十几份明文
+# （保留 keep_days 天），一旦整个目录被拷走或打包就跟着泄露；这些配置本来也能重建。
+SNAPSHOT_SKIP_FILES = {
+    "llm_config.json",      # 百炼 api_key
+    "pdf_config.json",      # MinerU cloud_token
+    "weather_config.json",  # 和风 Host / Key
+    "settings.json",        # 学制 / 本地扫描目录
+}
 JOB_TS_RE = re.compile(r"^(.+)_(\d{8})_(\d{6})_[a-z0-9]{4}$")
 
 
@@ -859,8 +869,17 @@ def _dir_size(path):
     return total
 
 
+def _auto_archive_enabled():
+    """「每日自动 git 存档」的开关，**默认关闭**（data/settings.json 里 auto_archive=true 才启用）。
+    为什么默认关：这个工作台会被别人 clone 到自己机器上，而存档执行的是 `git add -A`——
+    会把使用者当时**未提交的改动一并提交**，混进他自己的提交历史里，且失败只在日志里。
+    只有明确知道「这个目录就是我自己的 git 仓库」时才该打开。每次现读配置，改完不用重启。"""
+    return bool(_load_settings().get("auto_archive"))
+
+
 def _git_auto_commit(today):
     """把代码与轻量数据自动提交（pdf_jobs 已被 .gitignore 排除，提交很轻）。
+    仅在 data/settings.json 的 auto_archive=true 时被调用（见 _auto_archive_enabled）。
     注意：必须检查 returncode——曾经因 .git/index.lock 陈旧残留导致
     提交静默失败而日志仍报「完成」，自动备份形同虚设。"""
     try:
@@ -896,11 +915,14 @@ def _git_auto_commit(today):
 
 def _data_snapshot(today, keep_days=14):
     """把 data/ 下所有 *.json 与 *.md 轻量镜像到 data_snapshots/<日期>/
-    （转写文本与摘要都在内；input.pdf/images 等重资源不备份），并清理过期快照"""
+    （转写文本与摘要都在内；input.pdf/images 等重资源不备份），并清理过期快照。
+    密钥类配置（SNAPSHOT_SKIP_FILES）不进快照——避免把 api_key 复制成多份明文。"""
     dst = os.path.join(SNAPSHOT_ROOT, today)
     for root, _, files in os.walk(DATA_DIR):
         for fn in files:
             if os.path.splitext(fn)[1].lower() not in (".json", ".md"):
+                continue
+            if fn in SNAPSHOT_SKIP_FILES:
                 continue
             src = os.path.join(root, fn)
             rel = os.path.relpath(src, DATA_DIR)
@@ -1004,7 +1026,11 @@ def _maintenance_loop():
                 today = time.strftime("%Y-%m-%d")
                 state = _read_json(BACKUP_STATE_FILE, {})
                 if state.get("last_date") != today:
-                    _git_auto_commit(today)
+                    # git 存档是可选功能（默认关）：别人的 clone 里不该被自动提交
+                    if _auto_archive_enabled():
+                        _git_auto_commit(today)
+                    else:
+                        _log_maint("git：自动存档未启用（data/settings.json 的 auto_archive），已跳过")
                     _data_snapshot(today)
                     _prune_jobs()
                     _write_json(BACKUP_STATE_FILE, {

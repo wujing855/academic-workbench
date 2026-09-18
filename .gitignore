@@ -23,6 +23,13 @@ data/title_translations.json
 data/weekly_cache.json
 data/backup_state.json
 data/publications.json
+
+# ============================================================
+#  你的生成产出（每日热点日报 / 前沿日报等，属于个人内容，不入库）
+#  想留档就留在本地，或自己另建仓库；热点日报的提示词模板仍会入库
+# ============================================================
+data/hotspots/*.html
+data/digests/
 *.log
 
 # 待办默认入库（里面是 2 条示例）。

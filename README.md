@@ -154,6 +154,9 @@ academic-workbench/
 **Q：数据能带走 / 备份吗？**
 整个 `data/` 目录就是你的全部数据，复制走即可。
 
+**Q：它会自动把我改的东西 git commit 吗？**
+不会，这个功能**默认关闭**。只有你在 `data/settings.json` 里写 `"auto_archive": true` 之后，它才会在每天凌晨 3 点后第一次运行时执行一次 `git add -A` + `git commit -m "自动存档 <日期>"`。之所以默认关：它会把**你当时所有未提交的改动**一起提交进这个目录的 git 历史——只有当你确定这个目录就是你自己的仓库时才该打开。
+
 **Q：端口被占了？**
 改 `server.py` 顶部的 `PORT` 和 `WORKER_BASE`（两处要一致），并在 `start.command` 里同步。
 
