@@ -48,13 +48,26 @@ description: 帮用户搭建并「一键装好」学术工作台——一套免�
 
 ## 第 1 步：跑起来（你执行，用户不用动手）
 
-1. **确认环境**：需要 Python 3（macOS 自带；Windows 引导用户去 python.org 装，或你代装）。主服务**零第三方依赖**，无需 pip install。
-2. **启动服务**：
+1. **先拿到代码 —— 必须是 main 分支的最新版**（这一步别省：拿到旧版会让你后面全部白做，用户还会以为是你装坏了）。
+
+   ```bash
+   git clone https://github.com/wujing855/academic-workbench.git
+   cd academic-workbench
+   ```
+
+   - 机器上没有 git → 用源码包：
+     `curl -L -o aw.zip https://github.com/wujing855/academic-workbench/archive/refs/heads/main.zip && unzip -q aw.zip && cd academic-workbench-main`
+   - ⛔ **不要去 Releases 页面下载历史版本附件。** `v1.0` 那类旧包是历史存档，里面的进度卡会显示成**作者本人的学段**（这正是"博二的人看到博一"那一类 bug 的来源）。上面两条都走 `main`，永远是当前最新代码。
+   - **10 秒自检拿到的是哪一版**：仓库根目录要同时满足两条 —— `data/settings.example.json` 里含 `degree_level`，且 `server.py` 里含 `degree_level`。缺任一条就是旧包，回到上面重下 main。
+   - 已经是旧包又不想重下：至少把这两个文件换成本仓库 main 版本（`server.py` 与 `web/` 三件套），否则学段配置不会生效。
+
+2. **确认环境**：需要 Python 3（macOS 自带；Windows 引导用户去 python.org 装，或你代装）。主服务**零第三方依赖**，无需 pip install。
+3. **启动服务**：
    - macOS：`python3 server.py`（也可双击 `start.command`）
    - Windows：`python server.py`
    - 浏览器打开 `http://127.0.0.1:8765`
-3. **别让它"关掉就没了"**：macOS 可引导用户运行 `install_autostart.command` 做开机保活。
-4. 服务没起来时先查 `lsof -ti :8765`，端口被占就改 `server.py` 顶部 `PORT`（**同时改 `WORKER_BASE`**）并同步 `start.command`。
+4. **别让它"关掉就没了"**：macOS 可引导用户运行 `install_autostart.command` 做开机保活。
+5. 服务没起来时先查 `lsof -ti :8765`，端口被占就改 `server.py` 顶部 `PORT`（**同时改 `WORKER_BASE`**）并同步 `start.command`。
 
 ## 第 2 步：改成"属于他的"（个性化，必做）
 
@@ -164,6 +177,7 @@ description: 帮用户搭建并「一键装好」学术工作台——一套免�
 | 8 | PDF 转写 | 转一篇 PDF 出 Markdown（本地或云端任一） |
 | 9 | 自动化 | 三个定时任务已建，且至少手动跑通过一个 |
 | 10 | 控制台 | 无红色报错（网络类噪音除外） |
+| 11 | **代码版本** | 根目录 `server.py` 含 `degree_level`（= v1.1 及以上），不是 Releases 里的历史包 |
 
 **任一项没过就继续修，不要交付半成品。**
 
