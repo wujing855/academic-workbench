@@ -194,6 +194,9 @@ academic-workbench/
 ├── web/                   前端（原生 HTML/CSS/JS，无框架）
 ├── ai-bio-kit/            「前沿瞭望」Agent 指令包（领域可换）
 ├── SKILL/                 给 AI Agent 的部署向导（通用，不绑定平台）
+├── .github/               Issue 表单与 PR 模板
+├── CONTRIBUTING.md        贡献指南（含提交前的自查命令）
+├── CHANGELOG.md           更新日志（每版改了什么）
 ├── docs/screenshots/      README 用的界面截图
 └── data/                  所有数据与配置（业务数据都在这里）
 ```
@@ -249,6 +252,15 @@ academic-workbench/
 
 **Q：端口被占了？**
 改 `server.py` 顶部的 `PORT` 和 `WORKER_BASE`（两处要一致），并在 `start.command` 里同步。
+
+## 反馈 · 提问 · 讨论
+
+- 🐞 **遇到 Bug 或装不上** → [提个 Issue](https://github.com/wujing855/academic-workbench/issues/new/choose)。有现成模板，照着填就行；填不动的话把表单截图发给你的 AI Agent，让它帮你补全
+- 💬 **使用中的疑问、想法、「装到一半卡住了」** → [Discussions 讨论区](https://github.com/wujing855/academic-workbench/discussions)
+- 📝 **想知道新版改了什么** → [CHANGELOG.md](CHANGELOG.md)
+- 🤝 **想改代码 / 加功能** → 先看 [CONTRIBUTING.md](CONTRIBUTING.md) 里的贡献指南和 4 条自查命令
+
+提报错的时候，请把 `data/server.log` 里的报错段落贴上（**记得先删掉里面的 API Key 和私人路径**），或直接贴截图。信息给得越全，修得越快。
 
 ## 许可与致谢
 

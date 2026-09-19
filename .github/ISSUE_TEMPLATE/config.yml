@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 使用问题 · 安装卡住 · 随便聊聊
+    url: https://github.com/wujing855/academic-workbench/discussions
+    about: 不算 Bug、也不是功能建议的问题，来讨论区说
+  - name: 📖 常见问题（README）
+    url: https://github.com/wujing855/academic-workbench#常见问题
+    about: 装不上 / 怎么升级 / 数据备份 / 端口被占，先看这里
+  - name: 🤝 想改代码 / 加功能
+    url: https://github.com/wujing855/academic-workbench/blob/main/CONTRIBUTING.md
+    about: 贡献指南，含提交前的 4 条自查命令

@@ -1,0 +1,49 @@
+name: 💡 提功能建议
+description: 想要一个现在没有的功能，或觉得某处可以更好
+title: "[建议] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        欢迎提想法！这个项目最初就是「一个人给自己搭的工具」长出来的，不少功能来自用户随口一提。
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 你遇到了什么麻烦
+      description: 先讲场景，比直接讲功能更有用
+      placeholder: 我每次读完一篇文献，都要手动把引用信息抄到 Zotero 里，特别费时间……
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 你希望它怎么做
+      description: 哪怕只是一个模糊的想法也行
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 你现在怎么凑合解决的
+      description: 可选。知道你的替代方案，能帮我们判断该做成什么样
+    validations:
+      required: false
+
+  - type: dropdown
+    id: field
+    attributes:
+      label: 你的学科
+      description: 可选。帮我们判断这是不是某个领域的共性需求
+      options:
+        - 生物 / 医学
+        - 化学 / 材料
+        - 物理 / 数学
+        - 计算机 / AI
+        - 人文社科
+        - 其他 / 不便说
+    validations:
+      required: false

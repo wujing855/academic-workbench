@@ -1,0 +1,86 @@
+name: 🐞 报 Bug / 装不上
+description: 某个功能不工作，或安装、启动时卡住了
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        谢谢反馈！下面几项填得越全，修得越快。
+
+        不确定怎么填？可以把这份表单截图发给你在用的 AI Agent，让它照着帮你补全。
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: 操作系统
+      options:
+        - macOS
+        - Windows
+        - Linux
+        - 其他 / 不确定
+    validations:
+      required: true
+
+  - type: input
+    id: python_version
+    attributes:
+      label: Python 版本
+      description: 终端里执行 `python3 --version` 的结果；不会查就填「不确定」
+      placeholder: 例如 Python 3.13.2
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install_method
+    attributes:
+      label: 当初是怎么安装的
+      options:
+        - 让 AI Agent 按仓库里的 SKILL/SKILL.md 装的
+        - git clone 下来自己跑的
+        - 下载 main.zip 解压的
+        - 下载了 Releases 里的附件
+        - 不记得了
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: 发生了什么
+      description: 你期望看到什么？实际看到什么？
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 怎么复现
+      description: 一步一步写：点哪里、输什么
+      placeholder: |
+        1. 打开工作台，点「原文精读」
+        2. 上传一个 PDF
+        3. 界面一直转圈，没有结果
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 报错信息 / 截图
+      description: |
+        把界面截图直接拖进来，或粘贴 `data/server.log` 里的报错段落。
+        ⚠️ **贴之前请把里面的 API Key、私人文件路径删掉。**
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我贴的内容里没有 API Key 等敏感信息
+          required: true
+        - label: 我搜过已有的 Issue，没有重复
+          required: true
