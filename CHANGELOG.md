@@ -7,6 +7,10 @@
 
 ## [未发布]
 
+下一版的改动会先记在这里，发版时把本段标题改成 `## [x.y] - YYYY-MM-DD`。
+
+## [1.2] - 2026-09-20
+
 ### 新增
 
 - **社区基础设施**：新增 Issue 表单（报 Bug / 提功能建议）、PR 模板，并开启 [Discussions 讨论区](https://github.com/wujing855/academic-workbench/discussions)——从此「装不上」「有问题」「有想法」都有地方说
