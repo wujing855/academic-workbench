@@ -183,7 +183,7 @@ description: 帮用户搭建并「一键装好」学术工作台——一套免�
 | 5 | 天气 | 有温度与城市；或已明确告知他"没配天气" |
 | 6 | AI 摘要 | 丢一段文字生成摘要，**成功且内容非空** |
 | 7 | 翻译 / 精读 | 各跑一次，成功 |
-| 8 | PDF 转写 | 转一篇 PDF 出 Markdown；**本地、云端各试一次**（哪个没配就明确告诉用户"那个没开"，别默认它会好） |
+| 8 | PDF 转写 | ① 先验本地引擎版本：`pdf_worker/.venv/bin/pip show mineru \| grep -i version`，**必须是 `3.4.x`**（装成 4.x 必炸，见第 3c 步）；② 再转一篇 PDF 出 Markdown，**本地、云端各试一次**（哪个没配就明确告诉用户"那个没开"，别默认它会好） |
 | 9 | 自动化 | 三个定时任务已建，且至少手动跑通过一个 |
 | 10 | 控制台 | 无红色报错（网络类噪音除外） |
 | 11 | **代码版本** | 根目录 `server.py` 含 `degree_level`（= v1.1 及以上），不是 Releases 里的历史包 |
@@ -229,6 +229,7 @@ description: 帮用户搭建并「一键装好」学术工作台——一套免�
 | 资讯 / 天气全空 | 用户开了代理：代码默认直连国内源；个别国外源反而需要代理，属正常 |
 | AI 报 `403 FreeTierOnly` | 该模型当日免费额度用完 → 换 `qwen3.8-flash`，或次日再用 |
 | 转写卡在 3% | 看 `data/pdf_worker.log`；MinerU Token 90 天过期会静默失败 |
+| 点转写报「本地引擎版本不兼容 / 检测到已装 MinerU 4.x」 | venv 里装成了 4.x（4.x 重写了 CLI，本项目用 3.x 参数）→ `cd pdf_worker && .venv/bin/pip install -U "mineru<4"`，重启后再试 |
 | 页面打不开 | `lsof -ti :8765` 看进程；重启 `start.command` |
 | 天气卡片不显示 | `weather_config.json` 的 `api_host` 没填（Host 和 Key 是两个东西） |
 | 进度卡显示"待设置" | `data/settings.json` 的 `phd_start` / `phd_end` 没填，**或改完没重启服务** |
