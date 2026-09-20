@@ -127,11 +127,16 @@
 |---|---|---|---|
 | AI 摘要 / 翻译 / 精读 | [阿里云百炼](https://bailian.console.aliyun.com)（也可 DeepSeek 或其它 OpenAI 兼容服务） | 每天有免费 tokens，推荐 `qwen3.8-flash` | `data/llm_config.json` |
 | 天气卡片 | [和风天气](https://www.qweather.com) | 每天约 1000 次（**Host 和 Key 是两个值**） | `data/weather_config.json` |
-| 云端 PDF 转写 | [MinerU](https://mineru.net/apiManage/token) | 每天 2000 页，Token 90 天有效 | `data/pdf_config.json` |
+| 云端 PDF 转写 | [MinerU](https://mineru.net/apiManage/token)（需免费注册） | 每天 2000 页，Token 90 天有效 | `data/pdf_config.json` |
 
 每个文件都有对应的 `*.example.json` 模板，**复制改名再填**即可（真实配置已被 `.gitignore` 排除，不会误传）。
 
-> PDF 也想在本地转写（不消耗云端额度、不联网）：`cd pdf_worker && python3 -m venv .venv && .venv/bin/pip install -U mineru`，转写时选「本地引擎」。**本地 + 云端可以都配上，界面上随时切换。**
+> **PDF 转写有「本地」和「云端」两个引擎，它们各自依赖一个独立的包，别只装一半：**
+>
+> - **本地引擎**（免费、离线、不上传、**不用注册**）：`cd pdf_worker && python3 -m venv .venv && .venv/bin/pip install -U mineru`，转写时选「本地引擎」。
+> - **云端加速**（需注册 MinerU，速度快、不占电脑）：先在上述 venv 里补装 `.venv/bin/pip install -U mineru-open-sdk`（**必须放在上一条之后执行**，顺序反了云端会静默不可用），再把 Token 填进 `data/pdf_config.json`。
+>
+> **两个都配上，界面上随时切换** —— 本地兜底、云端提速。
 >
 > 免费额度是各家给的试用政策，**会调整** —— 以官网为准。
 

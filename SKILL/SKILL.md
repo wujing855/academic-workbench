@@ -147,7 +147,13 @@ description: 帮用户搭建并「一键装好」学术工作台——一套免�
 | **云端加速** | 用户注册，你配 | **"注册 MinerU 免费，每天 2000 页，转写速度快很多，而且完全不用你电脑的性能 —— 很推荐开。"** |
 
 - 本地引擎：`cd pdf_worker && python3 -m venv .venv && .venv/bin/pip install -U mineru`（Windows 用 `.venv\Scripts\pip`）。装完重启服务，选"本地引擎"试转一篇 PDF。
-- 云端加速：`data/pdf_config.json` 填 `cloud_token` + `token_created_at` + `token_validity_days`。**MinerU Token 90 天过期，过期会静默失败**，要提醒用户。
+  **本地引擎完全不用注册、不用 Token、不联网、不上传** —— 用户不想注册时，把这句话告诉他。
+- 云端加速（**三步都要做，缺一步就用不了**）：
+  1. **让用户去注册**：到 <https://mineru.net> 免费注册，再到 <https://mineru.net/apiManage/token> 领取 Precision Token 发给你。
+  2. **补装云端 SDK**：`cd pdf_worker && .venv/bin/pip install -U mineru-open-sdk`（Windows 用 `.venv\Scripts\pip`）。
+     ⚠️ **云端 SDK 与本地引擎是两个独立的包，只装 `mineru` 用不了云端** —— 会报「云端 SDK 未安装」。
+     🚨 **这一条必须放在 `pip install mineru` 之后执行，顺序不能反**：两个包共用 `mineru/` 命名空间，主包后装会覆盖 SDK 的 `__init__.py`，`from mineru import MinerU` 会失败（且是静默装错的，很难查）。
+  3. 写 `data/pdf_config.json`：`cloud_token` + `token_created_at` + `token_validity_days`。**MinerU Token 90 天过期，过期会静默失败**，要提醒用户。
 - **两个都配上**：界面可随时切换，本地兜底、云端提速。
 
 ## 第 4 步：自动化（第 10 题）—— 让他"不管也有产出"
