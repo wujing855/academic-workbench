@@ -146,8 +146,11 @@ description: 帮用户搭建并「一键装好」学术工作台——一套免�
 | **本地引擎** | **你装**（默认必备） | 免费、离线、不吃额度；缺点是吃本机 CPU、首次装依赖要几分钟 |
 | **云端加速** | 用户注册，你配 | **"注册 MinerU 免费，每天 2000 页，转写速度快很多，而且完全不用你电脑的性能 —— 很推荐开。"** |
 
-- 本地引擎：`cd pdf_worker && python3 -m venv .venv && .venv/bin/pip install -U mineru`（Windows 用 `.venv\Scripts\pip`）。装完重启服务，选"本地引擎"试转一篇 PDF。
+- 本地引擎：`cd pdf_worker && python3 -m venv .venv && .venv/bin/pip install -U "mineru>=3.4,<4"`（Windows 用 `.venv\Scripts\pip`）。装完重启服务，选"本地引擎"试转一篇 PDF。
   **本地引擎完全不用注册、不用 Token、不联网、不上传** —— 用户不想注册时，把这句话告诉他。
+  🚨 **版本上界 `<4` 不能省（2026-09-20 核实）**：MinerU 4.x（PyPI 上已到 4.0.4）把命令行**重写成了子命令**（`mineru parse <路径> --output …`），顶层只剩 `--version`；而本项目 `worker.py` 调用的是 3.x 的扁平参数（`mineru -p X -o Y -b pipeline -m auto -l ch -f/-t`）。**装到 4.x 必定转写报错**，而且安装时毫无提示，只在用户真去转 PDF 时才炸。3.x 的最后一版是 **3.4.5**（开发验证所用版本），`<4` 正好锁到它。
+  - 已误装 4.x 的补救：`cd pdf_worker && .venv/bin/pip install -U "mineru<4"`。
+  - 装完自检版本：`.venv/bin/pip show mineru | grep -i version`，应显示 `3.4.x`。
 - 云端加速（**三步都要做，缺一步就用不了**）：
   1. **让用户去注册**：到 <https://mineru.net> 免费注册，再到 <https://mineru.net/apiManage/token> 领取 Precision Token 发给你。
   2. **补装云端 SDK**：`cd pdf_worker && .venv/bin/pip install -U mineru-open-sdk`（Windows 用 `.venv\Scripts\pip`）。
@@ -180,7 +183,7 @@ description: 帮用户搭建并「一键装好」学术工作台——一套免�
 | 5 | 天气 | 有温度与城市；或已明确告知他"没配天气" |
 | 6 | AI 摘要 | 丢一段文字生成摘要，**成功且内容非空** |
 | 7 | 翻译 / 精读 | 各跑一次，成功 |
-| 8 | PDF 转写 | 转一篇 PDF 出 Markdown（本地或云端任一） |
+| 8 | PDF 转写 | 转一篇 PDF 出 Markdown；**本地、云端各试一次**（哪个没配就明确告诉用户"那个没开"，别默认它会好） |
 | 9 | 自动化 | 三个定时任务已建，且至少手动跑通过一个 |
 | 10 | 控制台 | 无红色报错（网络类噪音除外） |
 | 11 | **代码版本** | 根目录 `server.py` 含 `degree_level`（= v1.1 及以上），不是 Releases 里的历史包 |

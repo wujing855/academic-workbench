@@ -133,7 +133,8 @@
 
 > **PDF 转写有「本地」和「云端」两个引擎，它们各自依赖一个独立的包，别只装一半：**
 >
-> - **本地引擎**（免费、离线、不上传、**不用注册**）：`cd pdf_worker && python3 -m venv .venv && .venv/bin/pip install -U mineru`，转写时选「本地引擎」。
+> - **本地引擎**（免费、离线、不上传、**不用注册**）：`cd pdf_worker && python3 -m venv .venv && .venv/bin/pip install -U "mineru>=3.4,<4"`，转写时选「本地引擎」。
+>   **版本上界 `<4` 必须带上**：MinerU 4.x 重写了命令行接口，本项目调用的是 3.x 的参数，装 4.x 会直接报错（原因与补救见 `SKILL/SKILL.md`）。
 > - **云端加速**（需注册 MinerU，速度快、不占电脑）：先在上述 venv 里补装 `.venv/bin/pip install -U mineru-open-sdk`（**必须放在上一条之后执行**，顺序反了云端会静默不可用），再把 Token 填进 `data/pdf_config.json`。
 >
 > **两个都配上，界面上随时切换** —— 本地兜底、云端提速。

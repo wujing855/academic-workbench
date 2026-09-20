@@ -13,6 +13,9 @@
 
 - **PDF 云端加速的安装步骤补全（会导致「云端 SDK 未安装」）**：此前文档只教装本地引擎包 `mineru`，漏掉了云端加速所需的**独立包** `mineru-open-sdk` —— 照旧文档配好 Token 后点「云端加速」必然报错。现在 `SKILL/SKILL.md`、README 与 `data/pdf_config.example.json` 都写明：**两个包都要装，且 `mineru-open-sdk` 必须在 `mineru` 之后装**（两者共用 `mineru/` 命名空间，顺序反了会静默失效，很难排查）
 - 补上 MinerU 的注册与领 Token 指引（<https://mineru.net> 注册 → <https://mineru.net/apiManage/token> 领取），并明确说明**本地引擎不需要注册、不需要任何 Token、不联网**
+- 🔴 **本地引擎改为锁定 MinerU 3.x（`pip install -U "mineru>=3.4,<4"`）—— 修复「所有新装用户本地转写必失败」**：MinerU 已发布 4.0（当前 4.0.4），把命令行从扁平参数重写成了子命令（`mineru parse <路径> --output …`，顶层只剩 `--version`），而本项目调用的是 3.x 参数。此前文档那句不限版本的 `pip install -U mineru` 会让新用户装到 4.x，**本地转写 100% 报错，且安装时毫无提示**。现在 README 与 `SKILL/SKILL.md` 都锁上 `<4`（3.x 最后一版是 **3.4.5**，即开发验证所用版本），并给出已误装 4.x 的补救命令
+- `pdf_worker/worker.py` 新增 MinerU 版本探测：装成 4.x 时，点转写会**直接给出中文提示与修复命令**，而不是抛出 `No such option: -p` 这种看不懂的报错
+- `SKILL/SKILL.md` 第 5 步自检表第 8 项收紧为「**本地、云端各试一次**」——原来的「任一转通」会让没配好的那个引擎蒙混过关
 
 ## [1.2] - 2026-09-20
 

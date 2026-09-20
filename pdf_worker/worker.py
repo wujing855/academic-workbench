@@ -116,6 +116,29 @@ def local_engine_available():
     return os.path.isfile(MINERU_CLI)
 
 
+def local_mineru_major_version():
+    """读 pdf_worker/.venv 里已装 mineru 的主版本号（int）；读不到返回 None。
+
+    用于识别「装成了 4.x」这类不兼容情况：MinerU 4.0 把 CLI 从扁平参数
+    （`mineru -p X -o Y -b pipeline -m auto -l ch -f/-t`）重写成了子命令
+    （`mineru parse <路径> --output …`，顶层只剩 --version），本项目调用的是
+    3.x 那套参数，装 4.x 后转写必定失败，而且安装时毫无提示。
+    """
+    venv_lib = os.path.join(os.path.dirname(VENV_BIN), "lib")
+    try:
+        for pylib in sorted(os.listdir(venv_lib)):
+            sp = os.path.join(venv_lib, pylib, "site-packages")
+            if not os.path.isdir(sp):
+                continue
+            for name in sorted(os.listdir(sp)):
+                m = re.match(r"mineru-(\d+)\.[\d.]+\.dist-info$", name)
+                if m:
+                    return int(m.group(1))
+    except OSError:
+        return None
+    return None
+
+
 # ---------------------------------------------------------------------------
 # 任务管理：单队列、单工作线程、顺序执行（不追求并发）
 # ---------------------------------------------------------------------------
@@ -295,6 +318,15 @@ def run_local(job, mgr):
 
     if not local_engine_available():
         raise RuntimeError("本地 MinerU CLI 不存在：%s（请先在 pdf_worker/.venv 安装 mineru）" % MINERU_CLI)
+
+    major = local_mineru_major_version()
+    if major is not None and major >= 4:
+        raise RuntimeError(
+            "本地引擎版本不兼容：检测到已装 MinerU %d.x，而本项目只兼容 3.x。\n"
+            "原因：MinerU 4.0 重写了命令行接口（改为子命令式），本项目调用的是 3.x 参数，"
+            "继续用会报 'No such option' 之类的错。\n"
+            "修复：在 pdf_worker 目录执行  .venv/bin/pip install -U \"mineru<4\"  "
+            "（Windows 用 .venv\\Scripts\\pip），然后重启工作台再试。" % major)
 
     env = dict(os.environ)
     # MinerU 3.x CLI 会自启本地临时 API，回环地址必须绕过系统代理
