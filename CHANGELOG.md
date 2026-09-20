@@ -9,6 +9,8 @@
 
 下一版的改动会先记在这里，发版时把本段标题改成 `## [x.y] - YYYY-MM-DD`。
 
+> **不必等发新版本**：本节列出的改动**在 main 分支上已经生效**，`git clone` 或下载 main 分支的 zip 就能拿到。本项目在 main 上持续更新，**只在有较大功能更新时才打 Release** —— 所以「版本号没变」不代表「没修 bug」。
+
 ### 修复
 
 - **PDF 云端加速的安装步骤补全（会导致「云端 SDK 未安装」）**：此前文档只教装本地引擎包 `mineru`，漏掉了云端加速所需的**独立包** `mineru-open-sdk` —— 照旧文档配好 Token 后点「云端加速」必然报错。现在 `SKILL/SKILL.md`、README 与 `data/pdf_config.example.json` 都写明：**两个包都要装，且 `mineru-open-sdk` 必须在 `mineru` 之后装**（两者共用 `mineru/` 命名空间，顺序反了会静默失效，很难排查）
